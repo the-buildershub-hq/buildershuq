@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Figtree", system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", monospace;
+  
+  /* Brand Navy Palette matching the logo */
+  --color-brand-50: #f0f5fe;
+  --color-brand-100: #dbe7fc;
+  --color-brand-200: #bad0f7;
+  --color-brand-300: #8caff0;
+  --color-brand-400: #6291d3;
+  --color-brand-500: #4275be;
+  --color-brand-600: #315d9e;
+  --color-brand-700: #25497f;
+  --color-brand-800: #1a355f;
+  --color-brand-900: #0f2240;
+  --color-brand-950: #081223;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Explicit Brand Utilities */
+.bg-brand-navy {
+  background-color: #0f2240 !important;
+}
+
+.hover\:bg-brand-navy-hover:hover {
+  background-color: #1a355f !important;
+}
+
+.text-brand-navy {
+  color: #0f2240 !important;
+}
+
+.hover\:text-brand-navy-hover:hover {
+  color: #1a355f !important;
+}
+
+/* Hide Scrollbars */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
