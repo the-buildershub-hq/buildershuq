@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Icon from "@/components/Icon";
@@ -64,6 +65,11 @@ export default function Showcase() {
   const [activeIndex, setActiveIndex] = useState(2);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % mockProjects.length);
@@ -201,130 +207,131 @@ export default function Showcase() {
           </div>
 
         </div>
-
       </div>
 
-      {/* Custom Modal for Project Details */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 w-screen h-screen z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-lg p-4 sm:p-8"
-          >
+      {/* Custom Modal for Project Details (Portalled to document.body to avoid stacking context traps) */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedProject && (
             <motion.div
-              initial={{ scale: 0.95, y: 30 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 30 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl border border-zinc-200/80 flex flex-col scrollbar-hide"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 w-screen h-screen z-[99999] flex items-center justify-center bg-black/95 backdrop-blur-lg p-4 sm:p-8"
             >
-              {/* Modal Header */}
-              <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-30 px-6 py-5 border-b border-zinc-100 flex items-center justify-between">
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-mono text-zinc-400 font-bold uppercase tracking-widest">
-                    {selectedProject.category}
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-extrabold text-zinc-950">
-                    {selectedProject.title}
-                  </h3>
+              <motion.div
+                initial={{ scale: 0.95, y: 30 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.95, y: 30 }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl border border-zinc-200/80 flex flex-col scrollbar-hide"
+              >
+                {/* Modal Header */}
+                <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-30 px-6 py-5 border-b border-zinc-100 flex items-center justify-between">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-mono text-zinc-400 font-bold uppercase tracking-widest">
+                      {selectedProject.category}
+                    </span>
+                    <h3 className="text-xl font-extrabold text-zinc-950 mt-1">
+                      {selectedProject.title}
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="w-10 h-10 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 flex items-center justify-center text-zinc-500 cursor-pointer transition-colors"
+                  >
+                    <Icon name="close" className="text-lg" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-600 hover:bg-zinc-50 cursor-pointer transition-colors"
-                >
-                  <Icon name="close" className="text-base" />
-                </button>
-              </div>
 
-              {/* Modal Content */}
-              <div className="p-6 sm:p-8 flex flex-col gap-8">
-
-                {/* Media Section: Slide/Tabs of Images + Videos */}
-                <div className="flex flex-col gap-4">
-
-                  {/* Active Media Container */}
-                  <div className="w-full aspect-video relative rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-950 flex items-center justify-center">
-                    {selectedProject.video && activeMediaIndex === selectedProject.screenshots.length ? (
+                {/* Modal Media Showcase Container */}
+                <div className="bg-zinc-50 p-6 border-b border-zinc-100 flex flex-col gap-4">
+                  {/* Active Screen Display (Video or Image) */}
+                  <div className="relative aspect-video rounded-2xl overflow-hidden border border-zinc-200/60 bg-black flex items-center justify-center">
+                    {activeMediaIndex === selectedProject.screenshots.length && selectedProject.video ? (
                       <video
                         src={selectedProject.video}
                         controls
-                        className="w-full h-full object-cover"
                         autoPlay
+                        loop
+                        muted
+                        className="w-full h-full object-cover"
                       />
                     ) : (
                       <Image
-                        src={selectedProject.screenshots[activeMediaIndex]}
-                        alt="Project screenshot"
+                        src={selectedProject.screenshots[activeMediaIndex] || "/workspace.png"}
+                        alt={`${selectedProject.title} screenshot`}
                         fill
                         className="object-cover"
                       />
                     )}
                   </div>
 
-                  {/* Thumbnail / Tabs Selectors */}
-                  <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                    {selectedProject.screenshots.map((screen, sIdx) => (
+                  {/* Thumbnail Selector Tabs */}
+                  <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                    {/* Screenshot Thumbnails */}
+                    {selectedProject.screenshots.map((shot, sIdx) => (
                       <button
                         key={sIdx}
                         onClick={() => setActiveMediaIndex(sIdx)}
-                        className={`relative w-20 aspect-video rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 cursor-pointer ${activeMediaIndex === sIdx ? 'border-brand-navy scale-95' : 'border-zinc-200 opacity-60 hover:opacity-100'}`}
+                        className={`relative w-24 aspect-video rounded-lg overflow-hidden border-2 cursor-pointer shrink-0 transition-all ${activeMediaIndex === sIdx ? "border-brand-navy scale-95" : "border-zinc-200 opacity-60 hover:opacity-100"}`}
                       >
                         <Image
-                          src={screen}
-                          alt="Thumbnail"
+                          src={shot}
+                          alt="thumbnail link"
                           fill
                           className="object-cover"
                         />
                       </button>
                     ))}
 
-                    {/* Video Tab if exists */}
+                    {/* Video Thumbnail Option */}
                     {selectedProject.video && (
                       <button
                         onClick={() => setActiveMediaIndex(selectedProject.screenshots.length)}
-                        className={`relative w-20 aspect-video rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 bg-zinc-900 flex items-center justify-center text-white cursor-pointer ${activeMediaIndex === selectedProject.screenshots.length ? 'border-brand-navy scale-95' : 'border-zinc-200 opacity-60 hover:opacity-100'}`}
+                        className={`relative w-24 aspect-video rounded-lg overflow-hidden border-2 bg-zinc-900 flex items-center justify-center text-white cursor-pointer shrink-0 transition-all ${activeMediaIndex === selectedProject.screenshots.length ? "border-brand-navy scale-95" : "border-zinc-200 opacity-60 hover:opacity-100"}`}
                       >
-                        <Icon name="play_circle" className="text-xl" />
+                        <Icon name="play_circle" className="text-3xl text-white" />
                       </button>
                     )}
                   </div>
-
                 </div>
 
-                {/* Narrative Details Block */}
-                <div className="flex flex-col gap-4">
-                  <h4 className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-                    Project Story &amp; Details
-                  </h4>
-                  <p className="text-zinc-600 text-sm sm:text-base leading-relaxed">
-                    {selectedProject.story}
-                  </p>
-                </div>
+                {/* Modal Description Body */}
+                <div className="px-6 py-8 flex flex-col gap-6">
+                  <div className="flex flex-col gap-3">
+                    <h4 className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
+                      Project Story &amp; Details
+                    </h4>
+                    <p className="text-zinc-600 text-sm sm:text-base leading-relaxed">
+                      {selectedProject.story}
+                    </p>
+                  </div>
 
-                {/* External Action Button */}
-                <div className="pt-4 border-t border-zinc-100 flex items-center justify-end">
-                  <a
-                    href={selectedProject.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide cursor-pointer transition-all group"
-                  >
-                    Visit Live Project Website
-                    <Icon
-                      name="arrow_outward"
-                      className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      weight={600}
-                    />
-                  </a>
-                </div>
+                  {/* External Action Button */}
+                  <div className="pt-4 border-t border-zinc-100 flex items-center justify-end">
+                    <a
+                      href={selectedProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide cursor-pointer transition-all group"
+                    >
+                      Visit Live Project Website
+                      <Icon
+                        name="arrow_outward"
+                        className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        weight={600}
+                      />
+                    </a>
+                  </div>
 
-              </div>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
