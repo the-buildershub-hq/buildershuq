@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Icon from "@/components/Icon";
 import Showcase from "@/components/Showcase";
+import { projects } from "../lib/projects";
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -226,33 +228,41 @@ export default function Home() {
       </header>
 
       {/* Main Hero Container */}
-      <main className="flex-1 flex flex-col justify-center max-w-7xl w-full mx-auto px-6 pt-32 pb-16 z-10">
+      <main className="relative flex-1 flex items-center max-w-7xl w-full mx-auto px-6 pt-36 pb-20 z-10">
 
-        {/* Upper Hero Content (Typography & Primary CTA) */}
-        <div className="flex-1 flex flex-col justify-center items-start text-left mt-8 md:mt-16">
+        {/* Ambient glow anchoring the hero, independent of the framed visual */}
+        <div className="absolute top-10 right-0 w-[560px] h-[560px] bg-brand-100/40 rounded-full blur-3xl pointer-events-none -z-10" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-10 items-center w-full">
+
+          {/* Copy column */}
           <motion.div
             initial={{ opacity: 0, y: 60, filter: "blur(20px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] as const }}
-            className="flex flex-col items-start gap-8"
+            className="lg:col-span-7 flex flex-col items-start gap-8"
           >
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zinc-950 leading-[1.08] max-w-4xl">
-              We Engineer{" "}
-              <span className="relative inline-block px-3 py-1 bg-brand-100 text-brand-900 rounded-2xl select-none">
-                Systems
+              We Build Businesses {" "}
+              <span className="relative inline-block px-3 py-1 bg-gradient-to-br from-brand-100 to-brand-200/60 text-brand-900 rounded-2xl select-none">
+                Better
               </span>
               <span className="block mt-2">
-                We Craft <span className="text-brand-900">Art</span>.
+                We Craft Them <span className="text-brand-900">Digitally</span>.
               </span>
             </h1>
 
+            <p className="text-zinc-500 text-sm md:text-base leading-relaxed max-w-lg">
+              Builders Hub is a software development agency, We help businesses improve how they show up, attract customers, and operate online, combining strategy, design, and technology to build digital solutions that actually move the business forward. We design and build high-performance web and mobile applications, bespoke websites, and AI automations for the problems that actually slow your business down.
+            </p>
+
             {/* Premium Capsule Button (Try Aura / smalltribe style) */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <a
                 href="https://cal.com/builders-hub/introduction"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide transition-all shadow-sm"
+                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide transition-all shadow-sm hover:shadow-lg hover:shadow-brand-900/10 hover:-translate-y-0.5"
               >
                 Schedule a Call
               </a>
@@ -260,7 +270,7 @@ export default function Home() {
                 href="https://cal.com/builders-hub/introduction"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white flex items-center justify-center transition-all group"
+                className="w-12 h-12 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white flex items-center justify-center transition-all hover:shadow-lg hover:shadow-brand-900/10 hover:-translate-y-0.5 group"
               >
                 <Icon
                   name="arrow_outward"
@@ -269,20 +279,28 @@ export default function Home() {
                 />
               </a>
             </div>
+
+            {/* Compact visual for small screens, where the side panel is hidden */}
+            <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden border border-zinc-200/60 lg:hidden">
+              <Image src="/hero-bg.png" alt="" fill className="object-cover" priority />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/70 via-brand-navy/5 to-transparent" />
+            </div>
           </motion.div>
-        </div>
 
-        {/* Lower Hero Content (Metadata / Brief Description at bottom) */}
-        <div className="border-t border-zinc-200/60 pt-8 mt-16 grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
-          <div className="md:col-span-4 flex items-center text-zinc-400 text-xs font-mono uppercase tracking-wider">
-            <span>Software Development Agency</span>
-          </div>
+          {/* Framed visual panel, desktop only */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
+            className="hidden lg:block lg:col-span-5 relative"
+          >
+            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-[2.5rem] border border-zinc-200/80 bg-white" />
+            <div className="relative w-full aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-zinc-200/60">
+              <Image src="/hero-bg.png" alt="" fill className="object-cover" priority />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/70 via-brand-navy/10 to-transparent" />
+            </div>
+          </motion.div>
 
-          <div className="md:col-span-8 md:text-right">
-            <p className="text-zinc-500 text-sm md:text-base leading-relaxed max-w-lg md:ml-auto">
-              Builders Hub is a premium software development agency. We design and engineer high-performance web and mobile applications, bespoke websites, scalable backend architectures, and advanced AI automations to solve your most complex technical challenges.
-            </p>
-          </div>
         </div>
       </main>
 
@@ -300,26 +318,40 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div className="max-w-md">
               <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-                Quality Services <br />
-                <span className="text-zinc-400">You Can Get</span>
+                Built Around Your Business. <br />
+                <span className="text-zinc-400">one team.</span>
               </h2>
             </div>
             <div className="max-w-xs md:text-right">
               <p className="text-zinc-500 text-sm leading-relaxed">
-                We provide a wide range of software services. Covering all of your digital and operational needs.
+                Your business isn't like everyone else's. Your digital experience shouldn't be either.
               </p>
             </div>
           </div>
         </div>
 
         <div className="w-full mt-12 flex overflow-x-auto gap-6 pb-6 pt-4 scrollbar-hide px-6 md:px-20">
-          {[
+          {(() => {
+            const accentStyles: Record<
+              string,
+              { pill: string; svgHover: string; border: string; ring: string }
+            > = {
+              indigo: { pill: "bg-indigo-50 text-indigo-700", svgHover: "group-hover:text-indigo-900/15", border: "hover:border-indigo-300/70", ring: "group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600" },
+              emerald: { pill: "bg-emerald-50 text-emerald-700", svgHover: "group-hover:text-emerald-900/15", border: "hover:border-emerald-300/70", ring: "group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600" },
+              orange: { pill: "bg-orange-50 text-orange-700", svgHover: "group-hover:text-orange-900/15", border: "hover:border-orange-300/70", ring: "group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-500" },
+              pink: { pill: "bg-pink-50 text-pink-700", svgHover: "group-hover:text-pink-900/15", border: "hover:border-pink-300/70", ring: "group-hover:bg-pink-600 group-hover:text-white group-hover:border-pink-600" },
+              teal: { pill: "bg-teal-50 text-teal-700", svgHover: "group-hover:text-teal-900/15", border: "hover:border-teal-300/70", ring: "group-hover:bg-teal-600 group-hover:text-white group-hover:border-teal-600" },
+              rose: { pill: "bg-rose-50 text-rose-700", svgHover: "group-hover:text-rose-900/15", border: "hover:border-rose-300/70", ring: "group-hover:bg-rose-600 group-hover:text-white group-hover:border-rose-600" },
+            };
+            return [
             {
               label: "Websites & Web Apps",
-              desc: "Custom frontend architectures built with React, Next.js, and Tailwind CSS. Responsive, blazing fast, and optimized for conversion.",
+              slug: "websites",
+              accent: "indigo",
+              desc: "We design and develop fast, responsive websites and web applications tailored to your business, from corporate websites and landing pages to interactive platforms and custom web products.",
               icon: "web",
               svg: (
-                <svg className="w-24 h-24 text-brand-900/10" viewBox="0 0 100 100" fill="none">
+                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
                   <rect x="10" y="20" width="80" height="60" rx="8" stroke="currentColor" strokeWidth="2" />
                   <line x1="10" y1="35" x2="90" y2="35" stroke="currentColor" strokeWidth="2" />
                   <circle cx="20" cy="27.5" r="2.5" fill="currentColor" />
@@ -330,10 +362,12 @@ export default function Home() {
             },
             {
               label: "Mobile Applications",
-              desc: "High-performance React Native applications built to deliver smooth, fluid native mobile experiences on both iOS and Android.",
+              slug: "mobile",
+              accent: "emerald",
+              desc: "We build intuitive mobile applications that give your customers a seamless way to interact with your products, services, and digital experiences across iOS and Android.",
               icon: "phone_iphone",
               svg: (
-                <svg className="w-24 h-24 text-brand-900/10" viewBox="0 0 100 100" fill="none">
+                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
                   <rect x="30" y="15" width="40" height="70" rx="8" stroke="currentColor" strokeWidth="2" />
                   <circle cx="50" cy="77" r="3" fill="currentColor" />
                   <line x1="45" y1="22" x2="55" y2="22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -342,10 +376,12 @@ export default function Home() {
             },
             {
               label: "Backend Systems",
-              desc: "Scalable server engines, secure database designs, APIs, and cloud infrastructure engineered to support heavy operational workloads.",
+              slug: "backend",
+              accent: "orange",
+              desc: "We build secure APIs, databases, server-side systems, and cloud infrastructure that keep your digital products reliable, connected, and ready to scale.",
               icon: "dns",
               svg: (
-                <svg className="w-24 h-24 text-brand-900/10" viewBox="0 0 100 100" fill="none">
+                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
                   <rect x="15" y="15" width="70" height="20" rx="4" stroke="currentColor" strokeWidth="2" />
                   <rect x="15" y="40" width="70" height="20" rx="4" stroke="currentColor" strokeWidth="2" />
                   <rect x="15" y="65" width="70" height="20" rx="4" stroke="currentColor" strokeWidth="2" />
@@ -357,10 +393,12 @@ export default function Home() {
             },
             {
               label: "AI & Automations",
-              desc: "Custom automated workflows, workflow integrations, LLM configurations, and scanner pipelines designed to maximize business efficiency.",
+              slug: "automation",
+              accent: "pink",
+              desc: "We use AI, automation, and integrations to streamline workflows, reduce manual processes, and help businesses work more efficiently.",
               icon: "settings_suggest",
               svg: (
-                <svg className="w-24 h-24 text-brand-900/10" viewBox="0 0 100 100" fill="none">
+                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
                   <rect x="10" y="42" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2" />
                   <circle cx="50" cy="50" r="10" stroke="currentColor" strokeWidth="2" />
                   <rect x="74" y="42" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2" />
@@ -373,10 +411,12 @@ export default function Home() {
             },
             {
               label: "UI/UX Design",
-              desc: "Interactive wireframes, detailed high-fidelity screen designs, and custom design systems crafted down to the pixel for ultimate user engagement.",
+              slug: "design",
+              accent: "teal",
+              desc: "We turn ideas and business requirements into clear, intuitive interfaces — from early wireframes and user flows to polished high-fidelity designs and complete design systems.",
               icon: "palette",
               svg: (
-                <svg className="w-24 h-24 text-brand-900/10" viewBox="0 0 100 100" fill="none">
+                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
                   <rect x="20" y="20" width="50" height="50" rx="4" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
                   <rect x="16" y="16" width="8" height="8" fill="currentColor" />
                   <rect x="66" y="16" width="8" height="8" fill="currentColor" />
@@ -388,46 +428,59 @@ export default function Home() {
             },
             {
               label: "Product & Graphics",
-              desc: "Sleek branding assets, presentation decks, marketing layouts, and high-fidelity graphic concepts engineered to elevate your brand presence.",
+              slug: "graphics",
+              accent: "rose",
+              desc: "We create the visual assets your business needs to communicate consistently across digital products, marketing, presentations, and other brand touchpoints.",
               icon: "brush",
               svg: (
-                <svg className="w-24 h-24 text-brand-900/10" viewBox="0 0 100 100" fill="none">
+                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
                   <circle cx="40" cy="50" r="20" stroke="currentColor" strokeWidth="2" />
                   <circle cx="60" cy="50" r="20" stroke="currentColor" strokeWidth="2" />
                   <path d="M50 30 L53 45 L68 48 L53 51 L50 66 L47 51 L32 48 L47 45 Z" fill="currentColor" />
                 </svg>
               )
             }
-          ].map((service, index) => (
-            <div
-              key={index}
-              className="min-w-[280px] md:min-w-[320px] flex-1 bg-zinc-50 rounded-3xl border border-zinc-200/80 p-8 flex flex-col justify-between gap-8 group cursor-pointer hover:border-brand-navy/30 transition-colors duration-300"
-            >
-              <div className="flex flex-col gap-6">
-                {/* Top Label Pill */}
-                <div className="self-start px-4 py-2 rounded-full bg-white border border-zinc-200 text-xs font-semibold text-zinc-800 tracking-wide">
-                  {service.label}
-                </div>
+            ].map((service) => {
+              const accent = accentStyles[service.accent];
+              const count = projects.filter((p) => p.service === service.slug).length;
+              return (
+                <Link
+                  key={service.slug}
+                  href={`/work?service=${service.slug}`}
+                  className={`min-w-[280px] md:min-w-[320px] flex-1 bg-zinc-50 rounded-3xl border border-zinc-200/80 p-8 flex flex-col justify-between gap-8 group cursor-pointer transition-colors duration-300 ${accent.border}`}
+                >
+                  <div className="flex flex-col gap-6">
+                    {/* Top Label Pill, tinted per service */}
+                    <div className={`self-start px-4 py-2 rounded-full text-xs font-semibold tracking-wide ${accent.pill}`}>
+                      {service.label}
+                    </div>
 
-                {/* Service Graphic Illustration */}
-                <div className="py-6 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                  {service.svg}
-                </div>
-              </div>
+                    {/* Service Graphic Illustration, tinted with the service's accent */}
+                    <div className={`py-6 flex items-center justify-center text-zinc-900/[0.06] transition-colors duration-300 group-hover:scale-105 ${accent.svgHover}`}>
+                      {service.svg}
+                    </div>
+                  </div>
 
-              <div className="flex flex-col gap-4">
-                {/* Description Paragraph */}
-                <p className="text-zinc-500 text-xs md:text-sm leading-relaxed">
-                  {service.desc}
-                </p>
+                  <div className="flex flex-col gap-4">
+                    {/* Description Paragraph */}
+                    <p className="text-zinc-500 text-xs md:text-sm leading-relaxed">
+                      {service.desc}
+                    </p>
 
-                {/* Circular Arrow Button (No shadows, borders only) */}
-                <div className="self-end w-10 h-10 rounded-full border border-zinc-200 bg-white flex items-center justify-center text-zinc-600 group-hover:bg-brand-navy group-hover:text-white group-hover:border-brand-navy transition-all duration-300">
-                  <Icon name="arrow_outward" className="text-sm" weight={600} />
-                </div>
-              </div>
-            </div>
-          ))}
+                    <div className="flex items-center justify-between pt-1">
+                      <span className="text-[11px] font-bold text-zinc-400">
+                        {count > 0 ? `${count} project${count > 1 ? "s" : ""} shipped` : "See related work"}
+                      </span>
+                      {/* Circular Arrow Button, filling with the service accent on hover */}
+                      <div className={`w-10 h-10 rounded-full border border-zinc-200 bg-white flex items-center justify-center text-zinc-600 transition-all duration-300 ${accent.ring}`}>
+                        <Icon name="arrow_outward" className="text-sm" weight={600} />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
+            });
+          })()}
         </div>
       </motion.section>
 
@@ -444,15 +497,22 @@ export default function Home() {
 
           {/* Halved Image & Adjacent Content Block */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Black & White Abstract Image */}
-            <div className="md:col-span-6 relative aspect-square rounded-3xl overflow-hidden border border-zinc-200/60 bg-black">
-              <Image
-                src="/abstract.png"
-                alt="Builders Hub abstract design graphic"
-                fill
-                className="object-cover"
-                priority
-              />
+            {/* Left Column: Layered image treatment — a structural frame behind the abstract shot */}
+            <div className="md:col-span-6 relative aspect-square">
+              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl border border-zinc-200/80 bg-white hidden md:block" />
+              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-zinc-200/60 bg-black">
+                <Image
+                  src="/abstract.png"
+                  alt="Builders Hub abstract design graphic"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-2xl bg-white/90 backdrop-blur-sm px-4 py-3">
+                  <span className="text-[11px] font-bold text-zinc-800">Founded to sit on the client&apos;s side of the table</span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+                </div> */}
+              </div>
             </div>
 
             {/* Right Column: Key Details & Values Description */}
@@ -461,11 +521,30 @@ export default function Home() {
                 About Us
               </span>
               <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-                Crafting digital systems with the precision of physical structures.
+                We Don't Just Build Websites. We Build Digital Foundations.
               </h3>
               <p className="text-zinc-500 text-sm md:text-base leading-relaxed">
-                Builders Hub was founded on the belief that software agencies should be more than just code factories. We are problem solvers, designers, and artisans. When we partner with a brand, we sit on your side of the table, feel your operational bottlenecks, and design systems specifically built to fix them.
+                  Builders Hub is a web design and development agency helping businesses across Nigeria build a stronger presence online.
+
+                  We combine strategy, UI/UX design, development, and business thinking to create digital experiences that don't just look good, they have a purpose.
+
+                  Because a website should do more than exist.
+
+                  It should help your business move forward.              
               </p>
+
+              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-zinc-200/60">
+                {[
+                  { value: "5", label: "Industries served" },
+                  { value: "100%", label: "In-house delivery" },
+                  { value: "0", label: "Middle layers" },
+                ].map((stat, idx) => (
+                  <div key={idx} className="flex flex-col gap-1">
+                    <span className="text-xl font-extrabold text-zinc-950">{stat.value}</span>
+                    <span className="text-[11px] text-zinc-400 leading-snug">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -500,10 +579,10 @@ export default function Home() {
               Client Stories
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950">
-              Trusted by Ambitious Brands
+              Built for Businesses. Proven by People.
             </h2>
             <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
-              What our clients say about partnering with Builders Hub to design systems and solve operational challenges.
+              Every project starts with a business problem. These are the stories of what happened when we built around it.
             </p>
           </div>
         </div>
@@ -544,6 +623,9 @@ export default function Home() {
               className="min-w-[280px] md:min-w-[340px] flex-1 bg-white rounded-3xl border border-zinc-200/80 p-8 flex flex-col justify-between gap-8 group hover:border-brand-navy/30 transition-all duration-300"
             >
               <div className="flex flex-col gap-4">
+                <svg className="w-8 h-8 text-zinc-200 group-hover:text-brand-100 transition-colors duration-300" viewBox="0 0 32 24" fill="currentColor">
+                  <path d="M0 24V14.4C0 9.87 1.28 6.187 3.84 3.36 6.4 1.12 9.653 0 13.6 0v5.76c-2.027 0-3.68.64-4.96 1.92-1.173 1.173-1.867 2.667-2.08 4.48H12v11.84H0Zm17.6 0V14.4c0-4.53 1.28-8.213 3.84-11.04C24 1.12 27.253 0 31.2 0v5.76c-2.027 0-3.68.64-4.96 1.92-1.173 1.173-1.867 2.667-2.08 4.48H29.6v11.84H17.6Z" />
+                </svg>
                 <h3 className="text-lg font-extrabold text-zinc-950">
                   {item.title}
                 </h3>
@@ -579,17 +661,27 @@ export default function Home() {
           <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-          <div className="flex w-max animate-marquee gap-16 items-center">
+          <div className="flex w-max animate-marquee gap-12 items-center">
             {/* First Set */}
             {["FREENOW", "ORANGE", "AUSHA", "STRIPE", "VERCEL", "FIGMA", "GITHUB", "NEXT.JS"].map((brand, i) => (
-              <span key={i} className="text-xl font-mono font-extrabold tracking-widest text-zinc-300 uppercase select-none hover:text-zinc-600 transition-colors">
-                {brand}
+              <span key={i} className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-zinc-200/70 select-none">
+                <span className="w-6 h-6 rounded-full bg-zinc-900 text-white text-[10px] font-extrabold flex items-center justify-center shrink-0">
+                  {brand.charAt(0)}
+                </span>
+                <span className="text-sm font-mono font-extrabold tracking-widest text-zinc-400 uppercase">
+                  {brand}
+                </span>
               </span>
             ))}
             {/* Duplicated Set for Infinite Loop */}
             {["FREENOW", "ORANGE", "AUSHA", "STRIPE", "VERCEL", "FIGMA", "GITHUB", "NEXT.JS"].map((brand, i) => (
-              <span key={`dup-${i}`} className="text-xl font-mono font-extrabold tracking-widest text-zinc-300 uppercase select-none hover:text-zinc-600 transition-colors">
-                {brand}
+              <span key={`dup-${i}`} className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-zinc-200/70 select-none">
+                <span className="w-6 h-6 rounded-full bg-zinc-900 text-white text-[10px] font-extrabold flex items-center justify-center shrink-0">
+                  {brand.charAt(0)}
+                </span>
+                <span className="text-sm font-mono font-extrabold tracking-widest text-zinc-400 uppercase">
+                  {brand}
+                </span>
               </span>
             ))}
           </div>
@@ -655,6 +747,11 @@ export default function Home() {
                     <div key={i} className="border-r border-zinc-100/60 h-full last:border-r-0" />
                   ))}
                 </div>
+
+                {/* Connecting track running through every stage, reinforcing this is one continuous flow */}
+                <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-px bg-zinc-100 pointer-events-none" />
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-brand-900 pointer-events-none" />
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full border-2 border-zinc-200 bg-white pointer-events-none" />
 
                 {/* Stage 1: Understanding */}
                 <div className="col-start-1 col-span-3 sm:col-span-2 z-10">
@@ -751,58 +848,67 @@ export default function Home() {
               Why choose us?
             </h2>
             <p className="text-zinc-500 text-sm md:text-base leading-relaxed mt-2">
-              Our commitment to premium digital craftsmanship goes beyond just writing code. Discover the unique benefits that set us apart and guarantee success.
+              Because your website shouldn't be built in isolation from your business.
             </p>
           </div>
 
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-            {[
-              {
-                icon: "code",
-                title: "Handcrafted Code",
-                desc: "Every line of code is written in house by seasoned developers. We never outsource project delivery to third-party factories.",
-                highlight: true
-              },
-              {
-                icon: "group",
-                title: "Direct Partnership",
-                desc: "Work directly with lead designers and systems engineers. No project managers, middle layers, or communication gaps.",
-                highlight: false
-              },
-              {
-                icon: "palette",
-                title: "Pixel-Perfect Art",
-                desc: "Premium customized interfaces styled from scratch. We build detailed design libraries and layouts crafted down to the pixel.",
-                highlight: false
-              },
-              {
-                icon: "hub",
-                title: "Node Automations",
-                desc: "Automated business logic networks designed to optimize operations, integrate database states, and scale efficiency.",
-                highlight: false
-              }
-            ].map((card, idx) => (
-              <div
-                key={idx}
-                className={`rounded-3xl border p-8 flex flex-col gap-6 group transition-all duration-300 ${card.highlight ? 'bg-blue-50/60 border-blue-200/50 hover:border-blue-300' : 'bg-white border-zinc-200/85 hover:border-brand-navy/20'}`}
-              >
-                {/* Icon Wrapper */}
-                <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-white">
-                  <Icon name={card.icon} className="text-xl" />
-                </div>
-
-                {/* Info */}
-                <div className="flex flex-col gap-3">
-                  <h3 className="text-lg font-extrabold text-zinc-950">
-                    {card.title}
-                  </h3>
-                  <p className="text-zinc-500 text-xs leading-relaxed">
-                    {card.desc}
-                  </p>
-                </div>
+          {/* Asymmetric Grid: one lead reason gets room to breathe, the rest sit in a tighter row */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+            {/* Lead card */}
+            <div className="lg:col-span-5 rounded-3xl border border-brand-900 bg-brand-navy p-8 md:p-10 flex flex-col justify-between gap-10 min-h-[280px]">
+              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white">
+                <Icon name="code" className="text-xl" />
               </div>
-            ))}
+              <div className="flex flex-col gap-3">
+                <h3 className="text-xl font-extrabold text-white">
+                  We Start With the Business
+                </h3>
+                <p className="text-brand-100/80 text-sm leading-relaxed max-w-sm">
+                  We look beyond pages and features to understand what the website actually needs to accomplish.
+                </p>
+              </div>
+            </div>
+
+            {/* Three supporting reasons, stacked */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {[
+                {
+                  icon: "group",
+                  color: "bg-emerald-50 text-emerald-700",
+                  title: "We Design for Action",
+                  desc: "Every important page should lead visitors somewhere. Call, WhatsApp, book, order, enquire, apply, or buy.",
+                },
+                {
+                  icon: "palette",
+                  color: "bg-orange-50 text-orange-700",
+                  title: "Strategy Meets Design",
+                  desc: "We bring business thinking, UI/UX, and development together instead of treating them as separate pieces.",
+                },
+                {
+                  icon: "hub",
+                  color: "bg-pink-50 text-pink-700",
+                  title: "Built Around Your Customers",
+                  desc: "Different businesses have different customers, journeys, and expectations. We design accordingly.",
+                },
+              ].map((card, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-3xl border border-zinc-200/85 bg-white p-6 flex flex-col gap-5 hover:border-brand-navy/20 transition-all duration-300"
+                >
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${card.color}`}>
+                    <Icon name={card.icon} className="text-base" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-sm font-extrabold text-zinc-950">
+                      {card.title}
+                    </h3>
+                    <p className="text-zinc-500 text-xs leading-relaxed">
+                      {card.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>
@@ -828,66 +934,93 @@ export default function Home() {
               Simple &amp; Transparent Pricing
             </h2>
             <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
-              We engineer tailored solutions rather than copy-pasting code templates. That means we have no generic flat rates. Talk with us to get a custom roadmap and proposal.
+              We engineer tailored solutions rather than copy-pasting code templates. Every business is different, so we don't believe in forcing every project into the same box. Talk with us to get a custom roadmap and proposal.
             </p>
           </div>
 
-          {/* Single Focused Consultation Pricing Card */}
-          <div className="max-w-xl mx-auto w-full mt-6 bg-zinc-50 rounded-3xl border border-zinc-200/80 p-8 md:p-12 flex flex-col gap-8 justify-between hover:border-brand-navy/30 transition-all duration-300">
-            <div className="flex flex-col gap-6">
-              <div className="flex flex-col gap-2">
-                <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-                  Discovery &amp; Strategy Session
-                </span>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-5xl font-extrabold tracking-tight text-zinc-950">
-                    $0 / ₦0
+          {/* Pricing Card + What-Happens-Next Rail */}
+          <div className="max-w-4xl mx-auto w-full mt-6 grid grid-cols-1 md:grid-cols-12 gap-6">
+            {/* Consultation Pricing Card */}
+            <div className="md:col-span-7 bg-zinc-50 rounded-3xl border border-zinc-200/80 p-8 md:p-10 flex flex-col gap-8 justify-between hover:border-brand-navy/30 transition-all duration-300">
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2">
+                  <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
+                    Discovery &amp; Strategy Session
                   </span>
-                  <span className="text-xs font-medium text-zinc-400">
-                    / forever
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-extrabold tracking-tight text-zinc-950">
+                      $0 / ₦0
+                    </span>
+                    <span className="text-xs font-medium text-zinc-400">
+                      / forever
+                    </span>
+                  </div>
+                  <span className="text-xs font-bold text-emerald-600 mt-1">
+                    100% Free consultation call
                   </span>
                 </div>
-                <span className="text-xs font-bold text-emerald-600 mt-1">
-                  100% Free consultation call
-                </span>
+
+                <p className="text-zinc-500 text-sm leading-relaxed border-t border-zinc-200/40 pt-6">
+                  Don't know which one you need? Tell us what you're trying to achieve. We'll recommend the right approach.
+                </p>
+
+                {/* Consultation Features List */}
+                <div className="flex flex-col gap-3.5 border-t border-zinc-200/40 pt-6">
+                  {[
+                    "30-minute direct session with senior engineers",
+                    "Comprehensive review of operational bottlenecks",
+                    "Initial technical stack & framework evaluation",
+                    "Detailed blueprint document outlining potential steps",
+                    "No sales pitches or obligation to move forward"
+                  ].map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <Icon name="check_circle" className="text-emerald-500 text-base" />
+                      <span className="text-xs font-bold text-zinc-700">{feature}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <p className="text-zinc-500 text-sm leading-relaxed border-t border-zinc-200/40 pt-6">
-                Some software agencies charge hefty upfront assessment fees just to talk about your requirements. We do not. Let&apos;s map out your systems, examine bottlenecks, and draft a plan at no cost.
-              </p>
-
-              {/* Consultation Features List */}
-              <div className="flex flex-col gap-3.5 border-t border-zinc-200/40 pt-6">
-                {[
-                  "30-minute direct session with senior engineers",
-                  "Comprehensive review of operational bottlenecks",
-                  "Initial technical stack & framework evaluation",
-                  "Detailed blueprint document outlining potential steps",
-                  "No sales pitches or obligation to move forward"
-                ].map((feature, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <Icon name="check_circle" className="text-emerald-500 text-base" />
-                    <span className="text-xs font-bold text-zinc-700">{feature}</span>
-                  </div>
-                ))}
+              {/* CTA Button */}
+              <div className="pt-6 border-t border-zinc-200/40">
+                <a
+                  href="https://cal.com/builders-hub/introduction"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide cursor-pointer transition-all group"
+                >
+                  Schedule a Call
+                  <Icon
+                    name="arrow_outward"
+                    className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    weight={600}
+                  />
+                </a>
               </div>
             </div>
 
-            {/* CTA Button */}
-            <div className="pt-6 border-t border-zinc-200/40">
-              <a
-                href="https://cal.com/builders-hub/introduction"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide cursor-pointer transition-all group"
-              >
-                Schedule a Call
-                <Icon
-                  name="arrow_outward"
-                  className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  weight={600}
-                />
-              </a>
+            {/* What happens after the call */}
+            <div className="md:col-span-5 bg-brand-navy rounded-3xl p-8 md:p-10 flex flex-col gap-8 justify-center">
+              <span className="text-xs font-bold tracking-widest text-brand-100/70 uppercase">
+                After the call
+              </span>
+              <div className="flex flex-col gap-6">
+                {[
+                  { step: "1", title: "Proposal", desc: "Scope, timeline, and price, tailored to what we heard." },
+                  { step: "2", title: "Deposit & onboarding", desc: "We collect brand assets and access, then get to work." },
+                  { step: "3", title: "Build & launch", desc: "Design, development, QA, then your system goes live." },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-4">
+                    <span className="w-7 h-7 rounded-full border border-white/20 text-white text-[11px] font-bold flex items-center justify-center shrink-0">
+                      {item.step}
+                    </span>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-sm font-bold text-white">{item.title}</span>
+                      <span className="text-xs text-brand-100/70 leading-relaxed">{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -911,10 +1044,10 @@ export default function Home() {
               Get In Touch
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950">
-              Got ideas? Let&apos;s team up.
+              Have a Business to Build? Let's Talk.
             </h2>
             <p className="text-zinc-500 text-sm md:text-base leading-relaxed mt-2">
-              Tell us more about yourself and what you have in mind. We will get back to you within 24 hours.
+              Whether you're starting from scratch, redesigning an existing website, or looking to solve a bigger digital problem, tell us what you're working on.
             </p>
           </div>
 
@@ -923,19 +1056,33 @@ export default function Home() {
 
             {/* Left Column: Direct Info */}
             <div className="lg:col-span-4 flex flex-col gap-8">
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-4">
+                <div className="w-11 h-11 rounded-full bg-brand-navy flex items-center justify-center text-white">
+                  <Icon name="mail" className="text-lg" />
+                </div>
                 <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">
                   Chat to us
                 </span>
                 <p className="text-sm text-zinc-500">
-                  Our friendly team is here to help and answer any questions.
+                  Our team reads every message personally and answers within 24 hours.
                 </p>
                 <a
                   href="mailto:hello@buildershub.co"
-                  className="text-sm font-bold text-brand-navy hover:text-brand-navy-hover transition-colors cursor-pointer mt-1"
+                  className="text-sm font-bold text-brand-navy hover:text-brand-navy-hover transition-colors cursor-pointer -mt-1"
                 >
                   hello@buildershub.co
                 </a>
+              </div>
+
+              <div className="flex flex-col gap-3 pt-6 border-t border-zinc-200/60">
+                <div className="flex items-center gap-3 text-sm text-zinc-600">
+                  <Icon name="location_on" className="text-base text-zinc-400" />
+                  Lagos, Nigeria. Working with clients worldwide
+                </div>
+                <div className="flex items-center gap-3 text-sm text-zinc-600">
+                  <Icon name="schedule" className="text-base text-zinc-400" />
+                  Replies within 24 hours
+                </div>
               </div>
             </div>
 
@@ -1029,23 +1176,31 @@ export default function Home() {
         variants={sectionVariants}
         className="relative bg-zinc-50 py-32 border-t border-zinc-200/60 w-full overflow-hidden text-center flex flex-col items-center justify-center"
       >
-        <div className="max-w-4xl mx-auto px-6 flex flex-col gap-6 items-center">
+        {/* Ambient backdrop: soft radial glow + fine dot grid, echoing the "systems + art" duality */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.35]"
+          style={{ backgroundImage: "radial-gradient(circle, #d4d4d8 1px, transparent 1px)", backgroundSize: "28px 28px" }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-100/40 blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-4xl mx-auto px-6 flex flex-col gap-6 items-center">
           <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-zinc-950 uppercase leading-[1.15] flex flex-col gap-2 select-none">
             <span className="flex items-center justify-center gap-4 flex-wrap">
-              Built
+               Your
               <span className="inline-flex text-xs font-mono font-bold tracking-widest bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full uppercase">
-                By Artists
+              Business
               </span>
-              For The
+              Has Already Been Built.
             </span>
             <span className="flex items-center justify-center gap-4 flex-wrap">
+              Now Let's
               <span className="inline-flex text-xs font-mono font-bold tracking-widest bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full uppercase">
-                Critical
+                Build
               </span>
-              Ambitious
+              Its Digital Presence
             </span>
             <span className="flex items-center justify-center gap-4 flex-wrap">
-              &amp; The Outliers
+              
               <span className="inline-flex w-16 h-8 bg-zinc-900 rounded-full" />
             </span>
           </h2>
@@ -1115,12 +1270,22 @@ export default function Home() {
                 Services
               </h4>
               <div className="flex flex-col gap-2.5 text-sm text-zinc-400 font-medium">
-                <span>Websites &amp; Web Apps</span>
-                <span>Mobile Applications</span>
-                <span>Backend Systems</span>
-                <span>AI &amp; Automations</span>
-                <span>UI/UX Design</span>
-                <span>Product &amp; Graphics</span>
+                {[
+                  { label: "Websites & Web Apps", slug: "websites" },
+                  { label: "Mobile Applications", slug: "mobile" },
+                  { label: "Backend Systems", slug: "backend" },
+                  { label: "AI & Automations", slug: "automation" },
+                  { label: "UI/UX Design", slug: "design" },
+                  { label: "Product & Graphics", slug: "graphics" },
+                ].map((service) => (
+                  <Link
+                    key={service.slug}
+                    href={`/work?service=${service.slug}`}
+                    className="hover:text-white transition-colors cursor-pointer"
+                  >
+                    {service.label}
+                  </Link>
+                ))}
               </div>
             </div>
 

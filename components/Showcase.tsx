@@ -3,63 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Icon from "@/components/Icon";
-
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  story: string;
-  link: string;
-  screenshots: string[];
-  video?: string;
-}
-
-const mockProjects: Project[] = [
-  {
-    id: 1,
-    title: "Apex Logistics Dashboard",
-    category: "Logistics & Fleet Systems",
-    story: "A comprehensive operational dashboard engineered for real-time fleet coordination and warehouse workflows. The system integrates automated OCR scanner APIs to read container labels, schedules optimal routes dynamically, and handles high-throughput inventory events. Built using Next.js and Go to ensure sub-second rendering and reliable background processing under heavy peak workloads.",
-    link: "https://apexlogistics.example.com",
-    screenshots: ["/abstract.png", "/workspace.png", "/abstract.png"],
-    video: "https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-computer-34282-large.mp4"
-  },
-  {
-    id: 2,
-    title: "Nova Commerce Engine",
-    category: "High-Scale E-Commerce",
-    story: "A modular, lightning-fast e-commerce infrastructure supporting over 100,000 daily checkouts. The platform resolves stock sync issues across distributed nodes, designs responsive checkout funnels, and integrates package tracking automations. We designed this down to the pixel to ensure conversion rates scale with traffic.",
-    link: "https://novacommerce.example.com",
-    screenshots: ["/workspace.png", "/abstract.png", "/workspace.png"],
-  },
-  {
-    id: 3,
-    title: "ScanFlow System",
-    category: "Hardware Integration & OCR",
-    story: "A high-performance scanning pipeline engineered specifically for physical warehouses. Integrates package label audits via camera feeds and OCR, syncing data instantly to backend databases. Implements strict data validation to prevent packet drops and double entries.",
-    link: "https://scanflow.example.com",
-    screenshots: ["/abstract.png", "/workspace.png", "/abstract.png"],
-  },
-  {
-    id: 4,
-    title: "Velo Automation Engine",
-    category: "AI & Workflow Automation",
-    story: "An advanced node-based workflow system connecting customer operations, triggering background automations, and executing data synchronization cycles. Features detailed micro-interactions and clean dashboard views to make system management intuitive and elegant.",
-    link: "https://velo.example.com",
-    screenshots: ["/workspace.png", "/abstract.png", "/workspace.png"],
-    video: "https://assets.mixkit.co/videos/preview/mixkit-typing-on-a-computer-keyboard-close-up-44671-large.mp4"
-  },
-  {
-    id: 5,
-    title: "Aura Ledger Dashboard",
-    category: "Financial Operations Suite",
-    story: "A premium financial management tool that calculates liquidity metrics, generates compliance reports, and automates ledger adjustments. Implements detailed tables, custom layout grids, and interactive graphics for an elite user experience.",
-    link: "https://aura.example.com",
-    screenshots: ["/abstract.png", "/workspace.png", "/abstract.png"],
-  }
-];
+import { projects as mockProjects, type Project } from "../lib/projects";
 
 export default function Showcase() {
   const [activeIndex, setActiveIndex] = useState(2);
@@ -89,10 +36,10 @@ export default function Showcase() {
             Product Showcase
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950">
-            Curious What We Have Created?
+            Solutions Built for Real Businesses
           </h2>
           <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
-            Explore a selection of premium websites, mobile applications, and backend systems built with absolute attention to detail.
+            From a simple digital storefront to a custom business platform, we build around the problem you're trying to solve.
           </p>
         </div>
 
@@ -175,14 +122,27 @@ export default function Showcase() {
                       </div>
                     </div>
 
-                    {/* Bottom CTA to view details */}
+                    {/* Bottom CTA row: card body opens details, arrow jumps straight to the live site */}
                     <div className="flex items-center justify-between mt-2 pt-2 border-t border-zinc-200/30">
                       <span className="text-[11px] font-bold text-zinc-500">
                         {isActive ? "Click to open details" : "Select project"}
                       </span>
-                      <div className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 group-hover:bg-brand-navy group-hover:text-white transition-all duration-300">
+                      <a
+                        href={isActive ? project.link : undefined}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          if (!isActive) {
+                            e.preventDefault();
+                            return;
+                          }
+                          e.stopPropagation();
+                        }}
+                        title={isActive ? `Visit ${project.title}` : undefined}
+                        className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 hover:bg-brand-navy hover:text-white hover:border-brand-navy transition-all duration-300"
+                      >
                         <Icon name="arrow_outward" className="text-xs" weight={600} />
-                      </div>
+                      </a>
                     </div>
                   </div>
                 </motion.div>
@@ -205,6 +165,18 @@ export default function Showcase() {
               <Icon name="arrow_forward" className="text-base" />
             </button>
           </div>
+
+          <Link
+            href="/work"
+            className="mt-8 inline-flex items-center gap-1.5 text-xs font-bold text-zinc-500 hover:text-brand-navy transition-colors group"
+          >
+            See the full body of work
+            <Icon
+              name="arrow_outward"
+              className="text-xs transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              weight={600}
+            />
+          </Link>
 
         </div>
       </div>
