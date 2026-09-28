@@ -233,16 +233,16 @@ export default function Home() {
         {/* Ambient glow anchoring the hero, independent of the framed visual */}
         <div className="absolute top-10 right-0 w-[560px] h-[560px] bg-brand-100/40 rounded-full blur-3xl pointer-events-none -z-10" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-10 items-center w-full">
+        <div className="flex flex-col items-start max-w-3xl w-full">
 
           {/* Copy column */}
           <motion.div
             initial={{ opacity: 0, y: 60, filter: "blur(20px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] as const }}
-            className="lg:col-span-7 flex flex-col items-start gap-8"
+            className="flex flex-col items-start gap-8"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zinc-950 leading-[1.08] max-w-4xl">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zinc-950 leading-[1.08]">
               We Build Businesses {" "}
               <span className="relative inline-block px-3 py-1 bg-gradient-to-br from-brand-100 to-brand-200/60 text-brand-900 rounded-2xl select-none">
                 Better
@@ -252,8 +252,8 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-zinc-500 text-sm md:text-base leading-relaxed max-w-lg">
-              Builders Hub is a software development agency, We help businesses improve how they show up, attract customers, and operate online, combining strategy, design, and technology to build digital solutions that actually move the business forward. We design and build high-performance web and mobile applications, bespoke websites, and AI automations for the problems that actually slow your business down.
+            <p className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-2xl">
+              We design and build high-performance web and mobile applications, bespoke platforms, and AI automations that move your business forward.
             </p>
 
             {/* Premium Capsule Button (Try Aura / smalltribe style) */}
@@ -278,26 +278,6 @@ export default function Home() {
                   weight={600}
                 />
               </a>
-            </div>
-
-            {/* Compact visual for small screens, where the side panel is hidden */}
-            <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden border border-zinc-200/60 lg:hidden">
-              <Image src="/hero-bg.png" alt="" fill className="object-cover" priority />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/70 via-brand-navy/5 to-transparent" />
-            </div>
-          </motion.div>
-
-          {/* Framed visual panel, desktop only */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-            className="hidden lg:block lg:col-span-5 relative"
-          >
-            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-[2.5rem] border border-zinc-200/80 bg-white" />
-            <div className="relative w-full aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-zinc-200/60">
-              <Image src="/hero-bg.png" alt="" fill className="object-cover" priority />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/70 via-brand-navy/10 to-transparent" />
             </div>
           </motion.div>
 
@@ -533,18 +513,7 @@ export default function Home() {
                   It should help your business move forward.              
               </p>
 
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-zinc-200/60">
-                {[
-                  { value: "5", label: "Industries served" },
-                  { value: "100%", label: "In-house delivery" },
-                  { value: "0", label: "Middle layers" },
-                ].map((stat, idx) => (
-                  <div key={idx} className="flex flex-col gap-1">
-                    <span className="text-xl font-extrabold text-zinc-950">{stat.value}</span>
-                    <span className="text-[11px] text-zinc-400 leading-snug">{stat.label}</span>
-                  </div>
-                ))}
-              </div>
+
             </div>
           </div>
 
@@ -835,80 +804,164 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
-        className="relative bg-zinc-50 py-24 border-t border-zinc-200/60 z-10 w-full"
+        className="relative bg-white py-28 z-10 w-full overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
+        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col items-center">
 
-          {/* Header Title & Intro Row */}
-          <div className="flex flex-col gap-2 max-w-xl border-b border-zinc-200/60 pb-8">
-            <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
+          {/* Header Title & Intro */}
+          <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-16 px-4">
+            <div className="grid grid-cols-3 grid-rows-2 w-7 h-7 rounded-md overflow-hidden mb-6">
+              <div className="bg-black" />
+              <div className="bg-white" />
+              <div className="bg-[#00E5FF]" />
+              <div className="bg-[#FFD600]" />
+              <div className="bg-[#FF2E93]" />
+              <div className="bg-[#0051FF]" />
+            </div>
+            <span className="text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-3">
               Expertise
             </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950">
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-zinc-950 font-normal tracking-tight leading-tight mb-4">
               Why choose us?
             </h2>
-            <p className="text-zinc-500 text-sm md:text-base leading-relaxed mt-2">
+            <p className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-lg">
               Because your website shouldn't be built in isolation from your business.
             </p>
           </div>
 
-          {/* Asymmetric Grid: one lead reason gets room to breathe, the rest sit in a tighter row */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
-            {/* Lead card */}
-            <div className="lg:col-span-5 rounded-3xl border border-brand-900 bg-brand-navy p-8 md:p-10 flex flex-col justify-between gap-10 min-h-[280px]">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white">
-                <Icon name="code" className="text-xl" />
+          {/* Minimalist Colored Craft Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto pt-4 pb-8">
+            
+            {/* Card 1: Vermilion Orange */}
+            <div className="bg-[#F04623] rounded-[2rem] p-8 min-h-[460px] flex flex-col justify-between lg:-rotate-3 lg:hover:rotate-0 transition-transform duration-300 ease-out cursor-pointer hover:-translate-y-3">
+              <div className="w-full flex justify-center pt-2">
+                <svg className="w-full h-36" viewBox="0 0 240 140" fill="none">
+                  {Array.from({ length: 42 }).map((_, i) => {
+                    const x = 12 + i * 5.2;
+                    const progress = i / 41;
+                    const y1 = 12;
+                    const y2 = 30 + progress * 95;
+                    return (
+                      <line
+                        key={i}
+                        x1={x}
+                        y1={y1}
+                        x2={x}
+                        y2={y2}
+                        stroke="#FFFFFF"
+                        strokeWidth="1.5"
+                        strokeOpacity={0.85}
+                      />
+                    );
+                  })}
+                </svg>
               </div>
               <div className="flex flex-col gap-3">
-                <h3 className="text-xl font-extrabold text-white">
+                <h3 className="font-serif text-2xl sm:text-[1.65rem] font-normal leading-tight text-white">
                   We Start With the Business
                 </h3>
-                <p className="text-brand-100/80 text-sm leading-relaxed max-w-sm">
+                <p className="text-white/85 text-sm leading-relaxed">
                   We look beyond pages and features to understand what the website actually needs to accomplish.
                 </p>
               </div>
             </div>
 
-            {/* Three supporting reasons, stacked */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {[
-                {
-                  icon: "group",
-                  color: "bg-emerald-50 text-emerald-700",
-                  title: "We Design for Action",
-                  desc: "Every important page should lead visitors somewhere. Call, WhatsApp, book, order, enquire, apply, or buy.",
-                },
-                {
-                  icon: "palette",
-                  color: "bg-orange-50 text-orange-700",
-                  title: "Strategy Meets Design",
-                  desc: "We bring business thinking, UI/UX, and development together instead of treating them as separate pieces.",
-                },
-                {
-                  icon: "hub",
-                  color: "bg-pink-50 text-pink-700",
-                  title: "Built Around Your Customers",
-                  desc: "Different businesses have different customers, journeys, and expectations. We design accordingly.",
-                },
-              ].map((card, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-3xl border border-zinc-200/85 bg-white p-6 flex flex-col gap-5 hover:border-brand-navy/20 transition-all duration-300"
-                >
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${card.color}`}>
-                    <Icon name={card.icon} className="text-base" />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-sm font-extrabold text-zinc-950">
-                      {card.title}
-                    </h3>
-                    <p className="text-zinc-500 text-xs leading-relaxed">
-                      {card.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            {/* Card 2: Warm Sand / Cream */}
+            <div className="bg-[#EFE8DD] rounded-[2rem] p-8 min-h-[460px] flex flex-col justify-between lg:-rotate-1 lg:hover:rotate-0 transition-transform duration-300 ease-out cursor-pointer hover:-translate-y-3">
+              <div className="w-full flex justify-center pt-2">
+                <svg className="w-full h-36" viewBox="0 0 240 140" fill="none">
+                  {Array.from({ length: 14 }).map((_, col) =>
+                    Array.from({ length: 8 }).map((_, row) => {
+                      const opacities = [0.15, 0.25, 0.45, 0.6, 0.75, 0.35, 0.5, 0.2];
+                      const opacity = opacities[(col * 3 + row * 5) % opacities.length];
+                      return (
+                        <rect
+                          key={`${col}-${row}`}
+                          x={14 + col * 15}
+                          y={12 + row * 15}
+                          width="11"
+                          height="11"
+                          rx="1"
+                          fill="#524C44"
+                          fillOpacity={opacity}
+                        />
+                      );
+                    })
+                  )}
+                </svg>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h3 className="font-serif text-2xl sm:text-[1.65rem] font-normal leading-tight text-zinc-950">
+                  We Design for Action
+                </h3>
+                <p className="text-zinc-700 text-sm leading-relaxed">
+                  Every important page should lead visitors somewhere. Call, WhatsApp, book, order, enquire, apply, or buy.
+                </p>
+              </div>
             </div>
+
+            {/* Card 3: Electric Blue */}
+            <div className="bg-[#0084FF] rounded-[2rem] p-8 min-h-[460px] flex flex-col justify-between lg:rotate-1 lg:hover:rotate-0 transition-transform duration-300 ease-out cursor-pointer hover:-translate-y-3">
+              <div className="w-full flex justify-center pt-2">
+                <svg className="w-full h-36" viewBox="0 0 240 140" fill="none">
+                  {Array.from({ length: 22 }).map((_, i) => {
+                    const y = 14 + i * 5.2;
+                    const amp = Math.sin((i / 21) * Math.PI) * 9;
+                    return (
+                      <path
+                        key={i}
+                        d={`M 14 ${y} Q 70 ${y - amp} 120 ${y} T 226 ${y}`}
+                        stroke="#FFFFFF"
+                        strokeWidth="1.2"
+                        strokeOpacity={0.75}
+                      />
+                    );
+                  })}
+                </svg>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h3 className="font-serif text-2xl sm:text-[1.65rem] font-normal leading-tight text-white">
+                  Strategy Meets Design
+                </h3>
+                <p className="text-white/85 text-sm leading-relaxed">
+                  We bring business thinking, UI/UX, and development together instead of treating them as separate pieces.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 4: Vivid Spring Green */}
+            <div className="bg-[#00DF73] rounded-[2rem] p-8 min-h-[460px] flex flex-col justify-between lg:rotate-3 lg:hover:rotate-0 transition-transform duration-300 ease-out cursor-pointer hover:-translate-y-3">
+              <div className="w-full flex justify-center pt-2">
+                <svg className="w-full h-36" viewBox="0 0 240 140" fill="none">
+                  {Array.from({ length: 30 }).map((_, col) =>
+                    Array.from({ length: 7 }).map((_, row) => {
+                      const isVisible = (col + row * 3) % 4 !== 0;
+                      return isVisible ? (
+                        <rect
+                          key={`${col}-${row}`}
+                          x={16 + col * 7}
+                          y={14 + row * 16}
+                          width="4"
+                          height="12"
+                          rx="1"
+                          fill="#0A381E"
+                          fillOpacity={0.8}
+                        />
+                      ) : null;
+                    })
+                  )}
+                </svg>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h3 className="font-serif text-2xl sm:text-[1.65rem] font-normal leading-tight text-zinc-950">
+                  Built Around Your Customers
+                </h3>
+                <p className="text-zinc-900/80 text-sm leading-relaxed">
+                  Different businesses have different customers, journeys, and expectations. We design accordingly.
+                </p>
+              </div>
+            </div>
+
           </div>
 
         </div>

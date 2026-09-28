@@ -9,6 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: "Figtree", system-ui, -apple-system, sans-serif;
+  --font-serif: "Newsreader", "Playfair Display", Georgia, serif;
   --font-mono: "Geist Mono", monospace;
   
   /* Brand Navy Palette matching the logo */
