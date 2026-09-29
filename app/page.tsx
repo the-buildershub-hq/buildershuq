@@ -230,9 +230,6 @@ export default function Home() {
       {/* Main Hero Container */}
       <main className="relative flex-1 flex items-center max-w-7xl w-full mx-auto px-6 pt-36 pb-20 z-10">
 
-        {/* Ambient glow anchoring the hero, independent of the framed visual */}
-        <div className="absolute top-10 right-0 w-[560px] h-[560px] bg-brand-100/40 rounded-full blur-3xl pointer-events-none -z-10" />
-
         <div className="flex flex-col items-start max-w-3xl w-full">
 
           {/* Copy column */}
@@ -243,13 +240,7 @@ export default function Home() {
             className="flex flex-col items-start gap-8"
           >
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zinc-950 leading-[1.08]">
-              We Build Businesses {" "}
-              <span className="relative inline-block px-3 py-1 bg-gradient-to-br from-brand-100 to-brand-200/60 text-brand-900 rounded-2xl select-none">
-                Better
-              </span>
-              <span className="block mt-2">
-                We Craft Them <span className="text-brand-900">Digitally</span>.
-              </span>
+              We Build Better Digital Products.
             </h1>
 
             <p className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-2xl">
