@@ -801,14 +801,6 @@ export default function Home() {
 
           {/* Header Title & Intro */}
           <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-16 px-4">
-            <div className="grid grid-cols-3 grid-rows-2 w-7 h-7 rounded-md overflow-hidden mb-6">
-              <div className="bg-black" />
-              <div className="bg-white" />
-              <div className="bg-[#00E5FF]" />
-              <div className="bg-[#FFD600]" />
-              <div className="bg-[#FF2E93]" />
-              <div className="bg-[#0051FF]" />
-            </div>
             <span className="text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-3">
               Expertise
             </span>

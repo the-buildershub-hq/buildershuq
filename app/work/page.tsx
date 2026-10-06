@@ -4,9 +4,9 @@ import { projects, services } from "../../lib/projects";
 import ProjectCard from "../../components/ProjectCard";
 
 export const metadata = {
-  title: "Our Work — Builders Hub",
+  title: "Our Work: Builders Hub",
   description:
-    "Case studies from Builders Hub: websites, mobile apps, backend systems, automations, and design work shipped for real clients.",
+    "Case studies from Builders Hub including web applications, mobile apps, backend systems, and automations shipped for real clients.",
 };
 
 export default async function WorkPage({
