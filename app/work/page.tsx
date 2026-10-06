@@ -23,7 +23,7 @@ export default async function WorkPage({
   return (
     <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900">
       <header className="fixed top-4 left-0 right-0 z-50 px-4">
-        <nav className="mx-auto max-w-7xl h-16 flex items-center justify-between px-6 rounded-full bg-white/70 backdrop-blur-md border border-zinc-200/50">
+        <nav className="mx-auto max-w-7xl h-16 flex items-center justify-between px-6 rounded-full bg-white/80 backdrop-blur-md">
           <Link href="/" className="flex items-center gap-0.5">
             <span className="font-extrabold text-base tracking-tight text-zinc-950">
               Builders Hub
@@ -31,7 +31,7 @@ export default async function WorkPage({
           </Link>
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-xs font-semibold tracking-wide transition-all group"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold tracking-wide transition-all group"
           >
             Start a project
             <Icon
@@ -43,33 +43,33 @@ export default async function WorkPage({
         </nav>
       </header>
 
-      <main className="max-w-7xl mx-auto w-full px-6 pt-40 pb-24 flex flex-col gap-14">
+      <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-28 sm:pt-40 pb-24 flex flex-col gap-10 sm:gap-14">
         <div className="flex flex-col gap-4 max-w-2xl">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-400 hover:text-brand-navy transition-colors w-fit"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-400 hover:text-zinc-950 transition-colors w-fit"
           >
             <Icon name="arrow_back" className="text-sm" weight={600} />
             Back home
           </Link>
-          <h1 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950 leading-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-zinc-950 leading-tight">
             Work we&apos;ve shipped. <br />
             We Build. We Solve. We Show the Work.
           </h1>
           <p className="text-zinc-500 text-sm md:text-base leading-relaxed">
             Every project here is live, in the hands of real users. 
-            Explore the websites and digital experiences we've designed and developed for businesses looking to improve how they show up, connect, and grow online.
+            Explore the websites and digital experiences we have designed and developed for businesses looking to improve how they show up, connect, and grow online.
           </p>
         </div>
 
         {/* Filter chips */}
-        <div className="flex flex-wrap gap-2.5">
+        <div className="flex flex-wrap gap-2 sm:gap-2.5">
           <Link
             href="/work"
             className={`px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-colors ${
               !activeService
-                ? "bg-brand-navy text-white"
-                : "bg-white border border-zinc-200 text-zinc-600 hover:border-brand-navy/40"
+                ? "bg-zinc-950 text-white"
+                : "bg-white text-zinc-600 hover:bg-zinc-100"
             }`}
           >
             All work
@@ -80,8 +80,8 @@ export default async function WorkPage({
               href={`/work?service=${s.slug}`}
               className={`px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-colors ${
                 activeService?.slug === s.slug
-                  ? "bg-brand-navy text-white"
-                  : "bg-white border border-zinc-200 text-zinc-600 hover:border-brand-navy/40"
+                  ? "bg-zinc-950 text-white"
+                  : "bg-white text-zinc-600 hover:bg-zinc-100"
               }`}
             >
               {s.label}
@@ -96,7 +96,7 @@ export default async function WorkPage({
           ))}
           {filtered.length === 0 && (
             <p className="text-sm text-zinc-500">
-              Nothing filed under this service yet — check back soon.
+              Nothing filed under this service yet. Check back soon.
             </p>
           )}
         </div>

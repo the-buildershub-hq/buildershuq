@@ -175,14 +175,22 @@ export default function Showcase() {
           }}
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-5 w-full px-2 sm:px-4 items-start"
         >
-          {columns.map((column, colIdx) => (
-            <motion.div
-              key={colIdx}
-              style={{
-                y: columnOffsets[colIdx],
-              }}
-              className="flex flex-col gap-3 sm:gap-4 lg:gap-5 w-full"
-            >
+          {columns.map((column, colIdx) => {
+            const visibilityClass =
+              colIdx === 2
+                ? "hidden md:flex"
+                : colIdx >= 3
+                ? "hidden lg:flex"
+                : "flex";
+
+            return (
+              <motion.div
+                key={colIdx}
+                style={{
+                  y: columnOffsets[colIdx],
+                }}
+                className={`${visibilityClass} flex-col gap-3 sm:gap-4 lg:gap-5 w-full`}
+              >
               {column.map((item, itemIdx) => (
                 <motion.div
                   key={`${colIdx}-${itemIdx}`}
@@ -229,7 +237,8 @@ export default function Showcase() {
                 </motion.div>
               ))}
             </motion.div>
-          ))}
+          );
+        })}
         </motion.div>
 
       </div>
@@ -242,22 +251,22 @@ export default function Showcase() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 w-screen h-screen z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8"
+              className="fixed inset-0 w-screen h-screen z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-md p-3 sm:p-6 md:p-8"
             >
               <motion.div
                 initial={{ scale: 0.95, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.95, y: 20 }}
                 transition={{ type: "spring", damping: 25, stiffness: 220 }}
-                className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl flex flex-col scrollbar-hide text-zinc-950"
+                className="bg-white max-w-4xl w-full max-h-[92vh] overflow-y-auto rounded-2xl sm:rounded-3xl flex flex-col scrollbar-hide text-zinc-950"
               >
                 {/* Modal Header */}
-                <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-30 px-6 py-5 flex items-center justify-between">
+                <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-30 px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between">
                   <div className="flex flex-col">
                     <span className="text-xs font-mono text-zinc-400 font-bold uppercase tracking-widest">
                       {selectedProject.category}
                     </span>
-                    <h3 className="font-serif text-2xl font-normal text-zinc-950 mt-1">
+                    <h3 className="font-serif text-xl sm:text-2xl font-normal text-zinc-950 mt-0.5 sm:mt-1">
                       {selectedProject.title}
                     </h3>
                   </div>
@@ -270,8 +279,8 @@ export default function Showcase() {
                 </div>
 
                 {/* Media Container */}
-                <div className="bg-zinc-100 p-6 flex flex-col gap-4">
-                  <div className="relative aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center">
+                <div className="bg-zinc-100 p-4 sm:p-6 flex flex-col gap-4">
+                  <div className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-black flex items-center justify-center">
                     {activeMediaIndex === selectedProject.screenshots.length && selectedProject.video ? (
                       <video
                         src={selectedProject.video}
@@ -292,12 +301,12 @@ export default function Showcase() {
                   </div>
 
                   {/* Thumbnail Row */}
-                  <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                  <div className="flex gap-2.5 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide">
                     {selectedProject.screenshots.map((shot, sIdx) => (
                       <button
                         key={sIdx}
                         onClick={() => setActiveMediaIndex(sIdx)}
-                        className={`relative w-24 aspect-video rounded-xl overflow-hidden cursor-pointer shrink-0 transition-all ${
+                        className={`relative w-20 sm:w-24 aspect-video rounded-lg sm:rounded-xl overflow-hidden cursor-pointer shrink-0 transition-all ${
                           activeMediaIndex === sIdx ? "ring-2 ring-zinc-950" : "opacity-60 hover:opacity-100"
                         }`}
                       >
@@ -313,18 +322,18 @@ export default function Showcase() {
                     {selectedProject.video && (
                       <button
                         onClick={() => setActiveMediaIndex(selectedProject.screenshots.length)}
-                        className={`relative w-24 aspect-video rounded-xl overflow-hidden bg-zinc-900 flex items-center justify-center text-white cursor-pointer shrink-0 transition-all ${
+                        className={`relative w-20 sm:w-24 aspect-video rounded-lg sm:rounded-xl overflow-hidden bg-zinc-900 flex items-center justify-center text-white cursor-pointer shrink-0 transition-all ${
                           activeMediaIndex === selectedProject.screenshots.length ? "ring-2 ring-zinc-950" : "opacity-60 hover:opacity-100"
                         }`}
                       >
-                        <Icon name="play_circle" className="text-3xl text-white" />
+                        <Icon name="play_circle" className="text-2xl sm:text-3xl text-white" />
                       </button>
                     )}
                   </div>
                 </div>
 
                 {/* Story Description */}
-                <div className="px-6 py-8 flex flex-col gap-6">
+                <div className="px-4 sm:px-6 py-6 sm:py-8 flex flex-col gap-6">
                   <div className="flex flex-col gap-2">
                     <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
                       Project Background
@@ -334,12 +343,12 @@ export default function Showcase() {
                     </p>
                   </div>
 
-                  <div className="pt-4 flex items-center justify-end">
+                  <div className="pt-2 sm:pt-4 flex items-center justify-end">
                     <a
                       href={selectedProject.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-sm font-semibold tracking-wide cursor-pointer transition-colors group"
+                      className="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-sm font-semibold tracking-wide cursor-pointer transition-colors group"
                     >
                       Visit Live Project Website
                       <Icon

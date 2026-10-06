@@ -305,7 +305,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
-            className="hidden md:flex absolute top-10 lg:top-14 left-6 lg:left-16 -rotate-6 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-[#EBE7DF] p-4 text-zinc-950 flex-col justify-between"
+            className="hidden xl:flex absolute top-10 lg:top-14 left-6 lg:left-16 -rotate-6 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-[#EBE7DF] p-4 text-zinc-950 flex-col justify-between"
           >
             <div className="w-full flex flex-col gap-1.5 opacity-70">
               <div className="flex items-center gap-1">
@@ -325,7 +325,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, 8, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-            className="hidden md:flex absolute top-12 lg:top-16 right-6 lg:right-20 rotate-6 w-36 h-44 lg:w-40 lg:h-48 rounded-2xl bg-[#EFE8DD] p-4 flex-col justify-between"
+            className="hidden xl:flex absolute top-12 lg:top-16 right-6 lg:right-20 rotate-6 w-36 h-44 lg:w-40 lg:h-48 rounded-2xl bg-[#EFE8DD] p-4 flex-col justify-between"
           >
             <div className="w-full flex justify-center opacity-60">
               <svg className="w-full h-16" viewBox="0 0 100 60" fill="#524C44">
@@ -349,7 +349,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
             transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="hidden lg:flex absolute top-1/2 -translate-y-1/2 left-4 lg:left-6 rotate-3 w-40 h-28 rounded-2xl bg-[#0084FF] p-4 text-white flex-col justify-between"
+            className="hidden xl:flex absolute top-1/2 -translate-y-1/2 left-4 lg:left-6 rotate-3 w-40 h-28 rounded-2xl bg-[#0084FF] p-4 text-white flex-col justify-between"
           >
             <div className="w-full opacity-80">
               <svg className="w-full h-12" viewBox="0 0 100 40" fill="none" stroke="#ffffff" strokeWidth="2">
@@ -365,7 +365,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, 7, 0] }}
             transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-            className="hidden lg:flex absolute top-1/2 -translate-y-1/2 right-4 lg:right-6 -rotate-6 w-40 h-28 rounded-2xl bg-[#F04623] p-4 text-white flex-col justify-between"
+            className="hidden xl:flex absolute top-1/2 -translate-y-1/2 right-4 lg:right-6 -rotate-6 w-40 h-28 rounded-2xl bg-[#F04623] p-4 text-white flex-col justify-between"
           >
             <div className="w-full opacity-85">
               <svg className="w-full h-12" viewBox="0 0 100 40" fill="none" stroke="#ffffff" strokeWidth="2">
@@ -384,7 +384,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, 6, 0] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-            className="hidden md:flex absolute bottom-10 lg:bottom-14 left-8 lg:left-24 -rotate-3 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-zinc-900 p-4 text-white flex-col justify-between"
+            className="hidden xl:flex absolute bottom-10 lg:bottom-14 left-8 lg:left-24 -rotate-3 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-zinc-900 p-4 text-white flex-col justify-between"
           >
             <div className="flex flex-col gap-1.5 opacity-60">
               <div className="w-16 h-2 rounded bg-zinc-700" />
@@ -398,7 +398,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, -7, 0] }}
             transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-            className="hidden md:flex absolute bottom-12 lg:bottom-16 right-8 lg:right-24 rotate-6 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-[#00DF73] p-4 text-zinc-950 flex-col justify-between"
+            className="hidden xl:flex absolute bottom-12 lg:bottom-16 right-8 lg:right-24 rotate-6 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-[#00DF73] p-4 text-zinc-950 flex-col justify-between"
           >
             <div className="flex gap-1.5 opacity-70">
               <div className="w-2 h-8 rounded bg-zinc-950" />
@@ -418,26 +418,26 @@ export default function Home() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as const }}
           className="relative z-20 max-w-3xl mx-auto flex flex-col items-center text-center gap-6"
         >
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-zinc-950 leading-[1.12]">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-zinc-950 leading-[1.12]">
             We build websites and apps that help your business grow
           </h1>
 
-          <p className="text-zinc-600 text-base sm:text-lg leading-relaxed max-w-xl">
+          <p className="text-zinc-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl px-2 sm:px-0">
             You focus on running your business while we handle the technology. We create clean websites, mobile apps, and tools that make life easier for you and your customers.
           </p>
 
-          <div className="flex items-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
             <a
               href="https://cal.com/builders-hub/introduction"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white text-sm font-semibold tracking-wide transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white text-sm font-semibold tracking-wide transition-colors"
             >
               Schedule a Call
             </a>
             <Link
               href="/work"
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-zinc-200/70 hover:bg-zinc-200 text-zinc-900 text-sm font-semibold tracking-wide transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-zinc-200/70 hover:bg-zinc-200 text-zinc-900 text-sm font-semibold tracking-wide transition-colors"
             >
               See Our Work
             </Link>
@@ -985,13 +985,16 @@ export default function Home() {
         <div className="max-w-none w-full px-6 md:px-16 flex flex-col gap-12">
 
           {/* Section Card */}
-          <div className="bg-white rounded-3xl p-8 md:p-12 flex flex-col gap-12 overflow-x-auto scrollbar-hide">
+          <div className="bg-white rounded-3xl p-5 sm:p-8 md:p-12 flex flex-col gap-8 sm:gap-12 overflow-x-auto scrollbar-hide">
 
             {/* Header Title */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
               <h2 className="font-serif text-3xl sm:text-4xl font-normal tracking-tight text-zinc-950">
                 Timeline
               </h2>
+              <span className="sm:hidden text-xs font-mono text-zinc-400">
+                Scroll sideways to view full schedule
+              </span>
             </div>
 
             {/* Gantt Calendar Table */}
@@ -1499,7 +1502,7 @@ export default function Home() {
             </div>
 
             {/* Right Card: Services Selection and Form */}
-            <div className="lg:col-span-7 bg-white text-zinc-950 rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-8">
+            <div className="lg:col-span-7 bg-white text-zinc-950 rounded-3xl p-6 sm:p-10 flex flex-col justify-between gap-8">
 
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-1.5">
@@ -1550,7 +1553,7 @@ export default function Home() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="What should we call you?"
-                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all"
+                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-base sm:text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all"
                     />
                   </div>
 
@@ -1565,7 +1568,7 @@ export default function Home() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="Where can we write back to you?"
-                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all"
+                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-base sm:text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all"
                     />
                   </div>
 
@@ -1580,7 +1583,7 @@ export default function Home() {
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       placeholder="Share your goals, timeline, or any questions..."
-                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all resize-none"
+                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-base sm:text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all resize-none"
                     />
                   </div>
 
@@ -1631,31 +1634,31 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-100/40 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-4xl mx-auto px-6 flex flex-col gap-6 items-center">
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-zinc-950 uppercase leading-[1.15] flex flex-col gap-2 select-none">
-            <span className="flex items-center justify-center gap-4 flex-wrap">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-zinc-950 uppercase leading-[1.15] flex flex-col gap-2 select-none">
+            <span className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
               Your
-              <span className="inline-flex text-xs font-mono font-bold tracking-widest bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full uppercase">
+              <span className="inline-flex text-[10px] sm:text-xs font-mono font-bold tracking-widest bg-emerald-100 text-emerald-800 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full uppercase">
                 Business
               </span>
               Has Already Been Built.
             </span>
-            <span className="flex items-center justify-center gap-4 flex-wrap">
+            <span className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
               Now Let's
-              <span className="inline-flex text-xs font-mono font-bold tracking-widest bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full uppercase">
+              <span className="inline-flex text-[10px] sm:text-xs font-mono font-bold tracking-widest bg-indigo-100 text-indigo-800 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full uppercase">
                 Build
               </span>
               Its Digital Presence
             </span>
             <span className="flex items-center justify-center gap-4 flex-wrap">
 
-              <span className="inline-flex w-16 h-8 bg-zinc-900 rounded-full" />
+              <span className="inline-flex w-12 sm:w-16 h-6 sm:h-8 bg-zinc-900 rounded-full" />
             </span>
           </h2>
         </div>
       </motion.section>
 
       {/* Footer Section */}
-      <footer className="w-full bg-zinc-950 text-white rounded-t-[3rem] px-6 py-16 md:py-24 z-10 relative overflow-hidden">
+      <footer className="w-full bg-zinc-950 text-white rounded-t-[2.5rem] sm:rounded-t-[3rem] px-6 py-16 md:py-24 z-10 relative overflow-hidden">
         {/* Glow decoration (no shadows, flat elements) */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
 
@@ -1672,7 +1675,7 @@ export default function Home() {
           </div>
 
           {/* Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pt-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 pt-8">
 
             {/* Column 1: Contact Details */}
             <div className="flex flex-col gap-4">

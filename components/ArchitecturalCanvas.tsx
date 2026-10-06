@@ -269,7 +269,13 @@ export default function ArchitecturalCanvas() {
       setIsInteracting(true);
       previousPointerX = e.clientX;
       previousPointerY = e.clientY;
-      container.setPointerCapture(e.pointerId);
+      if (e.pointerType === "mouse") {
+        try {
+          container.setPointerCapture(e.pointerId);
+        } catch {
+          // ignore
+        }
+      }
     };
 
     const handlePointerMove = (e: PointerEvent) => {
@@ -283,7 +289,7 @@ export default function ArchitecturalCanvas() {
         targetRotationX += deltaY * 0.008;
         // Clamp vertical tilt to prevent awkward flipping
         targetRotationX = Math.max(-0.7, Math.min(0.7, targetRotationX));
-      } else {
+      } else if (e.pointerType === "mouse") {
         // Subtle parallax tracking on mouse move
         const rect = container.getBoundingClientRect();
         const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -297,10 +303,12 @@ export default function ArchitecturalCanvas() {
       if (isDragging) {
         isDragging = false;
         setIsInteracting(false);
-        try {
-          container.releasePointerCapture(e.pointerId);
-        } catch {
-          // ignore
+        if (e.pointerType === "mouse") {
+          try {
+            container.releasePointerCapture(e.pointerId);
+          } catch {
+            // ignore
+          }
         }
       }
     };
@@ -310,17 +318,24 @@ export default function ArchitecturalCanvas() {
     container.addEventListener("pointerup", handlePointerUp);
     container.addEventListener("pointercancel", handlePointerUp);
 
-    // Handle Resize
-    const handleResize = () => {
+    // Responsive camera and viewport sizing
+    const updateSize = () => {
       if (!container) return;
       const width = container.clientWidth;
       const height = container.clientHeight;
+      if (width === 0 || height === 0) return;
       camera.aspect = width / height;
+      camera.position.z = width < 420 ? 8.6 : 7.8;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     };
 
-    window.addEventListener("resize", handleResize);
+    const resizeObserver = new ResizeObserver(() => {
+      updateSize();
+    });
+    resizeObserver.observe(container);
+
+    window.addEventListener("resize", updateSize);
 
     // Animation Loop
     let animationFrameId: number;
@@ -353,7 +368,8 @@ export default function ArchitecturalCanvas() {
     return () => {
       cancelAnimationFrame(animationFrameId);
       observer.disconnect();
-      window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateSize);
 
       container.removeEventListener("pointerdown", handlePointerDown);
       container.removeEventListener("pointermove", handlePointerMove);
@@ -383,8 +399,9 @@ export default function ArchitecturalCanvas() {
   return (
     <div
       ref={containerRef}
-      className={`relative w-full max-w-[500px] aspect-square rounded-3xl overflow-hidden bg-black select-none touch-none ${isInteracting ? "cursor-grabbing" : "cursor-grab"
-        }`}
+      className={`relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[500px] aspect-square rounded-3xl overflow-hidden bg-black select-none touch-pan-y ${
+        isInteracting ? "cursor-grabbing" : "cursor-grab"
+      }`}
     >
       {/* Fallback poster while WebGL context initializes */}
       {!isLoaded && (
@@ -394,7 +411,6 @@ export default function ArchitecturalCanvas() {
           className="w-full h-full object-cover"
         />
       )}
-
     </div>
   );
 }
