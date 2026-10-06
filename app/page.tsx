@@ -305,19 +305,19 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
-            className="hidden xl:flex absolute top-10 lg:top-14 left-6 lg:left-16 -rotate-6 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-[#EBE7DF] p-4 text-zinc-950 flex-col justify-between"
+            className="flex absolute top-6 sm:top-8 lg:top-14 left-2 sm:left-6 lg:left-16 -rotate-6 w-28 h-20 sm:w-36 sm:h-26 lg:w-44 lg:h-32 rounded-xl sm:rounded-2xl bg-[#EBE7DF] p-2.5 sm:p-3.5 lg:p-4 text-zinc-950 flex-col justify-between z-10"
           >
-            <div className="w-full flex flex-col gap-1.5 opacity-70">
+            <div className="w-full flex flex-col gap-1 sm:gap-1.5 opacity-70">
               <div className="flex items-center gap-1">
                 <div className="w-1.5 h-1.5 rounded-full bg-zinc-950" />
                 <div className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
                 <div className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
               </div>
-              <div className="h-7 w-full rounded-md bg-zinc-300/60 mt-1 flex items-center px-2">
-                <div className="h-1.5 w-16 bg-zinc-600 rounded" />
+              <div className="h-5 sm:h-7 w-full rounded-md bg-zinc-300/60 mt-0.5 sm:mt-1 flex items-center px-1.5 sm:px-2">
+                <div className="h-1 sm:h-1.5 w-12 sm:w-16 bg-zinc-600 rounded" />
               </div>
             </div>
-            <span className="font-serif text-sm text-zinc-950 font-normal">Modern Website</span>
+            <span className="font-serif text-[11px] sm:text-xs lg:text-sm text-zinc-950 font-normal">Modern Website</span>
           </motion.div>
 
           {/* Card 2: Top Right Warm Sand Tile */}
@@ -325,10 +325,10 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, 8, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-            className="hidden xl:flex absolute top-12 lg:top-16 right-6 lg:right-20 rotate-6 w-36 h-44 lg:w-40 lg:h-48 rounded-2xl bg-[#EFE8DD] p-4 flex-col justify-between"
+            className="flex absolute top-8 sm:top-10 lg:top-16 right-2 sm:right-6 lg:right-20 rotate-6 w-24 h-32 sm:w-32 sm:h-40 lg:w-40 lg:h-48 rounded-xl sm:rounded-2xl bg-[#EFE8DD] p-2.5 sm:p-3.5 lg:p-4 flex-col justify-between z-10"
           >
             <div className="w-full flex justify-center opacity-60">
-              <svg className="w-full h-16" viewBox="0 0 100 60" fill="#524C44">
+              <svg className="w-full h-12 sm:h-16" viewBox="0 0 100 60" fill="#524C44">
                 <rect x="10" y="8" width="10" height="10" rx="2" fillOpacity="0.4" />
                 <rect x="26" y="8" width="10" height="10" rx="2" fillOpacity="0.7" />
                 <rect x="42" y="8" width="10" height="10" rx="2" fillOpacity="0.3" />
@@ -341,7 +341,7 @@ export default function Home() {
                 <rect x="74" y="24" width="10" height="10" rx="2" fillOpacity="0.6" />
               </svg>
             </div>
-            <span className="font-serif text-sm text-zinc-950 font-normal">Customer Portal</span>
+            <span className="font-serif text-[11px] sm:text-xs lg:text-sm text-zinc-950 font-normal">Customer Portal</span>
           </motion.div>
 
           {/* Card 3: Middle Left Electric Blue Tile */}
@@ -349,15 +349,15 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
             transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="hidden xl:flex absolute top-1/2 -translate-y-1/2 left-4 lg:left-6 rotate-3 w-40 h-28 rounded-2xl bg-[#0084FF] p-4 text-white flex-col justify-between"
+            className="flex absolute top-[38%] sm:top-1/2 -translate-y-1/2 -left-2 sm:left-4 lg:left-6 rotate-3 w-24 h-18 sm:w-34 sm:h-24 lg:w-40 lg:h-28 rounded-xl sm:rounded-2xl bg-[#0084FF] p-2.5 sm:p-3.5 lg:p-4 text-white flex-col justify-between z-10 opacity-80 sm:opacity-100"
           >
             <div className="w-full opacity-80">
-              <svg className="w-full h-12" viewBox="0 0 100 40" fill="none" stroke="#ffffff" strokeWidth="2">
+              <svg className="w-full h-8 sm:h-12" viewBox="0 0 100 40" fill="none" stroke="#ffffff" strokeWidth="2">
                 <path d="M 10 12 Q 50 4 90 12" />
                 <path d="M 10 24 Q 50 16 90 24" />
               </svg>
             </div>
-            <span className="font-serif text-sm font-normal">Mobile App</span>
+            <span className="font-serif text-[11px] sm:text-xs lg:text-sm font-normal">Mobile App</span>
           </motion.div>
 
           {/* Card 4: Middle Right Vermilion Tile */}
@@ -365,10 +365,10 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, 7, 0] }}
             transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-            className="hidden xl:flex absolute top-1/2 -translate-y-1/2 right-4 lg:right-6 -rotate-6 w-40 h-28 rounded-2xl bg-[#F04623] p-4 text-white flex-col justify-between"
+            className="flex absolute top-[42%] sm:top-1/2 -translate-y-1/2 -right-2 sm:right-4 lg:right-6 -rotate-6 w-24 h-18 sm:w-34 sm:h-24 lg:w-40 lg:h-28 rounded-xl sm:rounded-2xl bg-[#F04623] p-2.5 sm:p-3.5 lg:p-4 text-white flex-col justify-between z-10 opacity-80 sm:opacity-100"
           >
             <div className="w-full opacity-85">
-              <svg className="w-full h-12" viewBox="0 0 100 40" fill="none" stroke="#ffffff" strokeWidth="2">
+              <svg className="w-full h-8 sm:h-12" viewBox="0 0 100 40" fill="none" stroke="#ffffff" strokeWidth="2">
                 <line x1="15" y1="6" x2="15" y2="28" />
                 <line x1="30" y1="6" x2="30" y2="34" />
                 <line x1="45" y1="6" x2="45" y2="22" />
@@ -376,7 +376,7 @@ export default function Home() {
                 <line x1="75" y1="6" x2="75" y2="26" />
               </svg>
             </div>
-            <span className="font-serif text-sm font-normal">Online Store</span>
+            <span className="font-serif text-[11px] sm:text-xs lg:text-sm font-normal">Online Store</span>
           </motion.div>
 
           {/* Card 5: Bottom Left Dark Interface Tile */}
@@ -384,13 +384,13 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, 6, 0] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-            className="hidden xl:flex absolute bottom-10 lg:bottom-14 left-8 lg:left-24 -rotate-3 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-zinc-900 p-4 text-white flex-col justify-between"
+            className="flex absolute bottom-6 sm:bottom-10 lg:bottom-14 left-2 sm:left-8 lg:left-24 -rotate-3 w-28 h-20 sm:w-36 sm:h-26 lg:w-44 lg:h-32 rounded-xl sm:rounded-2xl bg-zinc-900 p-2.5 sm:p-3.5 lg:p-4 text-white flex-col justify-between z-10"
           >
-            <div className="flex flex-col gap-1.5 opacity-60">
-              <div className="w-16 h-2 rounded bg-zinc-700" />
-              <div className="w-24 h-2 rounded bg-zinc-800" />
+            <div className="flex flex-col gap-1 sm:gap-1.5 opacity-60">
+              <div className="w-12 sm:w-16 h-1.5 sm:h-2 rounded bg-zinc-700" />
+              <div className="w-16 sm:w-24 h-1.5 sm:h-2 rounded bg-zinc-800" />
             </div>
-            <span className="font-serif text-sm font-normal">Fast Checkout</span>
+            <span className="font-serif text-[11px] sm:text-xs lg:text-sm font-normal">Fast Checkout</span>
           </motion.div>
 
           {/* Card 6: Bottom Right Vivid Mint Tile */}
@@ -398,15 +398,15 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, y: [0, -7, 0] }}
             transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-            className="hidden xl:flex absolute bottom-12 lg:bottom-16 right-8 lg:right-24 rotate-6 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-[#00DF73] p-4 text-zinc-950 flex-col justify-between"
+            className="flex absolute bottom-8 sm:bottom-12 lg:bottom-16 right-2 sm:right-8 lg:right-24 rotate-6 w-28 h-20 sm:w-36 sm:h-26 lg:w-44 lg:h-32 rounded-xl sm:rounded-2xl bg-[#00DF73] p-2.5 sm:p-3.5 lg:p-4 text-zinc-950 flex-col justify-between z-10"
           >
-            <div className="flex gap-1.5 opacity-70">
-              <div className="w-2 h-8 rounded bg-zinc-950" />
-              <div className="w-2 h-6 rounded bg-zinc-950" />
-              <div className="w-2 h-10 rounded bg-zinc-950" />
-              <div className="w-2 h-5 rounded bg-zinc-950" />
+            <div className="flex gap-1 sm:gap-1.5 opacity-70">
+              <div className="w-1.5 sm:w-2 h-6 sm:h-8 rounded bg-zinc-950" />
+              <div className="w-1.5 sm:w-2 h-4 sm:h-6 rounded bg-zinc-950" />
+              <div className="w-1.5 sm:w-2 h-7 sm:h-10 rounded bg-zinc-950" />
+              <div className="w-1.5 sm:w-2 h-3.5 sm:h-5 rounded bg-zinc-950" />
             </div>
-            <span className="font-serif text-sm font-normal">Simple Tools</span>
+            <span className="font-serif text-[11px] sm:text-xs lg:text-sm font-normal">Simple Tools</span>
           </motion.div>
 
         </div>
