@@ -227,52 +227,151 @@ export default function Home() {
         </AnimatePresence>
       </header>
 
-      {/* Main Hero Container */}
-      <main className="relative flex-1 flex items-center max-w-7xl w-full mx-auto px-6 pt-36 pb-20 z-10">
+      {/* Main Hero Container: Centered Layout with Floating Scattered Elements */}
+      <main className="relative flex-1 flex flex-col items-center justify-center min-h-[85vh] max-w-7xl w-full mx-auto px-6 pt-36 pb-24 z-10 overflow-hidden">
 
-        <div className="flex flex-col items-start max-w-3xl w-full">
-
-          {/* Copy column */}
+        {/* Floating Visual Constellation (Inspired by iPartyLabs, Take a screenshot, and Nothing Playground) */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          
+          {/* Card 1: Top Left Photo Tile */}
           <motion.div
-            initial={{ opacity: 0, y: 60, filter: "blur(20px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] as const }}
-            className="flex flex-col items-start gap-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
+            className="hidden md:block absolute top-12 left-6 lg:left-16 -rotate-6 w-40 h-28 lg:w-48 lg:h-32 rounded-2xl overflow-hidden bg-zinc-100"
           >
-            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-zinc-950 leading-[1.08]">
-              We Build Better Digital Products.
-            </h1>
+            <Image
+              src="/pricing-consultation.jpg"
+              alt=""
+              fill
+              className="object-cover grayscale contrast-125"
+            />
+          </motion.div>
 
-            <p className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-2xl">
-              We design and build high-performance web and mobile applications, bespoke platforms, and AI automations that move your business forward.
-            </p>
-
-            {/* Premium Capsule Button (Try Aura / smalltribe style) */}
-            <div className="flex items-center gap-3">
-              <a
-                href="https://cal.com/builders-hub/introduction"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide transition-all shadow-sm hover:shadow-lg hover:shadow-brand-900/10 hover:-translate-y-0.5"
-              >
-                Schedule a Call
-              </a>
-              <a
-                href="https://cal.com/builders-hub/introduction"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white flex items-center justify-center transition-all hover:shadow-lg hover:shadow-brand-900/10 hover:-translate-y-0.5 group"
-              >
-                <Icon
-                  name="arrow_outward"
-                  className="text-lg transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  weight={600}
-                />
-              </a>
+          {/* Card 2: Top Right Warm Sand Tile */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, y: [0, 8, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+            className="hidden md:flex absolute top-14 right-6 lg:right-20 rotate-6 w-36 h-44 lg:w-40 lg:h-48 rounded-2xl bg-[#EFE8DD] p-4 flex-col justify-between"
+          >
+            <div className="w-full flex justify-center opacity-60">
+              <svg className="w-full h-16" viewBox="0 0 100 60" fill="#524C44">
+                <rect x="10" y="8" width="10" height="10" rx="2" fillOpacity="0.4" />
+                <rect x="26" y="8" width="10" height="10" rx="2" fillOpacity="0.7" />
+                <rect x="42" y="8" width="10" height="10" rx="2" fillOpacity="0.3" />
+                <rect x="58" y="8" width="10" height="10" rx="2" fillOpacity="0.8" />
+                <rect x="74" y="8" width="10" height="10" rx="2" fillOpacity="0.5" />
+                <rect x="10" y="24" width="10" height="10" rx="2" fillOpacity="0.7" />
+                <rect x="26" y="24" width="10" height="10" rx="2" fillOpacity="0.3" />
+                <rect x="42" y="24" width="10" height="10" rx="2" fillOpacity="0.9" />
+                <rect x="58" y="24" width="10" height="10" rx="2" fillOpacity="0.4" />
+                <rect x="74" y="24" width="10" height="10" rx="2" fillOpacity="0.6" />
+              </svg>
             </div>
+            <span className="font-serif text-sm text-zinc-950 font-normal">Customer Portal</span>
+          </motion.div>
+
+          {/* Card 3: Middle Left Electric Blue Tile */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            className="hidden lg:flex absolute top-1/2 -translate-y-1/2 left-4 rotate-3 w-40 h-28 rounded-2xl bg-[#0084FF] p-4 text-white flex-col justify-between"
+          >
+            <div className="w-full opacity-80">
+              <svg className="w-full h-12" viewBox="0 0 100 40" fill="none" stroke="#ffffff" strokeWidth="2">
+                <path d="M 10 12 Q 50 4 90 12" />
+                <path d="M 10 24 Q 50 16 90 24" />
+              </svg>
+            </div>
+            <span className="font-serif text-sm font-normal">Mobile App</span>
+          </motion.div>
+
+          {/* Card 4: Middle Right Vermilion Tile */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, y: [0, 7, 0] }}
+            transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+            className="hidden lg:flex absolute top-1/2 -translate-y-1/2 right-4 -rotate-6 w-40 h-28 rounded-2xl bg-[#F04623] p-4 text-white flex-col justify-between"
+          >
+            <div className="w-full opacity-85">
+              <svg className="w-full h-12" viewBox="0 0 100 40" fill="none" stroke="#ffffff" strokeWidth="2">
+                <line x1="15" y1="6" x2="15" y2="28" />
+                <line x1="30" y1="6" x2="30" y2="34" />
+                <line x1="45" y1="6" x2="45" y2="22" />
+                <line x1="60" y1="6" x2="60" y2="36" />
+                <line x1="75" y1="6" x2="75" y2="26" />
+              </svg>
+            </div>
+            <span className="font-serif text-sm font-normal">Online Store</span>
+          </motion.div>
+
+          {/* Card 5: Bottom Left Dark Interface Tile */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, y: [0, 6, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+            className="hidden md:flex absolute bottom-8 left-8 lg:left-24 -rotate-3 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-zinc-900 p-4 text-white flex-col justify-between"
+          >
+            <div className="flex flex-col gap-1.5 opacity-60">
+              <div className="w-16 h-2 rounded bg-zinc-700" />
+              <div className="w-24 h-2 rounded bg-zinc-800" />
+            </div>
+            <span className="font-serif text-sm font-normal">Fast Checkout</span>
+          </motion.div>
+
+          {/* Card 6: Bottom Right Vivid Mint Tile */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, y: [0, -7, 0] }}
+            transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+            className="hidden md:flex absolute bottom-10 right-8 lg:right-24 rotate-6 w-40 h-28 lg:w-44 lg:h-32 rounded-2xl bg-[#00DF73] p-4 text-zinc-950 flex-col justify-between"
+          >
+            <div className="flex gap-1.5 opacity-70">
+              <div className="w-2 h-8 rounded bg-zinc-950" />
+              <div className="w-2 h-6 rounded bg-zinc-950" />
+              <div className="w-2 h-10 rounded bg-zinc-950" />
+              <div className="w-2 h-5 rounded bg-zinc-950" />
+            </div>
+            <span className="font-serif text-sm font-normal">Simple Tools</span>
           </motion.div>
 
         </div>
+
+        {/* Central Hero Copy and Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as const }}
+          className="relative z-20 max-w-3xl mx-auto flex flex-col items-center text-center gap-6"
+        >
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-zinc-950 leading-[1.12]">
+            We build websites and apps that help your business grow
+          </h1>
+
+          <p className="text-zinc-600 text-base sm:text-lg leading-relaxed max-w-xl">
+            You focus on running your business while we handle the technology. We create clean websites, mobile apps, and tools that make life easier for you and your customers.
+          </p>
+
+          <div className="flex items-center gap-4 pt-2">
+            <a
+              href="https://cal.com/builders-hub/introduction"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white text-sm font-semibold tracking-wide transition-colors"
+            >
+              Schedule a Call
+            </a>
+            <Link
+              href="/work"
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-zinc-200/70 hover:bg-zinc-200 text-zinc-900 text-sm font-semibold tracking-wide transition-colors"
+            >
+              See Our Work
+            </Link>
+          </div>
+        </motion.div>
+
       </main>
 
       {/* Services Section underneath the Hero */}
