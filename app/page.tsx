@@ -577,55 +577,60 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
-        className="relative bg-zinc-50 py-24 border-t border-zinc-200/60 z-10 w-full"
+        className="relative bg-zinc-950 text-white py-28 sm:py-36 z-10 w-full overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-16">
+        {/* Subtle ambient backdrop behind the cube */}
+        <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-zinc-800/25 blur-3xl pointer-events-none" />
 
-          {/* Halved Image & Adjacent Content Block */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Layered image treatment — a structural frame behind the abstract shot */}
-            <div className="md:col-span-6 relative aspect-square">
-              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl border border-zinc-200/80 bg-white hidden md:block" />
-              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-zinc-200/60 bg-black">
+        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Column: Typography and Content */}
+            <div className="lg:col-span-6 flex flex-col gap-6 justify-center">
+              <span className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase">
+                About Us
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white leading-[1.15]">
+                We do not just build websites. We build digital foundations.
+              </h2>
+              <div className="flex flex-col gap-4 text-zinc-300 text-sm sm:text-base leading-relaxed max-w-lg mt-2">
+                <p>
+                  Builders Hub is a web design and development agency helping businesses across Nigeria build a stronger presence online.
+                </p>
+                <p>
+                  We combine strategy, UI/UX design, development, and business thinking to create digital experiences that do not just look good, they have a purpose.
+                </p>
+                <p className="text-white font-medium">
+                  Because a website should do more than exist. It should help your business move forward.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Immersive Animated Cube */}
+            <div className="lg:col-span-6 flex items-center justify-center relative">
+              <motion.div
+                animate={{
+                  y: [0, -12, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                whileHover={{ scale: 1.02 }}
+                className="relative w-full max-w-[500px] aspect-square rounded-3xl overflow-hidden bg-black select-none"
+              >
                 <Image
                   src="/abstract.png"
-                  alt="Builders Hub abstract design graphic"
+                  alt="Builders Hub digital foundation cube"
                   fill
                   className="object-cover"
                   priority
                 />
-                {/* <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-2xl bg-white/90 backdrop-blur-sm px-4 py-3">
-                  <span className="text-[11px] font-bold text-zinc-800">Founded to sit on the client&apos;s side of the table</span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
-                </div> */}
-              </div>
+              </motion.div>
             </div>
 
-            {/* Right Column: Key Details & Values Description */}
-            <div className="md:col-span-6 flex flex-col gap-6 justify-center">
-              <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-                About Us
-              </span>
-              <h3 className="font-serif text-3xl md:text-4xl font-normal tracking-tight text-zinc-950 leading-tight">
-                We Don't Just Build Websites. We Build Digital Foundations.
-              </h3>
-              <p className="text-zinc-500 text-sm md:text-base leading-relaxed">
-                  Builders Hub is a web design and development agency helping businesses across Nigeria build a stronger presence online.
-
-                  We combine strategy, UI/UX design, development, and business thinking to create digital experiences that don't just look good, they have a purpose.
-
-                  Because a website should do more than exist.
-
-                  It should help your business move forward.              
-              </p>
-
-
-            </div>
           </div>
-
-          {/* Line Divider */}
-          <div className="border-t border-zinc-200/60 w-full" />
-
         </div>
       </motion.section>
 
