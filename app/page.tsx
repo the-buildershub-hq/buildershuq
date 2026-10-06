@@ -237,7 +237,7 @@ export default function Home() {
       </header>
 
       {/* Main Hero Container: Centered Layout with Floating Scattered Elements */}
-      <main className="relative flex-1 flex flex-col items-center justify-center min-h-[85vh] max-w-7xl w-full mx-auto px-6 pt-36 pb-24 z-10 overflow-hidden">
+      <main className="relative flex-1 flex flex-col items-center justify-center min-h-[85vh] max-w-7xl w-full mx-auto px-6 pt-36 pb-36 sm:pb-48 z-10 overflow-hidden">
 
         {/* Floating Visual Constellation (Inspired by iPartyLabs, Take a screenshot, and Nothing Playground) */}
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
@@ -383,67 +383,91 @@ export default function Home() {
 
       </main>
 
-      {/* About Us Section */}
+      {/* About Us Section (Centered architectural composition inspired by reference screenshot) */}
       <motion.section
         id="about"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
-        className="relative bg-zinc-950 text-white py-28 sm:py-36 z-10 w-full overflow-hidden"
+        className="relative bg-black text-white pt-36 sm:pt-48 pb-32 sm:pb-44 z-10 w-full overflow-hidden"
       >
-        {/* Subtle ambient backdrop behind the cube */}
-        <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-zinc-800/25 blur-3xl pointer-events-none" />
+        {/* Ambient radial glow backdrop behind the cube and center */}
+        <div className="absolute left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[500px] rounded-full bg-zinc-900/60 blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        {/* Sweeping architectural dome and orbital arc lines from screenshot */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+          <svg
+            viewBox="0 0 1400 700"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full max-w-7xl h-auto opacity-35"
+          >
+            <path
+              d="M 50 640 C 350 80, 1050 80, 1350 640"
+              stroke="rgba(255, 255, 255, 0.22)"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 120 660 C 400 160, 1000 160, 1280 660"
+              stroke="rgba(255, 255, 255, 0.1)"
+              strokeWidth="1"
+              strokeDasharray="8 8"
+            />
+          </svg>
+        </div>
 
-            {/* Left Column: Typography and Content */}
-            <div className="lg:col-span-6 flex flex-col gap-6 justify-center">
-              <span className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase">
-                About Us
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white leading-[1.15]">
-                We do not just build websites. We build digital foundations.
-              </h2>
-              <div className="flex flex-col gap-4 text-zinc-300 text-sm sm:text-base leading-relaxed max-w-lg mt-2">
-                <p>
-                  Builders Hub is a web design and development agency helping businesses across Nigeria build a stronger presence online.
-                </p>
-                <p>
-                  We combine strategy, UI/UX design, development, and business thinking to create digital experiences that do not just look good, they have a purpose.
-                </p>
-                <p className="text-white font-medium">
-                  Because a website should do more than exist. It should help your business move forward.
-                </p>
-              </div>
-            </div>
+        <div className="relative max-w-5xl mx-auto w-full px-6 flex flex-col items-center text-center z-10">
+          
+          {/* Header & Typography */}
+          <span className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase">
+            About Us
+          </span>
 
-            {/* Right Column: Immersive Animated Cube */}
-            <div className="lg:col-span-6 flex items-center justify-center relative">
-              <motion.div
-                animate={{
-                  y: [0, -12, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                whileHover={{ scale: 1.02 }}
-                className="relative w-full max-w-[500px] aspect-square rounded-3xl overflow-hidden bg-black select-none"
-              >
-                <Image
-                  src="/abstract.png"
-                  alt="Builders Hub digital foundation cube"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </motion.div>
-            </div>
+          <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-white leading-[1.14] max-w-3xl mt-4">
+            We do not just build websites. We build digital foundations.
+          </h2>
 
+          <div className="flex flex-col gap-4 text-zinc-400 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed mt-6">
+            <p>
+              Builders Hub is a web design and development agency helping businesses across Nigeria build a stronger presence online.
+            </p>
+            <p>
+              We combine strategy, UI/UX design, development, and business thinking to create digital experiences that do not just look good, they have a purpose.
+            </p>
+            <p className="text-white font-medium text-base sm:text-lg">
+              Because a website should do more than exist. It should help your business move forward.
+            </p>
           </div>
+
+          {/* Immersive Animated 3D Cube */}
+          <div className="relative w-full max-w-[480px] sm:max-w-[580px] md:max-w-[680px] aspect-square flex items-center justify-center mt-12 sm:mt-16">
+            {/* Soft floor light pool */}
+            <div className="absolute inset-x-8 bottom-8 h-32 rounded-full bg-zinc-800/40 blur-2xl pointer-events-none" />
+
+            <motion.div
+              animate={{
+                y: [0, -16, 0],
+                rotate: [0, 1, 0],
+              }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              whileHover={{ scale: 1.03 }}
+              className="relative w-full h-full select-none cursor-default"
+            >
+              <Image
+                src="/abstract.png"
+                alt="Builders Hub digital foundation cube"
+                fill
+                className="object-contain"
+                priority
+              />
+            </motion.div>
+          </div>
+
         </div>
       </motion.section>
 
