@@ -730,37 +730,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Infinite Auto-Scrolling Brands Marquee */}
-        <div className="w-full overflow-hidden py-10 border-t border-b border-zinc-200/50 mt-12 bg-white relative">
-          {/* Fade gradients at screen edges for premium feel */}
-          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-          <div className="flex w-max animate-marquee gap-12 items-center">
-            {/* First Set */}
-            {["FREENOW", "ORANGE", "AUSHA", "STRIPE", "VERCEL", "FIGMA", "GITHUB", "NEXT.JS"].map((brand, i) => (
-              <span key={i} className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-zinc-200/70 select-none">
-                <span className="w-6 h-6 rounded-full bg-zinc-900 text-white text-[10px] font-extrabold flex items-center justify-center shrink-0">
-                  {brand.charAt(0)}
-                </span>
-                <span className="text-sm font-mono font-extrabold tracking-widest text-zinc-400 uppercase">
-                  {brand}
-                </span>
-              </span>
-            ))}
-            {/* Duplicated Set for Infinite Loop */}
-            {["FREENOW", "ORANGE", "AUSHA", "STRIPE", "VERCEL", "FIGMA", "GITHUB", "NEXT.JS"].map((brand, i) => (
-              <span key={`dup-${i}`} className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-zinc-200/70 select-none">
-                <span className="w-6 h-6 rounded-full bg-zinc-900 text-white text-[10px] font-extrabold flex items-center justify-center shrink-0">
-                  {brand.charAt(0)}
-                </span>
-                <span className="text-sm font-mono font-extrabold tracking-widest text-zinc-400 uppercase">
-                  {brand}
-                </span>
-              </span>
-            ))}
-          </div>
-        </div>
       </motion.section>
 
       {/* Timeline Section */}
