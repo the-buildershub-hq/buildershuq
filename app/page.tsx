@@ -239,7 +239,7 @@ export default function Home() {
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] as const }}
             className="flex flex-col items-start gap-8"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zinc-950 leading-[1.08]">
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-zinc-950 leading-[1.08]">
               We Build Better Digital Products.
             </h1>
 
@@ -288,7 +288,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div className="max-w-md">
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+              <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950 leading-tight">
                 Built Around Your Business. <br />
                 <span className="text-zinc-400">one team.</span>
               </h2>
@@ -491,7 +491,7 @@ export default function Home() {
               <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
                 About Us
               </span>
-              <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+              <h3 className="font-serif text-3xl md:text-4xl font-normal tracking-tight text-zinc-950 leading-tight">
                 We Don't Just Build Websites. We Build Digital Foundations.
               </h3>
               <p className="text-zinc-500 text-sm md:text-base leading-relaxed">
@@ -538,7 +538,7 @@ export default function Home() {
             <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
               Client Stories
             </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950">
+            <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950">
               Built for Businesses. Proven by People.
             </h2>
             <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
@@ -664,7 +664,7 @@ export default function Home() {
 
             {/* Header Title */}
             <div className="flex flex-col gap-2">
-              <h2 className="text-3xl font-extrabold tracking-tight text-zinc-950">
+              <h2 className="font-serif text-3xl sm:text-4xl font-normal tracking-tight text-zinc-950">
                 Timeline
               </h2>
             </div>
@@ -966,7 +966,7 @@ export default function Home() {
             <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
               Pricing
             </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950">
+            <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950">
               Simple &amp; Transparent Pricing
             </h2>
             <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
@@ -1079,7 +1079,7 @@ export default function Home() {
             <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
               Get In Touch
             </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950">
+            <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950">
               Have a Business to Build? Let's Talk.
             </h2>
             <p className="text-zinc-500 text-sm md:text-base leading-relaxed mt-2">

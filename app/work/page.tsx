@@ -52,7 +52,7 @@ export default async function WorkPage({
             <Icon name="arrow_back" className="text-sm" weight={600} />
             Back home
           </Link>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+          <h1 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950 leading-tight">
             Work we&apos;ve shipped. <br />
             We Build. We Solve. We Show the Work.
           </h1>

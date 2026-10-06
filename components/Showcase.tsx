@@ -35,7 +35,7 @@ export default function Showcase() {
           <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
             Product Showcase
           </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950">
+          <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950">
             Solutions Built for Real Businesses
           </h2>
           <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
