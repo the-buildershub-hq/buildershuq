@@ -3,9 +3,25 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import Icon from "@/components/Icon";
 import Showcase from "@/components/Showcase";
+
+const ArchitecturalCanvas = dynamic(() => import("@/components/ArchitecturalCanvas"), {
+  ssr: false,
+  loading: () => (
+    <div className="relative w-full max-w-[500px] aspect-square rounded-3xl overflow-hidden bg-black select-none">
+      <Image
+        src="/abstract.png"
+        alt="Builders Hub digital foundation 3D sculpture"
+        fill
+        className="object-cover"
+        priority
+      />
+    </div>
+  ),
+});
 function ActionCursor({
   name,
   pointerColor = "#18181b",
@@ -466,28 +482,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Immersive Animated Cube */}
+            {/* Right Column: Immersive 3D Architectural Element */}
             <div className="lg:col-span-6 flex items-center justify-center relative">
-              <motion.div
-                animate={{
-                  y: [0, -12, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                whileHover={{ scale: 1.02 }}
-                className="relative w-full max-w-[500px] aspect-square rounded-3xl overflow-hidden bg-black select-none"
-              >
-                <Image
-                  src="/abstract.png"
-                  alt="Builders Hub digital foundation cube"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </motion.div>
+              <ArchitecturalCanvas />
             </div>
 
           </div>
