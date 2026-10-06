@@ -76,10 +76,10 @@ export default function Home() {
     e.preventDefault();
     setSubmitStatus("loading");
     try {
-      const fullDescription =
-        selectedServices.length > 0
-          ? `Selected services: ${selectedServices.join(", ")}\n\n${formData.description}`
-          : formData.description;
+      const fullDescription = [
+        selectedServices.length > 0 ? `I am interested in: ${selectedServices.join(", ")}` : "",
+        formData.description.trim() ? `Project details: ${formData.description.trim()}` : ""
+      ].filter(Boolean).join("\n\n");
 
       const response = await fetch("https://x8ki-letl-twmt.n7.xano.io/api:7-0SUSqX/save_contact", {
         method: "POST",
@@ -87,15 +87,18 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          description: fullDescription,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          description: fullDescription || formData.description.trim(),
+          services: selectedServices,
+          message: formData.description.trim(),
         }),
       });
 
       if (response.ok) {
         setSubmitStatus("success");
         setFormData({ name: "", email: "", description: "" });
+        setSelectedServices(["Websites"]);
       } else {
         setSubmitStatus("error");
       }
@@ -1640,7 +1643,7 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
-        className="relative bg-zinc-50 py-32 border-t border-zinc-200/60 w-full overflow-hidden text-center flex flex-col items-center justify-center"
+        className="relative bg-zinc-50 py-32 w-full overflow-hidden text-center flex flex-col items-center justify-center"
       >
         {/* Ambient backdrop: soft radial glow + fine dot grid, echoing the "systems + art" duality */}
         <div
@@ -1691,7 +1694,7 @@ export default function Home() {
           </div>
 
           {/* Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pt-8 border-t border-zinc-900">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pt-8">
 
             {/* Column 1: Contact Details */}
             <div className="flex flex-col gap-4">
@@ -1700,10 +1703,10 @@ export default function Home() {
               </h4>
               <div className="flex flex-col gap-2.5">
                 <a
-                  href="mailto:hello@buildershub.co"
+                  href="mailto:hello@buildershub.tech"
                   className="text-sm font-medium text-zinc-400 hover:text-white transition-colors cursor-pointer"
                 >
-                  hello@buildershub.co
+                  hello@buildershub.tech
                 </a>
                 <span className="text-sm text-zinc-400">
                   Lagos, Nigeria
@@ -1788,7 +1791,7 @@ export default function Home() {
           </div>
 
           {/* Bottom Copyright Row */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-12 border-t border-zinc-900 text-xs text-zinc-500">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-12 text-xs text-zinc-500">
             <span>
               &copy; {new Date().getFullYear()} Builders Hub. All rights reserved.
             </span>
