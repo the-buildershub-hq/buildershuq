@@ -138,11 +138,11 @@ export default function Home() {
               Product Showcase
             </a>
             <a
-              href="#brands"
-              onClick={(e) => handleScroll(e, "brands")}
+              href="#reviews"
+              onClick={(e) => handleScroll(e, "reviews")}
               className="text-sm font-medium text-zinc-600 hover:text-brand-navy-hover transition-colors"
             >
-              Brands
+              Reviews
             </a>
             <a
               href="#timeline"
@@ -206,7 +206,7 @@ export default function Home() {
                 {[
                   { label: "About Us", target: "about" },
                   { label: "Product Showcase", target: "showcase" },
-                  { label: "Brands", target: "brands" },
+                  { label: "Reviews", target: "reviews" },
                   { label: "Timeline", target: "timeline" },
                   { label: "Pricing", target: "pricing" },
                   { label: "Contact", target: "contact" }
@@ -639,97 +639,111 @@ export default function Home() {
         <Showcase />
       </motion.div>
 
-      {/* Brands / Testimonials Section */}
+      {/* Reviews Section */}
       <motion.section
-        id="brands"
+        id="reviews"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
-        className="relative bg-zinc-100 py-24 border-t border-zinc-200/60 z-10 w-full"
+        className="relative bg-[#163829] py-24 z-10 w-full"
       >
-        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
-          <div className="flex flex-col items-center text-center gap-4">
-            <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-              Client Stories
+        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-16">
+          
+          {/* Header in Serif */}
+          <div className="flex flex-col items-center text-center gap-3">
+            <span className="text-xs font-bold tracking-widest text-emerald-300 uppercase">
+              Reviews
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950">
-              Built for Businesses. Proven by People.
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white">
+              What people say about us
             </h2>
-            <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
-              Every project starts with a business problem. These are the stories of what happened when we built around it.
+            <p className="text-emerald-100/70 text-sm md:text-base max-w-lg leading-relaxed mt-1">
+              Real feedback from founders and teams who built their software with us.
             </p>
           </div>
-        </div>
 
-        {/* Testimonial Cards Row (Horizontal Scroll, Scrollbar Hidden) */}
-        <div className="w-full mt-12 flex overflow-x-auto gap-6 pb-6 pt-4 scrollbar-hide px-6 md:px-20">
-          {[
-            {
-              title: '"Fast and Efficient"',
-              quote: "They understood our operational headaches immediately. The container scanning pipeline and custom logistics app they built saved us hours of manual logging every day.",
-              name: "Remi Bardoux",
-              role: "Product Manager @ Freenow",
-              initials: "RB",
-              color: "bg-indigo-100 text-indigo-800",
-              company: "FREENOW"
-            },
-            {
-              title: '"Wow effect"',
-              quote: "We worked with them to build our next-generation web application. What stood out was their speed, attention to detail, and the beautiful, fluid design system.",
-              name: "Miguel Labranche",
-              role: "Product Manager @ Orange",
-              initials: "ML",
-              color: "bg-orange-100 text-orange-800",
-              company: "ORANGE"
-            },
-            {
-              title: '"Creative"',
-              quote: "They designed a completely custom backend infrastructure and web app for our AI workflows. Very pleasant to collaborate with, honest about prices, and deliver premium art.",
-              name: "Jennifer Han",
-              role: "CMO @ Ausha",
-              initials: "JH",
-              color: "bg-pink-100 text-pink-800",
-              company: "AUSHA"
-            }
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className="min-w-[280px] md:min-w-[340px] flex-1 bg-white rounded-3xl border border-zinc-200/80 p-8 flex flex-col justify-between gap-8 group hover:border-brand-navy/30 transition-all duration-300"
-            >
-              <div className="flex flex-col gap-4">
-                <svg className="w-8 h-8 text-zinc-200 group-hover:text-brand-100 transition-colors duration-300" viewBox="0 0 32 24" fill="currentColor">
-                  <path d="M0 24V14.4C0 9.87 1.28 6.187 3.84 3.36 6.4 1.12 9.653 0 13.6 0v5.76c-2.027 0-3.68.64-4.96 1.92-1.173 1.173-1.867 2.667-2.08 4.48H12v11.84H0Zm17.6 0V14.4c0-4.53 1.28-8.213 3.84-11.04C24 1.12 27.253 0 31.2 0v5.76c-2.027 0-3.68.64-4.96 1.92-1.173 1.173-1.867 2.667-2.08 4.48H29.6v11.84H17.6Z" />
-                </svg>
-                <h3 className="text-lg font-extrabold text-zinc-950">
-                  {item.title}
-                </h3>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  {item.quote}
-                </p>
-              </div>
+          {/* Reviews Grid Inspired by Pinned Notes */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-4">
+            {[
+              {
+                quote: "They understood our operational headaches right away. The tracking software they built saved our team hours of manual work every single day.",
+                name: "Remi Bardoux",
+                role: "Product Lead at Freenow",
+                initials: "RB",
+                tilt: "-rotate-1 hover:rotate-0"
+              },
+              {
+                quote: "We worked with them to build our web application from the ground up. What stood out was their speed, attention to detail, and how straightforward they made the process.",
+                name: "Miguel Labranche",
+                role: "Product Lead at Orange",
+                initials: "ML",
+                tilt: "rotate-0 hover:rotate-1"
+              },
+              {
+                quote: "They built our internal workflow tools and automation. Very easy to collaborate with, transparent about pricing, and genuinely invested in helping us launch.",
+                name: "Jennifer Han",
+                role: "Marketing Director at Ausha",
+                initials: "JH",
+                tilt: "rotate-1 hover:rotate-0"
+              }
+            ].map((review, idx) => (
+              <div
+                key={idx}
+                className={`relative flex flex-col transition-transform duration-300 ${review.tilt}`}
+              >
+                {/* Layered Under-sheet for Paper Depth */}
+                <div className="absolute inset-0 bg-[#ebe3d3] rounded-3xl -rotate-1 pointer-events-none" />
 
-              <div className="flex items-center justify-between pt-6 border-t border-zinc-100">
-                <div className="flex items-center gap-3">
-                  {/* Initials Avatar (No images, using initials as requested) */}
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs ${item.color}`}>
-                    {item.initials}
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs font-bold text-zinc-950">{item.name}</span>
-                    <span className="text-[10px] text-zinc-400 mt-0.5">{item.role}</span>
-                  </div>
+                {/* White Pushpin */}
+                <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 self-center -mb-3.5 z-20 select-none">
+                  <div className="w-2 h-2 rounded-full bg-zinc-300" />
                 </div>
 
-                {/* Muted Company Tag */}
-                <span className="text-[10px] font-mono font-bold tracking-wider text-zinc-300 group-hover:text-brand-navy/40 transition-colors">
-                  {item.company}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+                {/* Main Paper Note Card */}
+                <div className="relative z-10 bg-[#f7f2e7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-6 flex-1 text-zinc-950">
+                  
+                  <div className="flex flex-col gap-4">
+                    {/* 5 Stars Rating */}
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className="w-4 h-4 text-amber-500 fill-amber-500"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
 
+                    {/* Quotation text */}
+                    <p className="text-zinc-800 text-sm sm:text-base leading-relaxed">
+                      &ldquo;{review.quote}&rdquo;
+                    </p>
+                  </div>
+
+                  {/* Reviewer Bio */}
+                  <div className="flex items-center gap-3 pt-4">
+                    <div className="w-10 h-10 rounded-full bg-[#163829] text-white flex items-center justify-center font-bold text-xs shrink-0 select-none">
+                      {review.initials}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-extrabold text-sm text-zinc-950">
+                        {review.name}
+                      </span>
+                      <span className="text-xs text-zinc-600">
+                        {review.role}
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
       </motion.section>
 
       {/* Timeline Section */}
@@ -1487,7 +1501,7 @@ export default function Home() {
                 Navigation
               </h4>
               <div className="flex flex-col gap-2.5">
-                {["About", "Showcase", "Brands", "Timeline", "Pricing", "Contact"].map((link, idx) => (
+                {["About", "Showcase", "Reviews", "Timeline", "Pricing", "Contact"].map((link, idx) => (
                   <a
                     key={idx}
                     href={`#${link.toLowerCase().replace(" ", "")}`}
