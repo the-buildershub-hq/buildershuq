@@ -6,7 +6,46 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Icon from "@/components/Icon";
 import Showcase from "@/components/Showcase";
-import { projects } from "../lib/projects";
+function ActionCursor({
+  name,
+  pointerColor = "#18181b",
+  tagBg = "bg-zinc-900",
+  animate,
+  transition,
+}: {
+  name: string;
+  pointerColor?: string;
+  tagBg?: string;
+  animate: { x: number[]; y: number[] };
+  transition: any;
+}) {
+  return (
+    <motion.div
+      animate={animate}
+      transition={transition}
+      className="absolute pointer-events-none select-none z-20 flex items-start"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-4 h-4 shrink-0"
+      >
+        <path
+          d="M1 1L6 14L8.5 8.5L14 6L1 1Z"
+          fill={pointerColor}
+        />
+      </svg>
+      <span
+        className={`-ml-1 mt-2.5 px-1.5 py-0.5 rounded text-[10px] font-semibold text-white tracking-tight leading-none ${tagBg}`}
+      >
+        {name}
+      </span>
+    </motion.div>
+  );
+}
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -499,79 +538,338 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Homogeneous Editorial Slabs */}
+          {/* Homogeneous Editorial Slabs with Collaborative Animated Action Canvases */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-            {[
-              {
-                label: "Websites and Web Apps",
-                slug: "websites",
-                count: "2 projects shipped",
-                bg: "bg-white",
-                desc: "We design and develop fast, responsive websites and web applications tailored to your business, from corporate websites and landing pages to interactive platforms and custom web products.",
-              },
-              {
-                label: "Mobile Applications",
-                slug: "mobile",
-                count: "1 project shipped",
-                bg: "bg-zinc-100",
-                desc: "We build intuitive mobile applications that give your customers a seamless way to interact with your products, services, and digital experiences across iOS and Android.",
-              },
-              {
-                label: "Backend Systems",
-                slug: "backend",
-                count: "1 project shipped",
-                bg: "bg-[#f5f1e8]",
-                desc: "We build secure APIs, databases, server-side systems, and cloud infrastructure that keep your digital products reliable, connected, and ready to scale.",
-              },
-              {
-                label: "AI and Automations",
-                slug: "automation",
-                count: "2 projects shipped",
-                bg: "bg-[#f5f1e8]",
-                desc: "We use AI, automation, and integrations to streamline workflows, reduce manual processes, and help businesses work more efficiently.",
-              },
-              {
-                label: "UI and UX Design",
-                slug: "design",
-                count: "1 project shipped",
-                bg: "bg-white",
-                desc: "We turn ideas and business requirements into clear, intuitive interfaces, from early wireframes and user flows to polished high-fidelity designs and complete design systems.",
-              },
-              {
-                label: "Product and Graphics",
-                slug: "graphics",
-                count: "See related work",
-                bg: "bg-zinc-100",
-                desc: "We create the visual assets your business needs to communicate consistently across digital products, marketing, presentations, and other brand touchpoints.",
-              },
-            ].map((service, idx) => (
-              <Link
-                key={service.slug}
-                href={`/work?service=${service.slug}`}
-                className={`${service.bg} rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-8 group cursor-pointer transition-transform duration-300 hover:-translate-y-1`}
-              >
-                <div className="flex flex-col gap-4">
-                  <span className="text-xs font-mono font-bold tracking-wider text-zinc-400 uppercase">
-                    0{idx + 1}
-                  </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl font-normal text-zinc-950 leading-snug">
-                    {service.label}
-                  </h3>
-                  <p className="text-zinc-600 text-sm leading-relaxed mt-2">
-                    {service.desc}
-                  </p>
-                </div>
+            
+            {/* 01 Websites and Web Apps */}
+            <Link
+              href="/work?service=websites"
+              className="bg-white rounded-3xl p-7 sm:p-8 flex flex-col justify-between gap-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex flex-col gap-3">
+                <span className="text-xs font-mono font-bold tracking-wider text-zinc-400 uppercase">
+                  01
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-zinc-950 leading-snug">
+                  Websites and Web Apps
+                </h3>
+                <p className="text-zinc-600 text-sm leading-relaxed mt-1">
+                  We design and develop fast, responsive websites and web applications tailored to your business, from corporate websites and landing pages to interactive platforms and custom web products.
+                </p>
+              </div>
 
-                <div className="flex items-center justify-between pt-6">
-                  <span className="text-xs font-semibold text-zinc-500">
-                    {service.count}
-                  </span>
-                  <div className="w-10 h-10 rounded-full bg-zinc-950 text-white flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
-                    <Icon name="arrow_outward" className="text-sm" weight={600} />
+              {/* Action Canvas: Web Browser Layout with Click Simulation */}
+              <div className="w-full h-44 rounded-2xl bg-zinc-100/70 p-4 relative overflow-hidden flex flex-col justify-between select-none">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-zinc-300" />
+                  <div className="w-2 h-2 rounded-full bg-zinc-300" />
+                  <div className="w-2 h-2 rounded-full bg-zinc-300" />
+                </div>
+                <div className="flex flex-col gap-2 my-auto">
+                  <div className="h-3 w-28 bg-zinc-300 rounded" />
+                  <div className="h-2 w-44 bg-zinc-200 rounded mt-0.5" />
+                  <motion.div
+                    animate={{ scale: [1, 0.94, 1] }}
+                    transition={{ duration: 4.5, repeat: Infinity, times: [0, 0.5, 1], ease: "easeInOut" }}
+                    className="mt-1 h-6 px-3 bg-zinc-950 text-white text-[9px] font-medium rounded flex items-center justify-center w-fit"
+                  >
+                    Explore Platform
+                  </motion.div>
+                </div>
+                <ActionCursor
+                  name="necati"
+                  pointerColor="#f97316"
+                  tagBg="bg-orange-500"
+                  animate={{
+                    x: [20, 140, 80, 20],
+                    y: [15, 68, 32, 15],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+            </Link>
+
+            {/* 02 Mobile Applications */}
+            <Link
+              href="/work?service=mobile"
+              className="bg-zinc-100 rounded-3xl p-7 sm:p-8 flex flex-col justify-between gap-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex flex-col gap-3">
+                <span className="text-xs font-mono font-bold tracking-wider text-zinc-400 uppercase">
+                  02
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-zinc-950 leading-snug">
+                  Mobile Applications
+                </h3>
+                <p className="text-zinc-600 text-sm leading-relaxed mt-1">
+                  We build intuitive mobile applications that give your customers a seamless way to interact with your products, services, and digital experiences across iOS and Android.
+                </p>
+              </div>
+
+              {/* Action Canvas: Mobile Device Screen with Tab Navigation */}
+              <div className="w-full h-44 rounded-2xl bg-white p-4 relative overflow-hidden flex items-center justify-center select-none">
+                <div className="w-48 h-36 bg-zinc-50 rounded-xl p-3 flex flex-col justify-between relative">
+                  <div className="flex items-center justify-between">
+                    <div className="h-2 w-12 bg-zinc-300 rounded" />
+                    <span className="text-[9px] font-mono text-zinc-400">09:41</span>
+                  </div>
+                  <div className="bg-white rounded-lg p-2 flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded-md bg-zinc-200" />
+                    <div className="flex flex-col gap-1 flex-1">
+                      <div className="h-2 w-16 bg-zinc-300 rounded" />
+                      <div className="h-1.5 w-10 bg-zinc-200 rounded" />
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-around pt-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-zinc-950" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-zinc-300" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-zinc-300" />
                   </div>
                 </div>
-              </Link>
-            ))}
+                <ActionCursor
+                  name="tiago"
+                  pointerColor="#3b82f6"
+                  tagBg="bg-blue-500"
+                  animate={{
+                    x: [35, 125, 70, 35],
+                    y: [20, 75, 38, 20],
+                  }}
+                  transition={{
+                    duration: 5.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+            </Link>
+
+            {/* 03 Backend Systems */}
+            <Link
+              href="/work?service=backend"
+              className="bg-[#f5f1e8] rounded-3xl p-7 sm:p-8 flex flex-col justify-between gap-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex flex-col gap-3">
+                <span className="text-xs font-mono font-bold tracking-wider text-zinc-400 uppercase">
+                  03
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-zinc-950 leading-snug">
+                  Backend Systems
+                </h3>
+                <p className="text-zinc-600 text-sm leading-relaxed mt-1">
+                  We build secure APIs, databases, server-side systems, and cloud infrastructure that keep your digital products reliable, connected, and ready to scale.
+                </p>
+              </div>
+
+              {/* Action Canvas: API Routes and Database Throughput */}
+              <div className="w-full h-44 rounded-2xl bg-white/80 p-4 relative overflow-hidden flex flex-col justify-between select-none font-mono">
+                <div className="flex flex-col gap-2">
+                  <div className="bg-zinc-100 rounded-lg p-2 flex items-center justify-between text-[10px]">
+                    <span className="text-zinc-600">POST /api/v1/auth</span>
+                    <span className="text-zinc-950 font-bold">200 OK</span>
+                  </div>
+                  <div className="bg-zinc-100 rounded-lg p-2 flex items-center justify-between text-[10px]">
+                    <span className="text-zinc-600">GET /db/clusters</span>
+                    <span className="text-zinc-950 font-bold">12ms</span>
+                  </div>
+                </div>
+                <div className="flex items-end gap-1.5 h-8 pt-2">
+                  {[40, 65, 80, 50, 95, 70, 85, 60].map((h, i) => (
+                    <div
+                      key={i}
+                      style={{ height: `${h}%` }}
+                      className="flex-1 bg-zinc-300 rounded-t"
+                    />
+                  ))}
+                </div>
+                <ActionCursor
+                  name="dami"
+                  pointerColor="#1e293b"
+                  tagBg="bg-slate-800"
+                  animate={{
+                    x: [25, 140, 60, 25],
+                    y: [15, 45, 85, 15],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+            </Link>
+
+            {/* 04 AI and Automations */}
+            <Link
+              href="/work?service=automation"
+              className="bg-[#f5f1e8] rounded-3xl p-7 sm:p-8 flex flex-col justify-between gap-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex flex-col gap-3">
+                <span className="text-xs font-mono font-bold tracking-wider text-zinc-400 uppercase">
+                  04
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-zinc-950 leading-snug">
+                  AI and Automations
+                </h3>
+                <p className="text-zinc-600 text-sm leading-relaxed mt-1">
+                  We use AI, automation, and integrations to streamline workflows, reduce manual processes, and help businesses work more efficiently.
+                </p>
+              </div>
+
+              {/* Action Canvas: Pipeline Workflow Nodes */}
+              <div className="w-full h-44 rounded-2xl bg-white/80 p-4 relative overflow-hidden flex flex-col justify-between select-none">
+                <div className="flex items-center justify-between gap-2 mt-2">
+                  <div className="bg-zinc-100 px-2 py-1.5 rounded-lg text-[9px] font-semibold text-zinc-800">
+                    Webhook
+                  </div>
+                  <div className="h-0.5 flex-1 bg-zinc-200" />
+                  <div className="bg-zinc-950 px-2 py-1.5 rounded-lg text-[9px] font-semibold text-white">
+                    AI Agent
+                  </div>
+                  <div className="h-0.5 flex-1 bg-zinc-200" />
+                  <div className="bg-zinc-100 px-2 py-1.5 rounded-lg text-[9px] font-semibold text-zinc-800">
+                    Sync
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-[10px] text-zinc-500 font-mono pt-2">
+                  <span>Auto Workflow</span>
+                  <span className="text-zinc-950 font-medium">99.8% accuracy</span>
+                </div>
+                <ActionCursor
+                  name="artur"
+                  pointerColor="#ef4444"
+                  tagBg="bg-red-500"
+                  animate={{
+                    x: [20, 105, 160, 20],
+                    y: [20, 25, 55, 20],
+                  }}
+                  transition={{
+                    duration: 5.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+            </Link>
+
+            {/* 05 UI and UX Design (Directly inspired by screenshot) */}
+            <Link
+              href="/work?service=design"
+              className="bg-white rounded-3xl p-7 sm:p-8 flex flex-col justify-between gap-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex flex-col gap-3">
+                <span className="text-xs font-mono font-bold tracking-wider text-zinc-400 uppercase">
+                  05
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-zinc-950 leading-snug">
+                  UI and UX Design
+                </h3>
+                <p className="text-zinc-600 text-sm leading-relaxed mt-1">
+                  We turn ideas and business requirements into clear, intuitive interfaces, from early wireframes and user flows to polished high-fidelity designs and complete design systems.
+                </p>
+              </div>
+
+              {/* Action Canvas: Collaborative Artboard with Bounding Box & Dual Cursors */}
+              <div className="w-full h-44 rounded-2xl bg-zinc-100/70 p-4 relative overflow-hidden flex items-center justify-center select-none">
+                <div className="w-48 h-32 bg-white rounded-xl p-3 relative flex items-center justify-between gap-3">
+                  <div className="w-16 h-14 bg-zinc-100 rounded-lg relative flex flex-col justify-center items-center p-1.5">
+                    <div className="w-1.5 h-1.5 bg-rose-500 rounded-xs absolute -top-0.5 -left-0.5" />
+                    <div className="w-1.5 h-1.5 bg-rose-500 rounded-xs absolute -top-0.5 -right-0.5" />
+                    <div className="w-1.5 h-1.5 bg-rose-500 rounded-xs absolute -bottom-0.5 -left-0.5" />
+                    <div className="w-1.5 h-1.5 bg-rose-500 rounded-xs absolute -bottom-0.5 -right-0.5" />
+                    <div className="w-6 h-4 bg-zinc-200 rounded" />
+                  </div>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-xs font-bold text-zinc-800 tracking-tight leading-none">Content</span>
+                    <span className="text-[10px] text-zinc-400 leading-none">Welcome</span>
+                  </div>
+                </div>
+                <ActionCursor
+                  name="tiago"
+                  pointerColor="#3b82f6"
+                  tagBg="bg-blue-500"
+                  animate={{
+                    x: [110, 135, 100, 110],
+                    y: [20, 45, 15, 20],
+                  }}
+                  transition={{
+                    duration: 4.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <ActionCursor
+                  name="kev"
+                  pointerColor="#f43f5e"
+                  tagBg="bg-rose-500"
+                  animate={{
+                    x: [40, 75, 45, 40],
+                    y: [70, 95, 65, 70],
+                  }}
+                  transition={{
+                    duration: 5.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+            </Link>
+
+            {/* 06 Product and Graphics */}
+            <Link
+              href="/work?service=graphics"
+              className="bg-zinc-100 rounded-3xl p-7 sm:p-8 flex flex-col justify-between gap-6 group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex flex-col gap-3">
+                <span className="text-xs font-mono font-bold tracking-wider text-zinc-400 uppercase">
+                  06
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-zinc-950 leading-snug">
+                  Product and Graphics
+                </h3>
+                <p className="text-zinc-600 text-sm leading-relaxed mt-1">
+                  We create the visual assets your business needs to communicate consistently across digital products, marketing, presentations, and other brand touchpoints.
+                </p>
+              </div>
+
+              {/* Action Canvas: Brand Tokens & Swatches */}
+              <div className="w-full h-44 rounded-2xl bg-white p-4 relative overflow-hidden flex flex-col justify-between select-none">
+                <div className="flex items-center justify-between">
+                  <div className="w-7 h-7 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-bold text-xs">
+                    B
+                  </div>
+                  <span className="text-[10px] font-mono text-zinc-400">Design System</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-zinc-950" />
+                  <div className="w-5 h-5 rounded-full bg-zinc-600" />
+                  <div className="w-5 h-5 rounded-full bg-zinc-300" />
+                  <div className="w-5 h-5 rounded-full bg-[#e8e2d5]" />
+                </div>
+                <div className="flex items-baseline justify-between pt-1">
+                  <span className="font-serif text-lg font-bold text-zinc-900 leading-none">Aa</span>
+                  <span className="text-[10px] text-zinc-500 font-mono">Outfit Display</span>
+                </div>
+                <ActionCursor
+                  name="zainab"
+                  pointerColor="#8b5cf6"
+                  tagBg="bg-violet-600"
+                  animate={{
+                    x: [20, 130, 65, 20],
+                    y: [20, 65, 85, 20],
+                  }}
+                  transition={{
+                    duration: 5.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+            </Link>
+
           </div>
 
         </div>
