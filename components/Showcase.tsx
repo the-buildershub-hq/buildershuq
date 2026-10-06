@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Icon from "@/components/Icon";
 import { projects as mockProjects, type Project } from "../lib/projects";
@@ -26,56 +25,81 @@ export default function Showcase() {
   });
 
   // Scale wall as user scrolls through it
-  const wallScale = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0.92, 1, 1, 0.94]);
-  const wallOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.75, 1, 1, 0.8]);
+  const wallScale = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0.93, 1, 1, 0.95]);
+  const wallOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.8, 1, 1, 0.85]);
 
-  // Subtle natural parallax offsets per column
-  const colY1 = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  const colY2 = useTransform(scrollYProgress, [0, 1], [-25, 25]);
-  const colY3 = useTransform(scrollYProgress, [0, 1], [35, -35]);
-  const colY4 = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+  // Parallax offsets per column
+  const colY1 = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const colY2 = useTransform(scrollYProgress, [0, 1], [-30, 30]);
+  const colY3 = useTransform(scrollYProgress, [0, 1], [45, -45]);
+  const colY4 = useTransform(scrollYProgress, [0, 1], [-25, 25]);
+  const colY5 = useTransform(scrollYProgress, [0, 1], [35, -35]);
 
-  const columnOffsets = [colY1, colY2, colY3, colY4];
+  const columnOffsets = [colY1, colY2, colY3, colY4, colY5];
 
-  // Gallery wall layout with alternating heights like art museum salon hanging
+  // Gallery wall with varied heights across 5 full-bleed columns
   const columns = [
     // Column 1
     [
       {
         project: mockProjects[0],
-        aspect: "h-[450px] sm:h-[490px]",
+        aspect: "h-[440px] sm:h-[480px]",
         tag: "Logistics",
+        shot: 0,
       },
       {
         project: mockProjects[4],
         aspect: "h-[300px] sm:h-[320px]",
         tag: "Fintech",
+        shot: 1,
+      },
+      {
+        project: mockProjects[2],
+        aspect: "h-[420px] sm:h-[450px]",
+        tag: "Automations",
+        shot: 0,
       },
     ],
     // Column 2
     [
       {
         project: mockProjects[1],
-        aspect: "h-[290px] sm:h-[310px]",
+        aspect: "h-[300px] sm:h-[320px]",
         tag: "Commerce",
+        shot: 0,
       },
       {
         project: mockProjects[5],
-        aspect: "h-[460px] sm:h-[500px]",
+        aspect: "h-[480px] sm:h-[520px]",
         tag: "Mobile",
+        shot: 1,
+      },
+      {
+        project: mockProjects[7],
+        aspect: "h-[310px] sm:h-[330px]",
+        tag: "Branding",
+        shot: 0,
       },
     ],
     // Column 3
     [
       {
         project: mockProjects[2],
-        aspect: "h-[450px] sm:h-[490px]",
+        aspect: "h-[460px] sm:h-[500px]",
         tag: "Hardware",
+        shot: 1,
       },
       {
         project: mockProjects[6],
-        aspect: "h-[300px] sm:h-[320px]",
+        aspect: "h-[310px] sm:h-[330px]",
         tag: "Healthcare",
+        shot: 0,
+      },
+      {
+        project: mockProjects[0],
+        aspect: "h-[440px] sm:h-[470px]",
+        tag: "Fleet Systems",
+        shot: 1,
       },
     ],
     // Column 4
@@ -83,12 +107,41 @@ export default function Showcase() {
       {
         project: mockProjects[7],
         aspect: "h-[290px] sm:h-[310px]",
-        tag: "Branding",
+        tag: "Brand Kit",
+        shot: 1,
       },
       {
         project: mockProjects[3],
-        aspect: "h-[460px] sm:h-[500px]",
-        tag: "Automation",
+        aspect: "h-[470px] sm:h-[510px]",
+        tag: "Workflow",
+        shot: 0,
+      },
+      {
+        project: mockProjects[5],
+        aspect: "h-[320px] sm:h-[340px]",
+        tag: "Field Service",
+        shot: 0,
+      },
+    ],
+    // Column 5
+    [
+      {
+        project: mockProjects[4],
+        aspect: "h-[460px] sm:h-[490px]",
+        tag: "Operations",
+        shot: 0,
+      },
+      {
+        project: mockProjects[1],
+        aspect: "h-[310px] sm:h-[330px]",
+        tag: "Storefront",
+        shot: 1,
+      },
+      {
+        project: mockProjects[6],
+        aspect: "h-[430px] sm:h-[460px]",
+        tag: "Interface",
+        shot: 1,
       },
     ],
   ];
@@ -99,39 +152,28 @@ export default function Showcase() {
       ref={containerRef}
       className="relative bg-zinc-50 py-24 sm:py-32 w-full overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-16">
+      <div className="w-full flex flex-col gap-14 sm:gap-16">
 
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center gap-4">
+        {/* Section Header (Centered with clean padding) */}
+        <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-3">
           <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
             Showcase
           </span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-zinc-950">
             Selected Works on Display
           </h2>
-          <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
+          <p className="text-zinc-500 text-sm md:text-base leading-relaxed mt-1">
             Like artworks on a museum wall, each system we build has its own character, size, and focus. Click any piece to see its details.
           </p>
-          <Link
-            href="/work"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-950 hover:text-zinc-600 transition-colors group mt-2"
-          >
-            See full portfolio
-            <Icon
-              name="arrow_outward"
-              className="text-xs transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              weight={600}
-            />
-          </Link>
         </div>
 
-        {/* Museum Gallery Wall with scale on scroll */}
+        {/* Full-Bleed Edge-to-Edge Museum Wall with scale on scroll */}
         <motion.div
           style={{
             scale: wallScale,
             opacity: wallOpacity,
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start w-full pt-4"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-5 w-full px-2 sm:px-4 items-start"
         >
           {columns.map((column, colIdx) => (
             <motion.div
@@ -139,35 +181,35 @@ export default function Showcase() {
               style={{
                 y: columnOffsets[colIdx],
               }}
-              className="flex flex-col gap-6 w-full"
+              className="flex flex-col gap-3 sm:gap-4 lg:gap-5 w-full"
             >
               {column.map((item, itemIdx) => (
                 <motion.div
-                  key={item.project.id}
+                  key={`${colIdx}-${itemIdx}`}
                   whileHover={{ scale: 1.02, y: -4 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   onClick={() => {
                     setSelectedProject(item.project);
                     setActiveMediaIndex(0);
                   }}
-                  className={`relative w-full ${item.aspect} rounded-3xl overflow-hidden cursor-pointer select-none group bg-zinc-950`}
+                  className={`relative w-full ${item.aspect} rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer select-none group bg-zinc-950`}
                 >
                   {/* Artwork Image */}
                   <Image
-                    src={item.project.screenshots[0]}
+                    src={item.project.screenshots[item.shot] || item.project.screenshots[0]}
                     alt={item.project.title}
                     fill
-                    className="object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-700"
+                    className="object-cover opacity-80 group-hover:opacity-95 group-hover:scale-105 transition-all duration-700"
                     draggable={false}
                   />
 
-                  {/* High contrast gradient backdrop for legible typography */}
+                  {/* Gradient overlay for high-contrast legible typography */}
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
 
                   {/* Card Content Overlay */}
-                  <div className="absolute inset-0 p-6 sm:p-7 flex flex-col justify-between z-10">
+                  <div className="absolute inset-0 p-5 sm:p-6 flex flex-col justify-between z-10">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-zinc-300 uppercase tracking-widest">
+                      <span className="text-[11px] font-mono font-bold text-zinc-300 uppercase tracking-widest">
                         {item.tag}
                       </span>
                       <div className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-white text-white group-hover:text-zinc-950 flex items-center justify-center transition-colors">
@@ -175,11 +217,11 @@ export default function Showcase() {
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-1.5">
-                      <span className="text-[11px] font-mono font-medium text-zinc-400">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-mono font-medium text-zinc-400">
                         {item.project.serviceLabel}
                       </span>
-                      <h3 className="font-serif text-xl sm:text-2xl font-normal text-white tracking-tight leading-tight group-hover:text-zinc-200 transition-colors">
+                      <h3 className="font-serif text-lg sm:text-xl font-normal text-white tracking-tight leading-tight group-hover:text-zinc-200 transition-colors">
                         {item.project.title}
                       </h3>
                     </div>

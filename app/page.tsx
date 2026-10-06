@@ -99,25 +99,25 @@ export default function Home() {
         }
       `}} />
 
-      <header className="fixed top-4 left-0 right-0 z-50 px-4">
-        <nav className="mx-auto max-w-7xl h-16 flex items-center justify-between px-6 rounded-full bg-white/70 backdrop-blur-md border border-zinc-200/50">
+      <header className="fixed top-4 left-0 right-0 z-50 px-4 flex justify-center">
+        <nav className="mx-auto max-w-5xl w-full h-14 flex items-center justify-between px-5 rounded-full bg-white/85 backdrop-blur-md">
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="flex items-center gap-0.5 cursor-pointer"
+            className="flex items-center gap-1.5 cursor-pointer"
           >
             <Image
               src="/logo.png"
               alt="Builders Hub Logo"
-              width={56}
-              height={56}
-              className="h-14 w-auto object-contain"
+              width={32}
+              height={32}
+              className="h-8 w-auto object-contain"
               priority
             />
-            <span className="font-extrabold text-base tracking-tight text-zinc-950 -ml-2.5">
+            <span className="font-extrabold text-sm tracking-tight text-zinc-950">
               Builders Hub
             </span>
           </a>
@@ -126,69 +126,63 @@ export default function Home() {
             <a
               href="#about"
               onClick={(e) => handleScroll(e, "about")}
-              className="text-sm font-medium text-zinc-600 hover:text-brand-navy-hover transition-colors"
+              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors"
             >
               About Us
             </a>
             <a
+              href="#services"
+              onClick={(e) => handleScroll(e, "services")}
+              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors"
+            >
+              Services
+            </a>
+            <a
               href="#showcase"
               onClick={(e) => handleScroll(e, "showcase")}
-              className="text-sm font-medium text-zinc-600 hover:text-brand-navy-hover transition-colors"
+              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors"
             >
-              Product Showcase
+              Showcase
             </a>
             <a
               href="#reviews"
               onClick={(e) => handleScroll(e, "reviews")}
-              className="text-sm font-medium text-zinc-600 hover:text-brand-navy-hover transition-colors"
+              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors"
             >
               Reviews
             </a>
             <a
               href="#timeline"
               onClick={(e) => handleScroll(e, "timeline")}
-              className="text-sm font-medium text-zinc-600 hover:text-brand-navy-hover transition-colors"
+              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors"
             >
               Timeline
             </a>
             <a
               href="#pricing"
               onClick={(e) => handleScroll(e, "pricing")}
-              className="text-sm font-medium text-zinc-600 hover:text-brand-navy-hover transition-colors"
+              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors"
             >
               Pricing
             </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleScroll(e, "contact")}
-              className="text-sm font-medium text-zinc-600 hover:text-brand-navy-hover transition-colors"
-            >
-              Contact
-            </a>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:inline-flex">
-              <a
-                href="https://cal.com/builders-hub/introduction"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-xs font-semibold tracking-wide transition-all group"
-              >
-                Schedule a Call
-                <Icon
-                  name="arrow_outward"
-                  className="text-sm transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  weight={600}
-                />
-              </a>
-            </div>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://cal.com/builders-hub/introduction"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold tracking-wide transition-colors"
+            >
+              Schedule a Call
+              <Icon name="arrow_outward" className="text-xs" weight={600} />
+            </a>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex lg:hidden items-center justify-center p-2 rounded-full border border-zinc-200 bg-white text-zinc-950 cursor-pointer focus:outline-none"
+              className="flex lg:hidden items-center justify-center p-2 rounded-full bg-zinc-100 text-zinc-950 cursor-pointer focus:outline-none"
             >
-              <Icon name={isMobileMenuOpen ? "close" : "menu"} className="text-xl" />
+              <Icon name={isMobileMenuOpen ? "close" : "menu"} className="text-lg" />
             </button>
           </div>
         </nav>
@@ -200,12 +194,13 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="fixed top-24 left-4 right-4 z-40 bg-white rounded-3xl border border-zinc-200/80 p-6 flex flex-col gap-4 shadow-lg lg:hidden"
+              className="fixed top-20 left-4 right-4 z-40 bg-white rounded-3xl p-6 flex flex-col gap-4 lg:hidden text-zinc-950"
             >
               <div className="flex flex-col gap-4">
                 {[
                   { label: "About Us", target: "about" },
-                  { label: "Product Showcase", target: "showcase" },
+                  { label: "Services", target: "services" },
+                  { label: "Showcase", target: "showcase" },
                   { label: "Reviews", target: "reviews" },
                   { label: "Timeline", target: "timeline" },
                   { label: "Pricing", target: "pricing" },
@@ -218,21 +213,19 @@ export default function Home() {
                       setIsMobileMenuOpen(false);
                       handleScroll(e, item.target);
                     }}
-                    className="text-base font-semibold text-zinc-600 hover:text-brand-navy transition-colors cursor-pointer py-1"
+                    className="text-base font-semibold text-zinc-800 hover:text-zinc-950 transition-colors"
                   >
                     {item.label}
                   </a>
                 ))}
               </div>
-
-              {/* Mobile CTA */}
-              <div className="border-t border-zinc-100 pt-4">
+              <div className="pt-2">
                 <a
                   href="https://cal.com/builders-hub/introduction"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="inline-flex w-full items-center justify-center gap-1.5 px-5 py-3 rounded-full bg-brand-navy text-white text-sm font-semibold tracking-wide cursor-pointer"
+                  className="inline-flex w-full items-center justify-center gap-1.5 px-5 py-3 rounded-full bg-zinc-950 text-white text-sm font-semibold tracking-wide cursor-pointer"
                 >
                   Schedule a Call
                   <Icon name="arrow_outward" className="text-sm" weight={600} />
@@ -390,186 +383,6 @@ export default function Home() {
 
       </main>
 
-      {/* Services Section underneath the Hero */}
-      <motion.section
-        id="services"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={sectionVariants}
-        className="relative bg-white py-24 border-t border-zinc-200/60 z-10 w-full"
-      >
-        {/* Header Block (Aligned with standard layout max-width) */}
-        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div className="max-w-md">
-              <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950 leading-tight">
-                Built Around Your Business. <br />
-                <span className="text-zinc-400">one team.</span>
-              </h2>
-            </div>
-            <div className="max-w-xs md:text-right">
-              <p className="text-zinc-500 text-sm leading-relaxed">
-                Your business isn't like everyone else's. Your digital experience shouldn't be either.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full mt-12 flex overflow-x-auto gap-6 pb-6 pt-4 scrollbar-hide px-6 md:px-20">
-          {(() => {
-            const accentStyles: Record<
-              string,
-              { pill: string; svgHover: string; border: string; ring: string }
-            > = {
-              indigo: { pill: "bg-indigo-50 text-indigo-700", svgHover: "group-hover:text-indigo-900/15", border: "hover:border-indigo-300/70", ring: "group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600" },
-              emerald: { pill: "bg-emerald-50 text-emerald-700", svgHover: "group-hover:text-emerald-900/15", border: "hover:border-emerald-300/70", ring: "group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600" },
-              orange: { pill: "bg-orange-50 text-orange-700", svgHover: "group-hover:text-orange-900/15", border: "hover:border-orange-300/70", ring: "group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-500" },
-              pink: { pill: "bg-pink-50 text-pink-700", svgHover: "group-hover:text-pink-900/15", border: "hover:border-pink-300/70", ring: "group-hover:bg-pink-600 group-hover:text-white group-hover:border-pink-600" },
-              teal: { pill: "bg-teal-50 text-teal-700", svgHover: "group-hover:text-teal-900/15", border: "hover:border-teal-300/70", ring: "group-hover:bg-teal-600 group-hover:text-white group-hover:border-teal-600" },
-              rose: { pill: "bg-rose-50 text-rose-700", svgHover: "group-hover:text-rose-900/15", border: "hover:border-rose-300/70", ring: "group-hover:bg-rose-600 group-hover:text-white group-hover:border-rose-600" },
-            };
-            return [
-            {
-              label: "Websites & Web Apps",
-              slug: "websites",
-              accent: "indigo",
-              desc: "We design and develop fast, responsive websites and web applications tailored to your business, from corporate websites and landing pages to interactive platforms and custom web products.",
-              icon: "web",
-              svg: (
-                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
-                  <rect x="10" y="20" width="80" height="60" rx="8" stroke="currentColor" strokeWidth="2" />
-                  <line x1="10" y1="35" x2="90" y2="35" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="20" cy="27.5" r="2.5" fill="currentColor" />
-                  <circle cx="28" cy="27.5" r="2.5" fill="currentColor" />
-                  <circle cx="36" cy="27.5" r="2.5" fill="currentColor" />
-                </svg>
-              )
-            },
-            {
-              label: "Mobile Applications",
-              slug: "mobile",
-              accent: "emerald",
-              desc: "We build intuitive mobile applications that give your customers a seamless way to interact with your products, services, and digital experiences across iOS and Android.",
-              icon: "phone_iphone",
-              svg: (
-                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
-                  <rect x="30" y="15" width="40" height="70" rx="8" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="50" cy="77" r="3" fill="currentColor" />
-                  <line x1="45" y1="22" x2="55" y2="22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              )
-            },
-            {
-              label: "Backend Systems",
-              slug: "backend",
-              accent: "orange",
-              desc: "We build secure APIs, databases, server-side systems, and cloud infrastructure that keep your digital products reliable, connected, and ready to scale.",
-              icon: "dns",
-              svg: (
-                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
-                  <rect x="15" y="15" width="70" height="20" rx="4" stroke="currentColor" strokeWidth="2" />
-                  <rect x="15" y="40" width="70" height="20" rx="4" stroke="currentColor" strokeWidth="2" />
-                  <rect x="15" y="65" width="70" height="20" rx="4" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="25" cy="25" r="2" fill="currentColor" />
-                  <circle cx="25" cy="50" r="2" fill="currentColor" />
-                  <circle cx="25" cy="75" r="2" fill="currentColor" />
-                </svg>
-              )
-            },
-            {
-              label: "AI & Automations",
-              slug: "automation",
-              accent: "pink",
-              desc: "We use AI, automation, and integrations to streamline workflows, reduce manual processes, and help businesses work more efficiently.",
-              icon: "settings_suggest",
-              svg: (
-                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
-                  <rect x="10" y="42" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="50" cy="50" r="10" stroke="currentColor" strokeWidth="2" />
-                  <rect x="74" y="42" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2" />
-                  <path d="M26 50 H40" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <path d="M60 50 H74" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <path d="M50 20 V40" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="50" cy="15" r="5" stroke="currentColor" strokeWidth="2" />
-                </svg>
-              )
-            },
-            {
-              label: "UI/UX Design",
-              slug: "design",
-              accent: "teal",
-              desc: "We turn ideas and business requirements into clear, intuitive interfaces — from early wireframes and user flows to polished high-fidelity designs and complete design systems.",
-              icon: "palette",
-              svg: (
-                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
-                  <rect x="20" y="20" width="50" height="50" rx="4" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
-                  <rect x="16" y="16" width="8" height="8" fill="currentColor" />
-                  <rect x="66" y="16" width="8" height="8" fill="currentColor" />
-                  <rect x="16" y="66" width="8" height="8" fill="currentColor" />
-                  <rect x="66" y="66" width="8" height="8" fill="currentColor" />
-                  <path d="M55 55 L75 65 L67 69 L78 80 L72 84 L61 73 L57 81 Z" fill="currentColor" />
-                </svg>
-              )
-            },
-            {
-              label: "Product & Graphics",
-              slug: "graphics",
-              accent: "rose",
-              desc: "We create the visual assets your business needs to communicate consistently across digital products, marketing, presentations, and other brand touchpoints.",
-              icon: "brush",
-              svg: (
-                <svg className="w-24 h-24" viewBox="0 0 100 100" fill="none">
-                  <circle cx="40" cy="50" r="20" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="60" cy="50" r="20" stroke="currentColor" strokeWidth="2" />
-                  <path d="M50 30 L53 45 L68 48 L53 51 L50 66 L47 51 L32 48 L47 45 Z" fill="currentColor" />
-                </svg>
-              )
-            }
-            ].map((service) => {
-              const accent = accentStyles[service.accent];
-              const count = projects.filter((p) => p.service === service.slug).length;
-              return (
-                <Link
-                  key={service.slug}
-                  href={`/work?service=${service.slug}`}
-                  className={`min-w-[280px] md:min-w-[320px] flex-1 bg-zinc-50 rounded-3xl border border-zinc-200/80 p-8 flex flex-col justify-between gap-8 group cursor-pointer transition-colors duration-300 ${accent.border}`}
-                >
-                  <div className="flex flex-col gap-6">
-                    {/* Top Label Pill, tinted per service */}
-                    <div className={`self-start px-4 py-2 rounded-full text-xs font-semibold tracking-wide ${accent.pill}`}>
-                      {service.label}
-                    </div>
-
-                    {/* Service Graphic Illustration, tinted with the service's accent */}
-                    <div className={`py-6 flex items-center justify-center text-zinc-900/[0.06] transition-colors duration-300 group-hover:scale-105 ${accent.svgHover}`}>
-                      {service.svg}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-4">
-                    {/* Description Paragraph */}
-                    <p className="text-zinc-500 text-xs md:text-sm leading-relaxed">
-                      {service.desc}
-                    </p>
-
-                    <div className="flex items-center justify-between pt-1">
-                      <span className="text-[11px] font-bold text-zinc-400">
-                        {count > 0 ? `${count} project${count > 1 ? "s" : ""} shipped` : "See related work"}
-                      </span>
-                      {/* Circular Arrow Button, filling with the service accent on hover */}
-                      <div className={`w-10 h-10 rounded-full border border-zinc-200 bg-white flex items-center justify-center text-zinc-600 transition-all duration-300 ${accent.ring}`}>
-                        <Icon name="arrow_outward" className="text-sm" weight={600} />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              );
-            });
-          })()}
-        </div>
-      </motion.section>
-
       {/* About Us Section */}
       <motion.section
         id="about"
@@ -631,6 +444,112 @@ export default function Home() {
             </div>
 
           </div>
+        </div>
+      </motion.section>
+
+      {/* Services Section Moved After About Us */}
+      <motion.section
+        id="services"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={sectionVariants}
+        className="relative bg-zinc-50 py-24 sm:py-32 z-10 w-full"
+      >
+        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
+          
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="max-w-md">
+              <span className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase">
+                Services
+              </span>
+              <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950 leading-tight mt-2">
+                Built Around Your Business. <br />
+                <span className="text-zinc-400">one team.</span>
+              </h2>
+            </div>
+            <div className="max-w-xs md:text-right">
+              <p className="text-zinc-500 text-sm leading-relaxed">
+                Your business is not like everyone else. Your digital experience should not be either.
+              </p>
+            </div>
+          </div>
+
+          {/* Homogeneous Editorial Slabs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+            {[
+              {
+                label: "Websites and Web Apps",
+                slug: "websites",
+                count: "2 projects shipped",
+                bg: "bg-white",
+                desc: "We design and develop fast, responsive websites and web applications tailored to your business, from corporate websites and landing pages to interactive platforms and custom web products.",
+              },
+              {
+                label: "Mobile Applications",
+                slug: "mobile",
+                count: "1 project shipped",
+                bg: "bg-zinc-100",
+                desc: "We build intuitive mobile applications that give your customers a seamless way to interact with your products, services, and digital experiences across iOS and Android.",
+              },
+              {
+                label: "Backend Systems",
+                slug: "backend",
+                count: "1 project shipped",
+                bg: "bg-[#f5f1e8]",
+                desc: "We build secure APIs, databases, server-side systems, and cloud infrastructure that keep your digital products reliable, connected, and ready to scale.",
+              },
+              {
+                label: "AI and Automations",
+                slug: "automation",
+                count: "2 projects shipped",
+                bg: "bg-[#f5f1e8]",
+                desc: "We use AI, automation, and integrations to streamline workflows, reduce manual processes, and help businesses work more efficiently.",
+              },
+              {
+                label: "UI and UX Design",
+                slug: "design",
+                count: "1 project shipped",
+                bg: "bg-white",
+                desc: "We turn ideas and business requirements into clear, intuitive interfaces, from early wireframes and user flows to polished high-fidelity designs and complete design systems.",
+              },
+              {
+                label: "Product and Graphics",
+                slug: "graphics",
+                count: "See related work",
+                bg: "bg-zinc-100",
+                desc: "We create the visual assets your business needs to communicate consistently across digital products, marketing, presentations, and other brand touchpoints.",
+              },
+            ].map((service, idx) => (
+              <Link
+                key={service.slug}
+                href={`/work?service=${service.slug}`}
+                className={`${service.bg} rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-8 group cursor-pointer transition-transform duration-300 hover:-translate-y-1`}
+              >
+                <div className="flex flex-col gap-4">
+                  <span className="text-xs font-mono font-bold tracking-wider text-zinc-400 uppercase">
+                    0{idx + 1}
+                  </span>
+                  <h3 className="font-serif text-2xl sm:text-3xl font-normal text-zinc-950 leading-snug">
+                    {service.label}
+                  </h3>
+                  <p className="text-zinc-600 text-sm leading-relaxed mt-2">
+                    {service.desc}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between pt-6">
+                  <span className="text-xs font-semibold text-zinc-500">
+                    {service.count}
+                  </span>
+                  <div className="w-10 h-10 rounded-full bg-zinc-950 text-white flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+                    <Icon name="arrow_outward" className="text-sm" weight={600} />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
         </div>
       </motion.section>
 
@@ -1226,19 +1145,19 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
             {/* Left Card: Team Lead and Anchor Statement */}
-            <div className="lg:col-span-5 bg-[#d6f831] rounded-3xl p-8 sm:p-10 flex flex-col justify-between">
+            <div className="lg:col-span-5 bg-zinc-100 rounded-3xl p-8 sm:p-10 flex flex-col justify-between">
               
               {/* Top Bar: Lead Avatar and Quick Contact */}
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-zinc-950 text-[#d6f831] flex items-center justify-center font-bold text-base shrink-0 select-none">
+                  <div className="w-14 h-14 rounded-full bg-zinc-950 text-white flex items-center justify-center font-bold text-base shrink-0 select-none">
                     FO
                   </div>
                   <div className="flex flex-col">
                     <span className="font-extrabold text-base text-zinc-950 tracking-tight leading-tight">
                       Fafure Olakunle
                     </span>
-                    <span className="text-xs text-zinc-800 leading-snug mt-0.5">
+                    <span className="text-xs text-zinc-600 leading-snug mt-0.5">
                       Team Lead. Guides your project from first discussion to launch.
                     </span>
                   </div>
@@ -1247,7 +1166,7 @@ export default function Home() {
                 <div className="flex flex-wrap items-center gap-2">
                   <a
                     href="mailto:hello@buildershub.tech"
-                    className="px-3.5 py-2 rounded-xl bg-zinc-950 text-white text-xs font-semibold hover:bg-zinc-900 transition-colors"
+                    className="px-4 py-2.5 rounded-xl bg-white text-zinc-900 text-xs font-semibold hover:bg-zinc-200 transition-colors"
                   >
                     hello@buildershub.tech
                   </a>
@@ -1255,7 +1174,7 @@ export default function Home() {
                     href="https://cal.com/builders-hub/introduction"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3.5 py-2 rounded-xl bg-zinc-950 text-[#d6f831] text-xs font-semibold hover:bg-zinc-900 transition-colors"
+                    className="px-4 py-2.5 rounded-xl bg-zinc-950 text-white text-xs font-semibold hover:bg-zinc-800 transition-colors"
                   >
                     Book Call
                   </a>
@@ -1267,60 +1186,29 @@ export default function Home() {
                 <h3 className="font-serif text-4xl sm:text-5xl font-normal text-zinc-950 leading-[1.08] tracking-tight">
                   Every project starts with a plan.
                 </h3>
-                <p className="mt-4 text-sm text-zinc-800 leading-relaxed max-w-sm">
+                <p className="mt-4 text-sm text-zinc-600 leading-relaxed max-w-sm">
                   We look at what you want to achieve, remove the guesswork, and build the right system for your business.
                 </p>
-              </div>
-
-              {/* Bottom: Location and Channels */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-4 text-xs font-semibold text-zinc-900">
-                <span>Lagos, Nigeria. Working with clients worldwide</span>
-                <div className="flex items-center gap-4">
-                  <a
-                    href="https://x.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline"
-                  >
-                    Twitter
-                  </a>
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline"
-                  >
-                    GitHub
-                  </a>
-                </div>
               </div>
 
             </div>
 
             {/* Right Card: Services Selection and Form */}
-            <div className="lg:col-span-7 bg-zinc-950 text-white rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-8">
+            <div className="lg:col-span-7 bg-white text-zinc-950 rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-8">
               
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-1.5">
-                  <h3 className="font-serif text-3xl sm:text-4xl font-normal text-white tracking-tight">
+                  <h3 className="font-serif text-3xl sm:text-4xl font-normal text-zinc-950 tracking-tight">
                     What can we help you build?
                   </h3>
-                  <p className="text-zinc-400 text-xs sm:text-sm">
+                  <p className="text-zinc-500 text-xs sm:text-sm">
                     Select what you need or write your thoughts below.
                   </p>
                 </div>
 
                 {/* Service Selection Chips */}
                 <div className="flex flex-col gap-2.5">
-                  <span className="text-xs font-semibold text-zinc-400">
+                  <span className="text-xs font-semibold text-zinc-500">
                     I am interested in
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -1333,8 +1221,8 @@ export default function Home() {
                           onClick={() => toggleService(service)}
                           className={`px-3.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors ${
                             isSelected
-                              ? "bg-[#d6f831] text-zinc-950"
-                              : "bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800"
+                              ? "bg-zinc-950 text-white"
+                              : "bg-zinc-100 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-200"
                           }`}
                         >
                           {service}
@@ -1348,7 +1236,7 @@ export default function Home() {
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
                   
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="name" className="text-xs font-semibold text-zinc-300">
+                    <label htmlFor="name" className="text-xs font-semibold text-zinc-700">
                       Your Name
                     </label>
                     <input
@@ -1358,12 +1246,12 @@ export default function Home() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="What should we call you?"
-                      className="w-full bg-zinc-900 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#d6f831] transition-all"
+                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all"
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="email" className="text-xs font-semibold text-zinc-300">
+                    <label htmlFor="email" className="text-xs font-semibold text-zinc-700">
                       Email Address
                     </label>
                     <input
@@ -1373,12 +1261,12 @@ export default function Home() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="Where can we write back to you?"
-                      className="w-full bg-zinc-900 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#d6f831] transition-all"
+                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all"
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="message" className="text-xs font-semibold text-zinc-300">
+                    <label htmlFor="message" className="text-xs font-semibold text-zinc-700">
                       Tell us about your project
                     </label>
                     <textarea
@@ -1388,7 +1276,7 @@ export default function Home() {
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       placeholder="Share your goals, timeline, or any questions..."
-                      className="w-full bg-zinc-900 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#d6f831] transition-all resize-none"
+                      className="w-full bg-zinc-50 rounded-xl px-4 py-3.5 text-sm text-zinc-950 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-950 transition-all resize-none"
                     />
                   </div>
 
@@ -1396,18 +1284,18 @@ export default function Home() {
                     <button
                       type="submit"
                       disabled={submitStatus === "loading"}
-                      className="w-full py-4 rounded-xl bg-[#d6f831] hover:bg-[#c8ea29] text-zinc-950 text-sm font-bold tracking-wide cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full py-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-sm font-bold tracking-wide cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {submitStatus === "loading" ? "Sending your message..." : "Submit"}
                     </button>
 
                     {submitStatus === "success" && (
-                      <p className="text-xs font-bold text-emerald-400">
+                      <p className="text-xs font-bold text-emerald-600">
                         Your message has been sent. We will get back to you shortly.
                       </p>
                     )}
                     {submitStatus === "error" && (
-                      <p className="text-xs font-bold text-rose-400">
+                      <p className="text-xs font-bold text-rose-600">
                         Something went wrong. Please write directly to hello@buildershub.tech.
                       </p>
                     )}
