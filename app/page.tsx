@@ -999,12 +999,12 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
-        className="relative bg-zinc-50 py-24 border-t border-zinc-200/60 z-10 w-full"
+        className="relative bg-zinc-50 py-24 z-10 w-full"
       >
         <div className="max-w-none w-full px-6 md:px-16 flex flex-col gap-12">
 
-          {/* Section Card (white block matching screenshot) */}
-          <div className="bg-white rounded-3xl border border-zinc-200/60 p-8 md:p-12 flex flex-col gap-12 overflow-x-auto scrollbar-hide">
+          {/* Section Card */}
+          <div className="bg-white rounded-3xl p-8 md:p-12 flex flex-col gap-12 overflow-x-auto scrollbar-hide">
 
             {/* Header Title */}
             <div className="flex flex-col gap-2">
@@ -1016,18 +1016,18 @@ export default function Home() {
             {/* Gantt Calendar Table */}
             <div className="min-w-[800px] w-full flex flex-col">
 
-              {/* Phases Header (6 Phases) */}
-              <div className="grid grid-cols-12 border-b border-zinc-100 pb-3 text-center">
-                <div className="col-span-2 text-xs font-bold text-zinc-800">Phase-1</div>
-                <div className="col-span-2 text-xs font-bold text-zinc-800">Phase-2</div>
-                <div className="col-span-2 text-xs font-bold text-zinc-800">Phase-3</div>
-                <div className="col-span-2 text-xs font-bold text-zinc-800">Phase-4</div>
-                <div className="col-span-2 text-xs font-bold text-zinc-800">Phase-5</div>
-                <div className="col-span-2 text-xs font-bold text-zinc-800">Phase-6</div>
+              {/* Phases Header (6 Phases) with reduced text thickness */}
+              <div className="grid grid-cols-12 pb-3 text-center">
+                <div className="col-span-2 text-xs font-normal text-zinc-500">Phase 1</div>
+                <div className="col-span-2 text-xs font-normal text-zinc-500">Phase 2</div>
+                <div className="col-span-2 text-xs font-normal text-zinc-500">Phase 3</div>
+                <div className="col-span-2 text-xs font-normal text-zinc-500">Phase 4</div>
+                <div className="col-span-2 text-xs font-normal text-zinc-500">Phase 5</div>
+                <div className="col-span-2 text-xs font-normal text-zinc-500">Phase 6</div>
               </div>
 
-              {/* Days Sub-header (12 columns) */}
-              <div className="grid grid-cols-12 py-3 text-center border-b border-zinc-100 text-[10px] font-bold text-zinc-400">
+              {/* Days Sub-header (12 columns) with reduced text thickness */}
+              <div className="grid grid-cols-12 py-3 text-center text-[10px] font-normal text-zinc-400">
                 <div>Mon</div>
                 <div>Tue</div>
                 <div>Wed</div>
@@ -1048,76 +1048,76 @@ export default function Home() {
                 {/* Vertical Column dividers (subtle background grid lines) */}
                 <div className="absolute inset-0 grid grid-cols-12 pointer-events-none">
                   {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="border-r border-zinc-100/60 h-full last:border-r-0" />
+                    <div key={i} className="w-px bg-zinc-100/60 h-full ml-auto last:hidden" />
                   ))}
                 </div>
 
-                {/* Connecting track running through every stage, reinforcing this is one continuous flow */}
+                {/* Connecting track running through every stage */}
                 <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-px bg-zinc-100 pointer-events-none" />
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-brand-900 pointer-events-none" />
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full border-2 border-zinc-200 bg-white pointer-events-none" />
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-zinc-200 pointer-events-none" />
 
-                {/* Stage 1: Understanding */}
+                {/* Stage 1: Understanding with reduced text thickness */}
                 <div className="col-start-1 col-span-3 sm:col-span-2 z-10">
-                  <div className="bg-brand-900 text-white rounded-full py-3 px-4 flex items-center justify-between shadow-sm">
+                  <div className="bg-brand-900 text-white rounded-full py-3 px-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Icon name="search" className="text-sm text-brand-200" />
-                      <span className="text-xs font-bold tracking-wide">Understanding</span>
+                      <span className="text-xs font-normal tracking-wide">Understanding</span>
                     </div>
                     <div className="w-2.5 h-2.5 rounded-full bg-white" />
                   </div>
                 </div>
 
-                {/* Stage 2: Strategy */}
+                {/* Stage 2: Strategy with reduced text thickness */}
                 <div className="col-start-2 col-span-3 z-10 mt-2">
-                  <div className="bg-emerald-500 text-white rounded-full py-3 px-4 flex items-center justify-between shadow-sm">
+                  <div className="bg-emerald-500 text-white rounded-full py-3 px-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Icon name="insights" className="text-sm text-emerald-100" />
-                      <span className="text-xs font-bold tracking-wide">Strategy</span>
+                      <span className="text-xs font-normal tracking-wide">Strategy</span>
                     </div>
                     <div className="w-2.5 h-2.5 rounded-full bg-white" />
                   </div>
                 </div>
 
-                {/* Stage 3: UI/UX */}
+                {/* Stage 3: UI/UX with reduced text thickness */}
                 <div className="col-start-4 col-span-3 z-10 mt-2">
-                  <div className="bg-orange-400 text-white rounded-full py-3 px-4 flex items-center justify-between shadow-sm">
+                  <div className="bg-orange-400 text-white rounded-full py-3 px-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Icon name="draw" className="text-sm text-orange-100" />
-                      <span className="text-xs font-bold tracking-wide">UI/UX</span>
+                      <span className="text-xs font-normal tracking-wide">UI/UX</span>
                     </div>
                     <div className="w-2.5 h-2.5 rounded-full bg-white" />
                   </div>
                 </div>
 
-                {/* Stage 4: Development */}
+                {/* Stage 4: Development with reduced text thickness */}
                 <div className="col-start-6 col-span-5 z-10 mt-2">
-                  <div className="bg-indigo-600 text-white rounded-full py-3 px-4 flex items-center justify-between shadow-sm">
+                  <div className="bg-indigo-600 text-white rounded-full py-3 px-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Icon name="code" className="text-sm text-indigo-200" />
-                      <span className="text-xs font-bold tracking-wide">Development</span>
+                      <span className="text-xs font-normal tracking-wide">Development</span>
                     </div>
                     <div className="w-2.5 h-2.5 rounded-full bg-white" />
                   </div>
                 </div>
 
-                {/* Stage 5: Testing */}
+                {/* Stage 5: Testing with reduced text thickness */}
                 <div className="col-start-10 col-span-2 z-10 mt-2">
-                  <div className="bg-pink-500 text-white rounded-full py-3 px-4 flex items-center justify-between shadow-sm">
+                  <div className="bg-pink-500 text-white rounded-full py-3 px-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Icon name="flaky" className="text-sm text-pink-100" />
-                      <span className="text-xs font-bold tracking-wide">Testing</span>
+                      <span className="text-xs font-normal tracking-wide">Testing</span>
                     </div>
                     <div className="w-2.5 h-2.5 rounded-full bg-white" />
                   </div>
                 </div>
 
-                {/* Stage 6: Deployment */}
+                {/* Stage 6: Deployment with reduced text thickness */}
                 <div className="col-start-11 col-span-2 z-10 mt-2">
-                  <div className="bg-teal-500 text-white rounded-full py-3 px-4 flex items-center justify-between shadow-sm">
+                  <div className="bg-teal-500 text-white rounded-full py-3 px-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Icon name="rocket_launch" className="text-sm text-teal-100" />
-                      <span className="text-xs font-bold tracking-wide">Deployment</span>
+                      <span className="text-xs font-normal tracking-wide">Deployment</span>
                     </div>
                     <div className="w-2.5 h-2.5 rounded-full bg-white" />
                   </div>
