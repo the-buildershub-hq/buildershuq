@@ -1,187 +1,198 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Icon from "@/components/Icon";
 import { projects as mockProjects, type Project } from "../lib/projects";
 
 export default function Showcase() {
-  const [activeIndex, setActiveIndex] = useState(2);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % mockProjects.length);
-  };
+  // Scale on scroll animation hook
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + mockProjects.length) % mockProjects.length);
-  };
+  // Scale wall as user scrolls through it
+  const wallScale = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0.92, 1, 1, 0.94]);
+  const wallOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.75, 1, 1, 0.8]);
+
+  // Subtle natural parallax offsets per column
+  const colY1 = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const colY2 = useTransform(scrollYProgress, [0, 1], [-25, 25]);
+  const colY3 = useTransform(scrollYProgress, [0, 1], [35, -35]);
+  const colY4 = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+
+  const columnOffsets = [colY1, colY2, colY3, colY4];
+
+  // Gallery wall layout with alternating heights like art museum salon hanging
+  const columns = [
+    // Column 1
+    [
+      {
+        project: mockProjects[0],
+        aspect: "h-[450px] sm:h-[490px]",
+        tag: "Logistics",
+      },
+      {
+        project: mockProjects[4],
+        aspect: "h-[300px] sm:h-[320px]",
+        tag: "Fintech",
+      },
+    ],
+    // Column 2
+    [
+      {
+        project: mockProjects[1],
+        aspect: "h-[290px] sm:h-[310px]",
+        tag: "Commerce",
+      },
+      {
+        project: mockProjects[5],
+        aspect: "h-[460px] sm:h-[500px]",
+        tag: "Mobile",
+      },
+    ],
+    // Column 3
+    [
+      {
+        project: mockProjects[2],
+        aspect: "h-[450px] sm:h-[490px]",
+        tag: "Hardware",
+      },
+      {
+        project: mockProjects[6],
+        aspect: "h-[300px] sm:h-[320px]",
+        tag: "Healthcare",
+      },
+    ],
+    // Column 4
+    [
+      {
+        project: mockProjects[7],
+        aspect: "h-[290px] sm:h-[310px]",
+        tag: "Branding",
+      },
+      {
+        project: mockProjects[3],
+        aspect: "h-[460px] sm:h-[500px]",
+        tag: "Automation",
+      },
+    ],
+  ];
 
   return (
-    <section id="showcase" className="relative bg-white py-24 border-t border-zinc-200/60 w-full overflow-hidden">
+    <section
+      id="showcase"
+      ref={containerRef}
+      className="relative bg-zinc-50 py-24 sm:py-32 w-full overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-16">
 
-        {/* Title Block */}
+        {/* Section Header */}
         <div className="flex flex-col items-center text-center gap-4">
           <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-            Product Showcase
+            Showcase
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950">
-            Solutions Built for Real Businesses
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-zinc-950">
+            Selected Works on Display
           </h2>
           <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
-            From a simple digital storefront to a custom business platform, we build around the problem you're trying to solve.
+            Like artworks on a museum wall, each system we build has its own character, size, and focus. Click any piece to see its details.
           </p>
-        </div>
-
-        {/* Curved / 3D Coverflow Showcase Carousel Wrapper */}
-        <div className="relative w-full flex flex-col items-center justify-center py-12">
-
-          {/* Coverflow Container */}
-          <div className="relative w-full max-w-5xl h-[480px] flex items-center justify-center perspective-[1200px] overflow-visible">
-            {mockProjects.map((project, idx) => {
-              // Calculate relative offset from active card
-              const offset = idx - activeIndex;
-              const absOffset = Math.abs(offset);
-
-              // Handle looping offsets correctly
-              let loopOffset = offset;
-              if (offset < -2) loopOffset += mockProjects.length;
-              if (offset > 2) loopOffset -= mockProjects.length;
-              const absLoopOffset = Math.abs(loopOffset);
-
-              const isActive = idx === activeIndex;
-
-              // Define 3D rotation, translation and scaling
-              const rotateY = loopOffset * 22; // Curved angle
-              const translateZ = isActive ? 100 : -120; // Active card pops forward
-              const translateX = loopOffset * 220; // Lateral spread spacing
-              const scale = isActive ? 1.05 : 0.78;
-              const opacity = absLoopOffset > 2 ? 0 : isActive ? 1 : 0.65;
-              const zIndex = 10 - absLoopOffset;
-
-              return (
-                <motion.div
-                  key={project.id}
-                  style={{
-                    transformStyle: "preserve-3d",
-                    zIndex,
-                  }}
-                  animate={{
-                    x: translateX,
-                    scale,
-                    opacity,
-                    rotateY,
-                    z: translateZ,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 85,
-                    damping: 18
-                  }}
-                  onClick={() => {
-                    if (isActive) {
-                      setSelectedProject(project);
-                      setActiveMediaIndex(0);
-                    } else {
-                      setActiveIndex(idx);
-                    }
-                  }}
-                  className={`absolute w-[320px] sm:w-[400px] h-[420px] rounded-3xl bg-zinc-50 border border-zinc-200/80 p-6 flex flex-col justify-between cursor-pointer select-none`}
-                >
-                  <div className="flex flex-col gap-4 h-full justify-between">
-                    <div className="flex flex-col gap-4">
-                      {/* Image Preview */}
-                      <div className="w-full h-56 relative rounded-2xl overflow-hidden border border-zinc-200/50 bg-black">
-                        <Image
-                          src={project.screenshots[0]}
-                          alt={project.title}
-                          fill
-                          className="object-cover"
-                          draggable={false}
-                        />
-                      </div>
-
-                      {/* Text info */}
-                      <div className="flex flex-col gap-1">
-                        <span className="text-[10px] font-mono text-zinc-400 font-bold uppercase tracking-widest">
-                          {project.category}
-                        </span>
-                        <h3 className="text-base font-bold text-zinc-950 truncate">
-                          {project.title}
-                        </h3>
-                      </div>
-                    </div>
-
-                    {/* Bottom CTA row: card body opens details, arrow jumps straight to the live site */}
-                    <div className="flex items-center justify-between mt-2 pt-2 border-t border-zinc-200/30">
-                      <span className="text-[11px] font-bold text-zinc-500">
-                        {isActive ? "Click to open details" : "Select project"}
-                      </span>
-                      <a
-                        href={isActive ? project.link : undefined}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => {
-                          if (!isActive) {
-                            e.preventDefault();
-                            return;
-                          }
-                          e.stopPropagation();
-                        }}
-                        title={isActive ? `Visit ${project.title}` : undefined}
-                        className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 hover:bg-brand-navy hover:text-white hover:border-brand-navy transition-all duration-300"
-                      >
-                        <Icon name="arrow_outward" className="text-xs" weight={600} />
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Navigation Controls */}
-          <div className="flex items-center gap-4 mt-8 z-20">
-            <button
-              onClick={handlePrev}
-              className="w-12 h-12 rounded-full border border-zinc-200 bg-white flex items-center justify-center text-zinc-600 hover:bg-zinc-50 cursor-pointer transition-colors"
-            >
-              <Icon name="arrow_back" className="text-base" />
-            </button>
-            <button
-              onClick={handleNext}
-              className="w-12 h-12 rounded-full border border-zinc-200 bg-white flex items-center justify-center text-zinc-600 hover:bg-zinc-50 cursor-pointer transition-colors"
-            >
-              <Icon name="arrow_forward" className="text-base" />
-            </button>
-          </div>
-
           <Link
             href="/work"
-            className="mt-8 inline-flex items-center gap-1.5 text-xs font-bold text-zinc-500 hover:text-brand-navy transition-colors group"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-950 hover:text-zinc-600 transition-colors group mt-2"
           >
-            See the full body of work
+            See full portfolio
             <Icon
               name="arrow_outward"
               className="text-xs transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               weight={600}
             />
           </Link>
-
         </div>
+
+        {/* Museum Gallery Wall with scale on scroll */}
+        <motion.div
+          style={{
+            scale: wallScale,
+            opacity: wallOpacity,
+          }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start w-full pt-4"
+        >
+          {columns.map((column, colIdx) => (
+            <motion.div
+              key={colIdx}
+              style={{
+                y: columnOffsets[colIdx],
+              }}
+              className="flex flex-col gap-6 w-full"
+            >
+              {column.map((item, itemIdx) => (
+                <motion.div
+                  key={item.project.id}
+                  whileHover={{ scale: 1.02, y: -4 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  onClick={() => {
+                    setSelectedProject(item.project);
+                    setActiveMediaIndex(0);
+                  }}
+                  className={`relative w-full ${item.aspect} rounded-3xl overflow-hidden cursor-pointer select-none group bg-zinc-950`}
+                >
+                  {/* Artwork Image */}
+                  <Image
+                    src={item.project.screenshots[0]}
+                    alt={item.project.title}
+                    fill
+                    className="object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-700"
+                    draggable={false}
+                  />
+
+                  {/* High contrast gradient backdrop for legible typography */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
+
+                  {/* Card Content Overlay */}
+                  <div className="absolute inset-0 p-6 sm:p-7 flex flex-col justify-between z-10">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono font-bold text-zinc-300 uppercase tracking-widest">
+                        {item.tag}
+                      </span>
+                      <div className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-white text-white group-hover:text-zinc-950 flex items-center justify-center transition-colors">
+                        <Icon name="arrow_outward" className="text-xs" weight={600} />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-[11px] font-mono font-medium text-zinc-400">
+                        {item.project.serviceLabel}
+                      </span>
+                      <h3 className="font-serif text-xl sm:text-2xl font-normal text-white tracking-tight leading-tight group-hover:text-zinc-200 transition-colors">
+                        {item.project.title}
+                      </h3>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          ))}
+        </motion.div>
+
       </div>
 
-      {/* Custom Modal for Project Details (Portalled to document.body to avoid stacking context traps) */}
+      {/* Portalled Project Details Modal (Zero borders, zero shadows) */}
       {mounted && createPortal(
         <AnimatePresence>
           {selectedProject && (
@@ -189,37 +200,36 @@ export default function Showcase() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 w-screen h-screen z-[99999] flex items-center justify-center bg-black/95 backdrop-blur-lg p-4 sm:p-8"
+              className="fixed inset-0 w-screen h-screen z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8"
             >
               <motion.div
-                initial={{ scale: 0.95, y: 30 }}
+                initial={{ scale: 0.95, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.95, y: 30 }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl border border-zinc-200/80 flex flex-col scrollbar-hide"
+                exit={{ scale: 0.95, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 220 }}
+                className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl flex flex-col scrollbar-hide text-zinc-950"
               >
                 {/* Modal Header */}
-                <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-30 px-6 py-5 border-b border-zinc-100 flex items-center justify-between">
+                <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-30 px-6 py-5 flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-mono text-zinc-400 font-bold uppercase tracking-widest">
+                    <span className="text-xs font-mono text-zinc-400 font-bold uppercase tracking-widest">
                       {selectedProject.category}
                     </span>
-                    <h3 className="text-xl font-extrabold text-zinc-950 mt-1">
+                    <h3 className="font-serif text-2xl font-normal text-zinc-950 mt-1">
                       {selectedProject.title}
                     </h3>
                   </div>
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="w-10 h-10 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 flex items-center justify-center text-zinc-500 cursor-pointer transition-colors"
+                    className="w-10 h-10 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-700 cursor-pointer transition-colors"
                   >
                     <Icon name="close" className="text-lg" />
                   </button>
                 </div>
 
-                {/* Modal Media Showcase Container */}
-                <div className="bg-zinc-50 p-6 border-b border-zinc-100 flex flex-col gap-4">
-                  {/* Active Screen Display (Video or Image) */}
-                  <div className="relative aspect-video rounded-2xl overflow-hidden border border-zinc-200/60 bg-black flex items-center justify-center">
+                {/* Media Container */}
+                <div className="bg-zinc-100 p-6 flex flex-col gap-4">
+                  <div className="relative aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center">
                     {activeMediaIndex === selectedProject.screenshots.length && selectedProject.video ? (
                       <video
                         src={selectedProject.video}
@@ -231,7 +241,7 @@ export default function Showcase() {
                       />
                     ) : (
                       <Image
-                        src={selectedProject.screenshots[activeMediaIndex] || "/workspace.png"}
+                        src={selectedProject.screenshots[activeMediaIndex] || "/abstract.png"}
                         alt={`${selectedProject.title} screenshot`}
                         fill
                         className="object-cover"
@@ -239,14 +249,15 @@ export default function Showcase() {
                     )}
                   </div>
 
-                  {/* Thumbnail Selector Tabs */}
+                  {/* Thumbnail Row */}
                   <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                    {/* Screenshot Thumbnails */}
                     {selectedProject.screenshots.map((shot, sIdx) => (
                       <button
                         key={sIdx}
                         onClick={() => setActiveMediaIndex(sIdx)}
-                        className={`relative w-24 aspect-video rounded-lg overflow-hidden border-2 cursor-pointer shrink-0 transition-all ${activeMediaIndex === sIdx ? "border-brand-navy scale-95" : "border-zinc-200 opacity-60 hover:opacity-100"}`}
+                        className={`relative w-24 aspect-video rounded-xl overflow-hidden cursor-pointer shrink-0 transition-all ${
+                          activeMediaIndex === sIdx ? "ring-2 ring-zinc-950" : "opacity-60 hover:opacity-100"
+                        }`}
                       >
                         <Image
                           src={shot}
@@ -257,11 +268,12 @@ export default function Showcase() {
                       </button>
                     ))}
 
-                    {/* Video Thumbnail Option */}
                     {selectedProject.video && (
                       <button
                         onClick={() => setActiveMediaIndex(selectedProject.screenshots.length)}
-                        className={`relative w-24 aspect-video rounded-lg overflow-hidden border-2 bg-zinc-900 flex items-center justify-center text-white cursor-pointer shrink-0 transition-all ${activeMediaIndex === selectedProject.screenshots.length ? "border-brand-navy scale-95" : "border-zinc-200 opacity-60 hover:opacity-100"}`}
+                        className={`relative w-24 aspect-video rounded-xl overflow-hidden bg-zinc-900 flex items-center justify-center text-white cursor-pointer shrink-0 transition-all ${
+                          activeMediaIndex === selectedProject.screenshots.length ? "ring-2 ring-zinc-950" : "opacity-60 hover:opacity-100"
+                        }`}
                       >
                         <Icon name="play_circle" className="text-3xl text-white" />
                       </button>
@@ -269,24 +281,23 @@ export default function Showcase() {
                   </div>
                 </div>
 
-                {/* Modal Description Body */}
+                {/* Story Description */}
                 <div className="px-6 py-8 flex flex-col gap-6">
-                  <div className="flex flex-col gap-3">
-                    <h4 className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-                      Project Story &amp; Details
-                    </h4>
-                    <p className="text-zinc-600 text-sm sm:text-base leading-relaxed">
+                  <div className="flex flex-col gap-2">
+                    <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
+                      Project Background
+                    </span>
+                    <p className="text-zinc-700 text-sm sm:text-base leading-relaxed">
                       {selectedProject.story}
                     </p>
                   </div>
 
-                  {/* External Action Button */}
-                  <div className="pt-4 border-t border-zinc-100 flex items-center justify-end">
+                  <div className="pt-4 flex items-center justify-end">
                     <a
                       href={selectedProject.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide cursor-pointer transition-all group"
+                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-sm font-semibold tracking-wide cursor-pointer transition-colors group"
                     >
                       Visit Live Project Website
                       <Icon
@@ -296,8 +307,8 @@ export default function Showcase() {
                       />
                     </a>
                   </div>
-
                 </div>
+
               </motion.div>
             </motion.div>
           )}
