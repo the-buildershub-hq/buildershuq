@@ -1488,16 +1488,18 @@ export default function Home() {
                 <div className="flex flex-wrap items-center gap-2">
                   <a
                     href="mailto:hello@buildershub.tech"
-                    className="px-4 py-2.5 rounded-xl bg-white text-zinc-900 text-xs font-semibold hover:bg-zinc-200 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-zinc-900 text-xs font-semibold hover:bg-zinc-200 transition-colors"
                   >
+                    <Icon name="mail" className="text-sm text-zinc-700" />
                     hello@buildershub.tech
                   </a>
                   <a
                     href="https://cal.com/builders-hub/introduction"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-xl bg-zinc-950 text-white text-xs font-semibold hover:bg-zinc-800 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-950 text-white text-xs font-semibold hover:bg-zinc-800 transition-colors"
                   >
+                    <Icon name="calendar_today" className="text-sm text-zinc-300" />
                     Book Call
                   </a>
                 </div>
