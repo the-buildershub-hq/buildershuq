@@ -241,7 +241,7 @@ export default function Home() {
 
         {/* Floating Visual Constellation (Inspired by iPartyLabs, Take a screenshot, and Nothing Playground) */}
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-          
+
           {/* Card 1: Top Left Photo Tile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -397,7 +397,7 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto w-full px-6 flex flex-col">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
+
             {/* Left Column: Typography and Content */}
             <div className="lg:col-span-6 flex flex-col gap-6 justify-center">
               <span className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase">
@@ -457,7 +457,7 @@ export default function Home() {
         className="relative bg-zinc-50 py-24 sm:py-32 z-10 w-full"
       >
         <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
-          
+
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div className="max-w-md">
               <span className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase">
@@ -573,7 +573,7 @@ export default function Home() {
         className="relative bg-[#163829] py-24 z-10 w-full"
       >
         <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-16">
-          
+
           {/* Header in Serif */}
           <div className="flex flex-col items-center text-center gap-3">
             <span className="text-xs font-bold tracking-widest text-emerald-300 uppercase">
@@ -626,7 +626,7 @@ export default function Home() {
 
                 {/* Main Paper Note Card */}
                 <div className="relative z-10 bg-[#f7f2e7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-6 flex-1 text-zinc-950">
-                  
+
                   <div className="flex flex-col gap-4">
                     {/* 5 Stars Rating */}
                     <div className="flex items-center gap-1">
@@ -836,7 +836,7 @@ export default function Home() {
 
           {/* Minimalist Colored Craft Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto pt-4 pb-8">
-            
+
             {/* Card 1: Vermilion Orange */}
             <div className="bg-[#F04623] rounded-[2rem] p-8 min-h-[460px] flex flex-col justify-between lg:-rotate-3 lg:hover:rotate-0 transition-transform duration-300 ease-out cursor-pointer hover:-translate-y-3">
               <div className="w-full flex justify-center pt-2">
@@ -997,7 +997,7 @@ export default function Home() {
 
           {/* 3-Card Grid matching screenshot */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-            
+
             {/* Card 1: Team Photo + Black Call Box */}
             <div className="rounded-[2rem] overflow-hidden bg-black flex flex-col justify-between border border-zinc-200/60 min-h-[580px]">
               <div className="relative w-full aspect-[4/3] bg-zinc-900 overflow-hidden">
@@ -1146,7 +1146,7 @@ export default function Home() {
 
             {/* Left Card: Team Lead and Anchor Statement */}
             <div className="lg:col-span-5 bg-zinc-100 rounded-3xl p-8 sm:p-10 flex flex-col justify-between">
-              
+
               {/* Top Bar: Lead Avatar and Quick Contact */}
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">
@@ -1158,7 +1158,7 @@ export default function Home() {
                       Fafure Olakunle
                     </span>
                     <span className="text-xs text-zinc-600 leading-snug mt-0.5">
-                      Team Lead. Guides your project from first discussion to launch.
+                      Team Lead.
                     </span>
                   </div>
                 </div>
@@ -1195,7 +1195,7 @@ export default function Home() {
 
             {/* Right Card: Services Selection and Form */}
             <div className="lg:col-span-7 bg-white text-zinc-950 rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-8">
-              
+
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-1.5">
                   <h3 className="font-serif text-3xl sm:text-4xl font-normal text-zinc-950 tracking-tight">
@@ -1219,11 +1219,10 @@ export default function Home() {
                           key={service}
                           type="button"
                           onClick={() => toggleService(service)}
-                          className={`px-3.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors ${
-                            isSelected
+                          className={`px-3.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors ${isSelected
                               ? "bg-zinc-950 text-white"
                               : "bg-zinc-100 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-200"
-                          }`}
+                            }`}
                         >
                           {service}
                         </button>
@@ -1234,7 +1233,7 @@ export default function Home() {
 
                 {/* Contact Form */}
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
-                  
+
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="name" className="text-xs font-semibold text-zinc-700">
                       Your Name
@@ -1329,9 +1328,9 @@ export default function Home() {
         <div className="relative max-w-4xl mx-auto px-6 flex flex-col gap-6 items-center">
           <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-zinc-950 uppercase leading-[1.15] flex flex-col gap-2 select-none">
             <span className="flex items-center justify-center gap-4 flex-wrap">
-               Your
+              Your
               <span className="inline-flex text-xs font-mono font-bold tracking-widest bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full uppercase">
-              Business
+                Business
               </span>
               Has Already Been Built.
             </span>
@@ -1343,7 +1342,7 @@ export default function Home() {
               Its Digital Presence
             </span>
             <span className="flex items-center justify-center gap-4 flex-wrap">
-              
+
               <span className="inline-flex w-16 h-8 bg-zinc-900 rounded-full" />
             </span>
           </h2>
