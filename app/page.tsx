@@ -12,6 +12,17 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", description: "" });
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [selectedServices, setSelectedServices] = useState<string[]>(["Websites"]);
+
+  const toggleService = (service: string) => {
+    setSelectedServices((prev) =>
+      prev.includes(service)
+        ? prev.length > 1
+          ? prev.filter((s) => s !== service)
+          : prev
+        : [...prev, service]
+    );
+  };
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -26,6 +37,11 @@ export default function Home() {
     e.preventDefault();
     setSubmitStatus("loading");
     try {
+      const fullDescription =
+        selectedServices.length > 0
+          ? `Selected services: ${selectedServices.join(", ")}\n\n${formData.description}`
+          : formData.description;
+
       const response = await fetch("https://x8ki-letl-twmt.n7.xano.io/api:7-0SUSqX/save_contact", {
         method: "POST",
         headers: {
@@ -34,7 +50,7 @@ export default function Home() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          description: formData.description,
+          description: fullDescription,
         }),
       });
 
@@ -1202,133 +1218,216 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
-        className="relative bg-zinc-50 py-24 border-t border-zinc-200/60 z-10 w-full"
+        className="relative bg-zinc-50 py-24 z-10 w-full"
       >
-        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
+        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-10">
 
-          {/* Header Title Block */}
           <div className="flex flex-col gap-2 max-w-xl">
             <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
               Get In Touch
             </span>
             <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950">
-              Have a Business to Build? Let's Talk.
+              Have a project in mind? Let's talk.
             </h2>
-            <p className="text-zinc-500 text-sm md:text-base leading-relaxed mt-2">
-              Whether you're starting from scratch, redesigning an existing website, or looking to solve a bigger digital problem, tell us what you're working on.
+            <p className="text-zinc-500 text-sm md:text-base leading-relaxed">
+              Tell us what you are working on. We will review your goals and get back to you with clear next steps.
             </p>
           </div>
 
-          {/* Form Content Split Layout (No shadows, borders only) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6 items-start">
+          {/* Split Contact Presentation */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-            {/* Left Column: Direct Info */}
-            <div className="lg:col-span-4 flex flex-col gap-8">
-              <div className="flex flex-col gap-4">
-                <div className="w-11 h-11 rounded-full bg-brand-navy flex items-center justify-center text-white">
-                  <Icon name="mail" className="text-lg" />
+            {/* Left Card: Team Lead and Anchor Statement */}
+            <div className="lg:col-span-5 bg-[#d6f831] rounded-3xl p-8 sm:p-10 flex flex-col justify-between">
+              
+              {/* Top Bar: Lead Avatar and Quick Contact */}
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-zinc-950 text-[#d6f831] flex items-center justify-center font-bold text-base shrink-0 select-none">
+                    FO
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-extrabold text-base text-zinc-950 tracking-tight leading-tight">
+                      Fafure Olakunle
+                    </span>
+                    <span className="text-xs text-zinc-800 leading-snug mt-0.5">
+                      Team Lead. Guides your project from first discussion to launch.
+                    </span>
+                  </div>
                 </div>
-                <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">
-                  Chat to us
-                </span>
-                <p className="text-sm text-zinc-500">
-                  Our team reads every message personally and answers within 24 hours.
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href="mailto:hello@buildershub.tech"
+                    className="px-3.5 py-2 rounded-xl bg-zinc-950 text-white text-xs font-semibold hover:bg-zinc-900 transition-colors"
+                  >
+                    hello@buildershub.tech
+                  </a>
+                  <a
+                    href="https://cal.com/builders-hub/introduction"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-2 rounded-xl bg-zinc-950 text-[#d6f831] text-xs font-semibold hover:bg-zinc-900 transition-colors"
+                  >
+                    Book Call
+                  </a>
+                </div>
+              </div>
+
+              {/* Center Typography */}
+              <div className="my-auto py-10 lg:py-16">
+                <h3 className="font-serif text-4xl sm:text-5xl font-normal text-zinc-950 leading-[1.08] tracking-tight">
+                  Every project starts with a plan.
+                </h3>
+                <p className="mt-4 text-sm text-zinc-800 leading-relaxed max-w-sm">
+                  We look at what you want to achieve, remove the guesswork, and build the right system for your business.
                 </p>
-                <a
-                  href="mailto:hello@buildershub.co"
-                  className="text-sm font-bold text-brand-navy hover:text-brand-navy-hover transition-colors cursor-pointer -mt-1"
-                >
-                  hello@buildershub.co
-                </a>
               </div>
 
-              <div className="flex flex-col gap-3 pt-6 border-t border-zinc-200/60">
-                <div className="flex items-center gap-3 text-sm text-zinc-600">
-                  <Icon name="location_on" className="text-base text-zinc-400" />
-                  Lagos, Nigeria. Working with clients worldwide
-                </div>
-                <div className="flex items-center gap-3 text-sm text-zinc-600">
-                  <Icon name="schedule" className="text-base text-zinc-400" />
-                  Replies within 24 hours
+              {/* Bottom: Location and Channels */}
+              <div className="flex flex-wrap items-center justify-between gap-4 pt-4 text-xs font-semibold text-zinc-900">
+                <span>Lagos, Nigeria. Working with clients worldwide</span>
+                <div className="flex items-center gap-4">
+                  <a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    Twitter
+                  </a>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    GitHub
+                  </a>
                 </div>
               </div>
+
             </div>
 
-            {/* Right Column: Contact Form */}
-            <div className="lg:col-span-8 bg-white border border-zinc-200/80 rounded-3xl p-8 md:p-10">
-              <form onSubmit={handleFormSubmit} className="flex flex-col gap-6">
-
-                {/* Name Field */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="name" className="text-xs font-bold text-zinc-700">
-                    Your name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Enter your name"
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-sm text-zinc-950 focus:outline-none focus:border-brand-navy transition-colors"
-                  />
+            {/* Right Card: Services Selection and Form */}
+            <div className="lg:col-span-7 bg-zinc-950 text-white rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-8">
+              
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-1.5">
+                  <h3 className="font-serif text-3xl sm:text-4xl font-normal text-white tracking-tight">
+                    What can we help you build?
+                  </h3>
+                  <p className="text-zinc-400 text-xs sm:text-sm">
+                    Select what you need or write your thoughts below.
+                  </p>
                 </div>
 
-                {/* Email Field */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="email" className="text-xs font-bold text-zinc-700">
-                    Email address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="you@company.com"
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-sm text-zinc-950 focus:outline-none focus:border-brand-navy transition-colors"
-                  />
+                {/* Service Selection Chips */}
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-xs font-semibold text-zinc-400">
+                    I am interested in
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {["Websites", "Web Apps", "Mobile Apps", "Automation", "Product Design", "Other"].map((service) => {
+                      const isSelected = selectedServices.includes(service);
+                      return (
+                        <button
+                          key={service}
+                          type="button"
+                          onClick={() => toggleService(service)}
+                          className={`px-3.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors ${
+                            isSelected
+                              ? "bg-[#d6f831] text-zinc-950"
+                              : "bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800"
+                          }`}
+                        >
+                          {service}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                {/* Message Field */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="message" className="text-xs font-bold text-zinc-700">
-                    Tell us about the project
-                  </label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={4}
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    placeholder="Describe your goals, timeline, and scope..."
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-sm text-zinc-950 focus:outline-none focus:border-brand-navy transition-colors resize-none"
-                  />
-                </div>
+                {/* Contact Form */}
+                <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
+                  
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="name" className="text-xs font-semibold text-zinc-300">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="What should we call you?"
+                      className="w-full bg-zinc-900 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#d6f831] transition-all"
+                    />
+                  </div>
 
-                {/* Submit button */}
-                <div className="pt-2 flex flex-col gap-3">
-                  <button
-                    type="submit"
-                    disabled={submitStatus === "loading"}
-                    className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-xs font-bold tracking-wide cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {submitStatus === "loading" ? "Sending..." : "Send Message"}
-                  </button>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="email" className="text-xs font-semibold text-zinc-300">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="Where can we write back to you?"
+                      className="w-full bg-zinc-900 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#d6f831] transition-all"
+                    />
+                  </div>
 
-                  {submitStatus === "success" && (
-                    <p className="text-xs font-bold text-emerald-600 mt-1">
-                      Your request was submitted successfully! We will get in touch shortly.
-                    </p>
-                  )}
-                  {submitStatus === "error" && (
-                    <p className="text-xs font-bold text-rose-600 mt-1">
-                      Something went wrong. Please try again or email hello@buildershub.co directly.
-                    </p>
-                  )}
-                </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="message" className="text-xs font-semibold text-zinc-300">
+                      Tell us about your project
+                    </label>
+                    <textarea
+                      id="message"
+                      required
+                      rows={3}
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      placeholder="Share your goals, timeline, or any questions..."
+                      className="w-full bg-zinc-900 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#d6f831] transition-all resize-none"
+                    />
+                  </div>
 
-              </form>
+                  <div className="pt-2 flex flex-col gap-3">
+                    <button
+                      type="submit"
+                      disabled={submitStatus === "loading"}
+                      className="w-full py-4 rounded-xl bg-[#d6f831] hover:bg-[#c8ea29] text-zinc-950 text-sm font-bold tracking-wide cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {submitStatus === "loading" ? "Sending your message..." : "Submit"}
+                    </button>
+
+                    {submitStatus === "success" && (
+                      <p className="text-xs font-bold text-emerald-400">
+                        Your message has been sent. We will get back to you shortly.
+                      </p>
+                    )}
+                    {submitStatus === "error" && (
+                      <p className="text-xs font-bold text-rose-400">
+                        Something went wrong. Please write directly to hello@buildershub.tech.
+                      </p>
+                    )}
+                  </div>
+
+                </form>
+              </div>
+
             </div>
 
           </div>
