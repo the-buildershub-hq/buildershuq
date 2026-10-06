@@ -1,45 +1,76 @@
 import React from "react";
+import {
+  IconArrowUpRight,
+  IconArrowLeft,
+  IconX,
+  IconMenu2,
+  IconCirclePlay,
+  IconSearch,
+  IconChartLine,
+  IconPencil,
+  IconCode,
+  IconTestPipe,
+  IconRocket,
+  IconMail,
+  IconCalendar,
+  type Icon as TablerIcon,
+} from "@tabler/icons-react";
 
 interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
   name: string;
   className?: string;
-  fill?: boolean;
+  strokeWidth?: number;
   weight?: number;
-  grade?: number;
-  opticalSize?: number;
+  fill?: boolean;
+  size?: number | string;
 }
+
+const ICON_MAP: Record<string, TablerIcon> = {
+  arrow_outward: IconArrowUpRight,
+  arrow_back: IconArrowLeft,
+  close: IconX,
+  menu: IconMenu2,
+  play_circle: IconCirclePlay,
+  search: IconSearch,
+  insights: IconChartLine,
+  draw: IconPencil,
+  code: IconCode,
+  flaky: IconTestPipe,
+  rocket_launch: IconRocket,
+  mail: IconMail,
+  calendar_today: IconCalendar,
+  calendar: IconCalendar,
+  email: IconMail,
+  rocket: IconRocket,
+};
 
 export default function Icon({
   name,
   className = "",
-  fill = false,
+  strokeWidth,
   weight,
-  grade,
-  opticalSize,
-  style,
+  size,
   ...props
 }: IconProps) {
-  const fontVariationSettings = [
-    fill ? "'FILL' 1" : "'FILL' 0",
-    weight !== undefined ? `'wght' ${weight}` : null,
-    grade !== undefined ? `'GRAD' ${grade}` : null,
-    opticalSize !== undefined ? `'opsz' ${opticalSize}` : null,
-  ]
-    .filter(Boolean)
-    .join(", ");
+  const Component = ICON_MAP[name];
 
-  const combinedStyle = {
-    fontVariationSettings,
-    ...style,
-  };
+  if (!Component) {
+    return null;
+  }
+
+  const stroke = strokeWidth ?? (weight && weight >= 600 ? 2.25 : 2);
 
   return (
     <span
-      className={`material-symbols-outlined select-none inline-block align-middle ${className}`}
-      style={combinedStyle}
+      className={`inline-flex items-center justify-center shrink-0 leading-none select-none ${className}`}
       {...props}
     >
-      {name}
+      <Component
+        size={size ?? "1em"}
+        stroke={stroke}
+        className="w-full h-full"
+      />
     </span>
   );
 }
+
