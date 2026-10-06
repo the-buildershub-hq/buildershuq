@@ -1301,12 +1301,12 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={sectionVariants}
-        className="relative bg-white py-24 border-t border-zinc-200/60 z-10 w-full"
+        className="relative bg-white py-24 z-10 w-full"
       >
         <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
 
-          {/* Header Title Block matching screenshot: Left Title, Right "Full transparency" */}
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 pb-2 border-b border-zinc-100">
+          {/* Header Title Block: Left Title, Right "Full transparency" */}
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 pb-2">
             <div>
               <h2 className="font-serif text-5xl md:text-6xl text-zinc-950 font-normal tracking-tight">
                 Pricing
@@ -1317,11 +1317,11 @@ export default function Home() {
             </span>
           </div>
 
-          {/* 3-Card Grid matching screenshot */}
+          {/* 3-Card Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
 
             {/* Card 1: Team Photo + Black Call Box */}
-            <div className="rounded-[2rem] overflow-hidden bg-black flex flex-col justify-between border border-zinc-200/60 min-h-[580px]">
+            <div className="rounded-[2rem] overflow-hidden bg-black flex flex-col justify-between min-h-[580px]">
               <div className="relative w-full aspect-[4/3] bg-zinc-900 overflow-hidden">
                 <Image
                   src="/pricing-consultation.jpg"
@@ -1339,7 +1339,7 @@ export default function Home() {
                   href="https://cal.com/builders-hub/introduction"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center py-4 px-6 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 text-sm font-semibold tracking-wide transition-all shadow-sm hover:shadow-md"
+                  className="w-full inline-flex items-center justify-center py-4 px-6 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 text-sm font-semibold tracking-wide transition-colors"
                 >
                   Let&apos;s Talk!
                 </a>
@@ -1347,7 +1347,7 @@ export default function Home() {
             </div>
 
             {/* Card 2: Single Project / Discovery & Strategy Session */}
-            <div className="bg-white rounded-[2rem] border border-zinc-200/80 p-8 flex flex-col justify-between min-h-[580px]">
+            <div className="bg-zinc-100 rounded-[2rem] p-8 flex flex-col justify-between min-h-[580px]">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                   <h3 className="text-2xl font-bold text-zinc-950 tracking-tight">
@@ -1367,7 +1367,7 @@ export default function Home() {
                     "No sales pitches or obligation to move forward",
                   ].map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#F04623] shrink-0 mt-2" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 shrink-0 mt-2" />
                       <span className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-medium">
                         {feature}
                       </span>
@@ -1376,7 +1376,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="border-t border-zinc-100 pt-6 mt-8 flex items-end justify-between">
+              <div className="pt-6 mt-8 flex items-end justify-between">
                 <div className="flex flex-col gap-0.5">
                   <span className="text-xs text-zinc-400 font-medium">Starting for</span>
                   <div className="text-3xl font-extrabold text-zinc-950 tracking-tight flex items-baseline gap-1">
@@ -1392,7 +1392,7 @@ export default function Home() {
             </div>
 
             {/* Card 3: After the Call / Custom Engineering */}
-            <div className="bg-zinc-100/70 rounded-[2rem] border border-zinc-200/60 p-8 flex flex-col justify-between min-h-[580px]">
+            <div className="bg-[#f5f1e8] rounded-[2rem] p-8 flex flex-col justify-between min-h-[580px]">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                   <h3 className="text-2xl font-bold text-zinc-950 tracking-tight">
@@ -1412,7 +1412,7 @@ export default function Home() {
                     "Milestone sprints with continuous live preview demos",
                   ].map((step, idx) => (
                     <div key={idx} className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#F04623] shrink-0 mt-2" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 shrink-0 mt-2" />
                       <span className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-medium">
                         {step}
                       </span>
@@ -1421,7 +1421,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="border-t border-zinc-200/60 pt-6 mt-8 flex items-end justify-between">
+              <div className="pt-6 mt-8 flex items-end justify-between">
                 <div className="flex flex-col gap-0.5">
                   <span className="text-xs text-zinc-400 font-medium">Delivery model</span>
                   <span className="text-3xl font-extrabold text-zinc-950 tracking-tight">
