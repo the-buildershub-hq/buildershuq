@@ -961,103 +961,136 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto w-full px-6 flex flex-col gap-12">
 
-          {/* Header Title Block */}
-          <div className="flex flex-col items-center text-center gap-4">
-            <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-              Pricing
+          {/* Header Title Block matching screenshot: Left Title, Right "Full transparency" */}
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 pb-2 border-b border-zinc-100">
+            <div>
+              <h2 className="font-serif text-5xl md:text-6xl text-zinc-950 font-normal tracking-tight">
+                Pricing
+              </h2>
+            </div>
+            <span className="text-sm font-medium text-zinc-400">
+              Full transparency
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-950">
-              Simple &amp; Transparent Pricing
-            </h2>
-            <p className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed">
-              We engineer tailored solutions rather than copy-pasting code templates. Every business is different, so we don't believe in forcing every project into the same box. Talk with us to get a custom roadmap and proposal.
-            </p>
           </div>
 
-          {/* Pricing Card + What-Happens-Next Rail */}
-          <div className="max-w-4xl mx-auto w-full mt-6 grid grid-cols-1 md:grid-cols-12 gap-6">
-            {/* Consultation Pricing Card */}
-            <div className="md:col-span-7 bg-zinc-50 rounded-3xl border border-zinc-200/80 p-8 md:p-10 flex flex-col gap-8 justify-between hover:border-brand-navy/30 transition-all duration-300">
+          {/* 3-Card Grid matching screenshot */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+            
+            {/* Card 1: Team Photo + Black Call Box */}
+            <div className="rounded-[2rem] overflow-hidden bg-black flex flex-col justify-between border border-zinc-200/60 min-h-[580px]">
+              <div className="relative w-full aspect-[4/3] bg-zinc-900 overflow-hidden">
+                <Image
+                  src="/pricing-consultation.jpg"
+                  alt="Book a consultation call"
+                  fill
+                  className="object-cover object-center grayscale contrast-125"
+                  priority
+                />
+              </div>
+              <div className="p-7 sm:p-8 flex flex-col justify-between gap-6 flex-1 bg-black">
+                <p className="text-white text-xl sm:text-2xl font-semibold leading-snug tracking-tight">
+                  Book a free 20-minute call to talk through your project
+                </p>
+                <a
+                  href="https://cal.com/builders-hub/introduction"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center py-4 px-6 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 text-sm font-semibold tracking-wide transition-all shadow-sm hover:shadow-md"
+                >
+                  Let&apos;s Talk!
+                </a>
+              </div>
+            </div>
+
+            {/* Card 2: Single Project / Discovery & Strategy Session */}
+            <div className="bg-white rounded-[2rem] border border-zinc-200/80 p-8 flex flex-col justify-between min-h-[580px]">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
-                  <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-                    Discovery &amp; Strategy Session
-                  </span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-extrabold tracking-tight text-zinc-950">
-                      $0 / ₦0
-                    </span>
-                    <span className="text-xs font-medium text-zinc-400">
-                      / forever
-                    </span>
-                  </div>
-                  <span className="text-xs font-bold text-emerald-600 mt-1">
-                    100% Free consultation call
-                  </span>
+                  <h3 className="text-2xl font-bold text-zinc-950 tracking-tight">
+                    Discovery &amp; Strategy
+                  </h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">
+                    Don&apos;t know which one you need? Tell us what you&apos;re trying to achieve and we&apos;ll recommend the right approach.
+                  </p>
                 </div>
 
-                <p className="text-zinc-500 text-sm leading-relaxed border-t border-zinc-200/40 pt-6">
-                  Don't know which one you need? Tell us what you're trying to achieve. We'll recommend the right approach.
-                </p>
-
-                {/* Consultation Features List */}
-                <div className="flex flex-col gap-3.5 border-t border-zinc-200/40 pt-6">
+                <div className="flex flex-col gap-3.5 pt-2">
                   {[
                     "30-minute direct session with senior engineers",
                     "Comprehensive review of operational bottlenecks",
                     "Initial technical stack & framework evaluation",
                     "Detailed blueprint document outlining potential steps",
-                    "No sales pitches or obligation to move forward"
+                    "No sales pitches or obligation to move forward",
                   ].map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <Icon name="check_circle" className="text-emerald-500 text-base" />
-                      <span className="text-xs font-bold text-zinc-700">{feature}</span>
+                    <div key={idx} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F04623] shrink-0 mt-2" />
+                      <span className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-medium">
+                        {feature}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* CTA Button */}
-              <div className="pt-6 border-t border-zinc-200/40">
-                <a
-                  href="https://cal.com/builders-hub/introduction"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 px-6 py-4 rounded-full bg-brand-navy hover:bg-brand-navy-hover text-white text-sm font-semibold tracking-wide cursor-pointer transition-all group"
-                >
-                  Schedule a Call
-                  <Icon
-                    name="arrow_outward"
-                    className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    weight={600}
-                  />
-                </a>
+              <div className="border-t border-zinc-100 pt-6 mt-8 flex items-end justify-between">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-xs text-zinc-400 font-medium">Starting for</span>
+                  <div className="text-3xl font-extrabold text-zinc-950 tracking-tight flex items-baseline gap-1">
+                    $0
+                    <span className="text-xs font-normal text-zinc-400">/ forever</span>
+                  </div>
+                </div>
+                <div className="flex flex-col items-end gap-0.5">
+                  <span className="text-xs text-zinc-400 font-medium">Delivery time</span>
+                  <span className="text-sm font-bold text-zinc-950">20-30 mins</span>
+                </div>
               </div>
             </div>
 
-            {/* What happens after the call */}
-            <div className="md:col-span-5 bg-brand-navy rounded-3xl p-8 md:p-10 flex flex-col gap-8 justify-center">
-              <span className="text-xs font-bold tracking-widest text-brand-100/70 uppercase">
-                After the call
-              </span>
+            {/* Card 3: After the Call / Custom Engineering */}
+            <div className="bg-zinc-100/70 rounded-[2rem] border border-zinc-200/60 p-8 flex flex-col justify-between min-h-[580px]">
               <div className="flex flex-col gap-6">
-                {[
-                  { step: "1", title: "Proposal", desc: "Scope, timeline, and price, tailored to what we heard." },
-                  { step: "2", title: "Deposit & onboarding", desc: "We collect brand assets and access, then get to work." },
-                  { step: "3", title: "Build & launch", desc: "Design, development, QA, then your system goes live." },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4">
-                    <span className="w-7 h-7 rounded-full border border-white/20 text-white text-[11px] font-bold flex items-center justify-center shrink-0">
-                      {item.step}
-                    </span>
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-sm font-bold text-white">{item.title}</span>
-                      <span className="text-xs text-brand-100/70 leading-relaxed">{item.desc}</span>
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-2xl font-bold text-zinc-950 tracking-tight">
+                    Custom Project
+                  </h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">
+                    Tailored engineering and bespoke execution rather than copy-pasting code templates.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3.5 pt-2">
+                  {[
+                    "1. Proposal: Scope, timeline, and price tailored to what we heard",
+                    "2. Deposit & onboarding: Brand assets, access, and kickoff",
+                    "3. Build & launch: Design, development, QA, and production go-live",
+                    "Dedicated in-house team with zero middle layers",
+                    "Milestone sprints with continuous live preview demos",
+                  ].map((step, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F04623] shrink-0 mt-2" />
+                      <span className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-medium">
+                        {step}
+                      </span>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              </div>
+
+              <div className="border-t border-zinc-200/60 pt-6 mt-8 flex items-end justify-between">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-xs text-zinc-400 font-medium">Delivery model</span>
+                  <span className="text-3xl font-extrabold text-zinc-950 tracking-tight">
+                    Bespoke
+                  </span>
+                </div>
+                <div className="flex flex-col items-end gap-0.5">
+                  <span className="text-xs text-zinc-400 font-medium">Delivery time</span>
+                  <span className="text-sm font-bold text-zinc-950">2-4 weeks</span>
+                </div>
               </div>
             </div>
+
           </div>
 
         </div>
