@@ -1456,18 +1456,23 @@ export default function Home() {
               {/* Top Bar: Lead Avatar and Quick Contact */}
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-zinc-950 text-white flex items-center justify-center font-bold text-base shrink-0 select-none">
-                    FO
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-extrabold text-base text-zinc-950 tracking-tight leading-tight">
-                      Fafure Olakunle
-                    </span>
-                    <span className="text-xs text-zinc-600 leading-snug mt-0.5">
-                      Team Lead.
-                    </span>
-                  </div>
+                <div className="relative w-14 h-14 rounded-full overflow-hidden shrink-0 bg-zinc-100">
+                  <Image
+                    src="/team/fafure.jpg"
+                    alt="Fafure Olakunle"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
+                <div className="flex flex-col">
+                  <span className="font-extrabold text-base text-zinc-950 tracking-tight leading-tight">
+                    Fafure Olakunle
+                  </span>
+                  <span className="text-xs text-zinc-600 leading-snug mt-0.5">
+                    Team Lead.
+                  </span>
+                </div>
+              </div>
 
                 <div className="flex flex-wrap items-center gap-2">
                   <a

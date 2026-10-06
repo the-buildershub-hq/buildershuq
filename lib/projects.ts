@@ -25,16 +25,23 @@ export const services = [
 export const projects: Project[] = [
   {
     id: 1,
-    slug: "apex-logistics-dashboard",
-    title: "Apex Logistics Dashboard",
-    category: "Logistics & Fleet Systems",
-    service: "backend",
-    serviceLabel: "Backend Systems",
+    slug: "dheir-international",
+    title: "D_HEIR International",
+    category: "Procurement & Logistics",
+    service: "websites",
+    serviceLabel: "Websites & Web Apps",
     story:
-      "A comprehensive operational dashboard engineered for real-time fleet coordination and warehouse workflows. The system integrates automated OCR scanner APIs to read container labels, schedules optimal routes dynamically, and handles high-throughput inventory events. Built using Next.js and Go to ensure sub-second rendering and reliable background processing under heavy peak workloads.",
-    link: "https://apexlogistics.example.com",
-    screenshots: ["/abstract.png", "/hero-bg.png"],
-    video: "https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-computer-34282-large.mp4",
+      "A professional digital experience built for D_HEIR International, bringing its procurement, sourcing, and logistics services into one clear and accessible platform. The website was designed to communicate the company's services, simplify the customer journey, and make it easier for individuals and businesses to understand how D_HEIR can support their importation and logistics needs.",
+    link: "https://www.dheirinternational.com/",
+    screenshots: [
+      "/projects/dheir_1.png",
+      "/projects/dheir_2.png",
+      "/projects/dheir_3.png",
+      "/projects/dheir_4.png",
+      "/projects/dheir_5.png"
+
+    ],
+    video: "",
   },
   {
     id: 2,
