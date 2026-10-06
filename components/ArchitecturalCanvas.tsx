@@ -383,9 +383,8 @@ export default function ArchitecturalCanvas() {
   return (
     <div
       ref={containerRef}
-      className={`relative w-full max-w-[500px] aspect-square rounded-3xl overflow-hidden bg-black select-none touch-none ${
-        isInteracting ? "cursor-grabbing" : "cursor-grab"
-      }`}
+      className={`relative w-full max-w-[500px] aspect-square rounded-3xl overflow-hidden bg-black select-none touch-none ${isInteracting ? "cursor-grabbing" : "cursor-grab"
+        }`}
     >
       {/* Fallback poster while WebGL context initializes */}
       {!isLoaded && (
@@ -396,12 +395,6 @@ export default function ArchitecturalCanvas() {
         />
       )}
 
-      {/* Subtle interaction cue at bottom */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none opacity-40 hover:opacity-80 transition-opacity">
-        <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">
-          Drag to rotate
-        </span>
-      </div>
     </div>
   );
 }
